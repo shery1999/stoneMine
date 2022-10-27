@@ -62,9 +62,10 @@
                                             <td>
                                                 {{ $item->data['qr_code'] }}
                                                 <div class="visible-print text-center">
-                                                    {{ $id =  $item->data['id']  }}
-                                                    {!! QrCode::generate( url('/print_details/' . $id)) !!}
+                                                    {{ $id = $item->data['id'] }}
+                                                    {!! QrCode::generate(url('/print_details/' . $id)) !!}
                                                 </div>
+                                            </td>
                                             <td>{{ $item->data['created_at'] }}</td>
                                             <td>
                                                 <a href="/print_details/{{ $item['id'] }}">

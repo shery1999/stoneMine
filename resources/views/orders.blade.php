@@ -23,17 +23,12 @@
                                         <th>Lot ID</th>
                                         <th>Buyer Name</th>
                                         <th>Buyer Showroom Name</th>
+                                        <th>Country</th>
+                                        <th>Stones Sold</th>
                                         <th>QR Code</th>
                                         <th>Price</th>
                                         <th>Date</th>
                                         <th>Print</th>
-
-                                        {{-- @foreach ($processed_stones_data[0] as $key => $item)
-                                        
-                                            <th>Stone {{ $key + 1 }} Id </th>
-                                            <th>Stone Weight</th>
-                                            <th>Stone Size</th>
-                                        @endforeach --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,34 +38,25 @@
                                             <td>{{ $Data[$key]['lot_id'] }}</td>
                                             <td>{{ $Data[$key]->Showroom['ownername'] }}</td>
                                             <td>{{ $Data[$key]->Showroom['showroomname'] }}</td>
+                                            <td>{{ $Data[$key]->Showroom['country'] }}</td>
+                                            <td>
+                                                @foreach ($processed_stones_data[$key] as $key1 => $item)
+                                                    {{ $item['id'] . ',' }}
+                                                @endforeach
+                                            </td>
                                             {{ $id_data = $Data[$key]['lot_id'] }}
                                             <td>
                                                 <div class="visible-print text-center">
-                                                    {!! QrCode::size(50)->generate("orders/$id_data ") !!}
+                                                    {!! QrCode::size(50)->generate(url('/print/'.$id_data)) !!}
                                                 </div>
-                                                QR CODE new
                                             </td>
-
                                             <td>{{ $Data[$key]->Data['price'] }}</td>
                                             <td>{{ $Data[$key]['updated_at'] }}</td>
                                             <td>
-                                                <a href="/print/{{$Data[$key]['lot_id']}}">
+                                                <a href="/print/{{ $Data[$key]['lot_id'] }}">
                                                     <button type="button" class="btn btn-block btn-success">Print</button>
                                                 </a>
                                             </td>
-                                        <tr>
-                                            <th>Stone Id </th>
-                                            <th>Stone Weight</th>
-                                            <th>Stone Size</th>
-                                        </tr>
-                                        @foreach ($processed_stones_data[$key] as $key1 => $item)
-                                            <tr>
-                                                <td>{{ $item['id'] }}</td>
-                                                <td>{{ $item['dimensions'] }}</td>
-                                                <td>{{ $item['weight'] }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
@@ -79,6 +65,8 @@
                                         <th>Lot ID</th>
                                         <th>Buyer Name</th>
                                         <th>Buyer Showroom Name</th>
+                                        <th>Country</th>
+                                        <th>Stones Sold</th>
                                         <th>QR Code</th>
                                         <th>Price</th>
                                         <th>Date</th>

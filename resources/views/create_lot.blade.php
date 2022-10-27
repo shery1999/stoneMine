@@ -32,8 +32,6 @@
                                         <th>Treatment</th>
                                         <th>Lab Certificate</th>
                                         <th>Store Location</th>
-                                        <th>Image</th>
-                                        <th>QR Code</th>
                                         <th>Date</th>
                                     </tr>
                                 </thead>
@@ -53,12 +51,15 @@
                                         <th>Treatment</th>
                                         <th>Lab Certificate</th>
                                         <th>Store Location</th>
-                                        <th>Image</th>
-                                        <th>QR Code</th>
                                         <th>Date</th>
                                     </tr>
                                 </tfoot>
                             </table>
+                            @if ($errors->has('storage_id'))
+                                <div style="color: red;font-size: 1rem;" class="error">
+                                    {{ 'Please Add From Avaliable Stone Table and Submit again' }}</div>
+                            @endif
+
                         </div>
                     </div>
                     <form action="/create_lot" method="post" onsubmit="this.submit(); this.reset(); return false;">
@@ -68,7 +69,8 @@
                                     class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input required type="hidden" name="storage_id" id="storage_id" type="" value="">
+                                <input required type="hidden" name="storage_id" id="storage_id" type=""
+                                    value="">
                                 <input required name="price" type="text" class="form-control ml-5" id="val_lot_price"
                                     name="val-lot_price" placeholder="Price..">
                             </div>
@@ -131,9 +133,15 @@
                                             <td>{{ $item->data['lab_certificate'] }}</td>
                                             <td>{{ $item->stores['location'] }}</td>
                                             {{-- <td>{{ $item->data['picture'] }}</td> --}}
-                                            <td><img src="{{url('/storage/'.$item->data['picture'])}}" height="100px" width="150px" alt="" title="" /></td>
-
-                                            <td>{{ $item->data['qr_code'] }}</td>
+                                            <td><img src="{{ url('/storage/' . $item->data['picture']) }}" height="100px"
+                                                    width="150px" alt="" title="" /></td>
+                                            <td>
+                                                {{ $item->data['qr_code'] }}
+                                                <div class="visible-print text-center">
+                                                    {{ $id = $item->data['id'] }}
+                                                    {!! QrCode::generate(url('/print_details/' . $id)) !!}
+                                                </div>
+                                            </td>
                                             <td>{{ $item->data['created_at'] }}</td>
                                             <td> <button type="button" class="use-button  btn mb-1 btn-primary">Add to Lot
                                                     <span class=" btn-icon-right"><i class="fa fa-shopping-cart"></i></span>
@@ -196,8 +204,6 @@
             var treatment = row.find("td")[8].textContent;
             var lab_certificate = row.find("td")[9].textContent;
             var store = row.find("td")[10].textContent;
-            var image = row.find("td")[11].textContent;
-            var qr_code = row.find("td")[12].textContent;
             var date = row.find("td")[13].textContent;
             sno++;
             console.log(lot)
@@ -216,8 +222,6 @@
                 "</td><td>" + treatment +
                 "</td><td>" + lab_certificate +
                 "</td><td>" + store +
-                "</td><td>" + image +
-                "</td><td>" + qr_code +
                 "</td><td>" + date +
                 "</td><tr>";
             $("#pdfTab").append(newRow);
@@ -226,15 +230,3 @@
 
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-

@@ -52,14 +52,22 @@
                         <ul aria-expanded="false">
                             <li><a href="/processing">Send to Workshop</a></li>
                         </ul>
+                    </li>
+                    
+                    <li class="nav-label">UPDATE STORE LOCATION</li>
+                    <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Send to Store</span>
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Update Store Location</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="/to_store">Send Unprocessed to Store</a></li>
-                            <li><a href="/to_store_processed">Send Processed to Store</a></li>
+                            <li><a href="/to_store">Update Unprocessed Store Location</a></li>
+                            <li><a href="/to_store_processed">Update Processed Store Location</a></li>
                         </ul>
                     </li>
+
+
+
+
                     @if (Auth::user()->role == 'admin')
                         <li class="nav-label">INVENTORY</li>
                         <li>
@@ -79,7 +87,6 @@
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="/create_lot">Create Lot</a></li>
-                                <li><a href="/select_lot">Process Lot</a></li>
                             </ul>
                         </li>
 
@@ -89,7 +96,6 @@
                                 <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Showroom</span>
                             </a>
                             <ul aria-expanded="false">
-                                {{-- <li><a href="/add_showroom">Add Showroom</a></li> --}}
                                 <li><a href="/view_showroom_detail">View Showroom</a></li>
                             </ul>
                         </li>

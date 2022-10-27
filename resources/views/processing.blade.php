@@ -47,10 +47,14 @@
                                     </select>
                                     <button type="button" onclick="addmember();" class="btn btn-block btn-success">Add
                                         New</button>
-                                    <input type="hidden" id="bag_id" name="bag_ids" value="">
-                                </div>
+                                        <input required type="hidden" id="bag_id" name="bag_ids" value="">
+                                    </div>
+                                    @if ($errors->has('bag_ids'))
+                                    <div style="color: red;font-size: 1rem;" class="error">{{'Please press Add New and Submit again' }}</div>
+                                    @endif
                             </div>
                             <div class="form-row align-items-center">
+                                <h3></h3>
                                 <table id="myTable" class="table table-striped table-bordered zero-configuration">
                                     <thead>
                                         <tr>
@@ -88,20 +92,16 @@
                     </div>
                 </div>
             </div>
-            <input type="text" id="refreshcheck" value="no">
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Submit</h4>
                             <div class="button-icon">
-                                <button id="btnsubmit" onclick="submitForm()" type="submit"
-                                    class="btn mb-1 btn-success">Submit <span class="btn-icon-right"><i
-                                            class="fa fa-check"></i></span>
+                                <button id="btnsubmit" type="submit" class="btn mb-1 btn-success">Submit <span
+                                        class="btn-icon-right"><i class="fa fa-check"></i></span>
                                 </button>
                             </div>
-                            <button onclick="submitForm()">formtesting</button>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,5 @@
             }
             var z = getInputValue();
         }
-
-
     }
 </script>

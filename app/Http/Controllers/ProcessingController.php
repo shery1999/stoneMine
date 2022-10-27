@@ -7,6 +7,8 @@ use App\Models\processing;
 use App\Models\workshop;
 use App\Models\first_storage;
 use App\Models\MultipleProcessingIds;
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\unprocessed_grading;
 
 
@@ -43,37 +45,37 @@ class ProcessingController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request->all());
-        $save_multiple = MultipleProcessingIds::create([
-            'processing_ids' => $request->input('bag_ids'),
-            'description' => $request->input('description'),
+        $validator = Validator::make($request->all(), [
+            'bag_ids' => 'required|max:255',
         ]);
-
-        $result1 = explode(',', $request->input('bag_ids'));
-        foreach ($result1 as $key => $value) {
-
-            $result  = explode('|', $value);
-            // dd($result);
-
-            $save = processing::create([
-                'workshop_id' => $request->input('workshop'),
-                'first_storage_id' => $result[1],
-                'unprocessed_grading_id' => $result[0],
-                'user_id' =>  Auth()->user()->id,
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+            $save_multiple = MultipleProcessingIds::create([
+                'processing_ids' => $request->input('bag_ids'),
                 'description' => $request->input('description'),
             ]);
-            $unprocessed_id =  $save['first_storage_id'];
-            $updateStaus = first_storage::where('id', $unprocessed_id)
-                ->update(
-                    ['status' => 1]
-                );
+            $result1 = explode(',', $request->input('bag_ids'));
+            foreach ($result1 as $key => $value) {
+                $result  = explode('|', $value);
+                $save = processing::create([
+                    'workshop_id' => $request->input('workshop'),
+                    'first_storage_id' => $result[1],
+                    'unprocessed_grading_id' => $result[0],
+                    'user_id' =>  Auth()->user()->id,
+                    'description' => $request->input('description'),
+                ]);
+                $unprocessed_id =  $save['first_storage_id'];
+                $updateStaus = first_storage::where('id', $unprocessed_id)
+                    ->update(
+                        ['status' => 1]
+                    );
+            }
+            $id = $save_multiple['id'];
+            return redirect('/print_processing_details/' . $id);
         }
-        $id = $save_multiple['id'];
-        // dd($id);
-
-        return redirect('/print_processing_details/' . $id);
-        // return redirect('/select_lot/' . $lot_id_data);
-
     }
 
     /**

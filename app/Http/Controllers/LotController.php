@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Second_storage;
 use App\Models\ProcessedGrading;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class LotController extends Controller
 {
@@ -42,21 +44,32 @@ class LotController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'storage_id' => 'required|max:255',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+
+
             $save_lot = Lot::create([
                 'storage_id' => $request->input('storage_id'),
                 'price' => $request->input('price'),
             ]);
             $lot = $request->input('storage_id');
             $processed_ids = explode(",", $lot);
-            
+
             foreach ($processed_ids as $i => $key) {
                 $updateStatus = Second_storage::where('processed_grading_id', $processed_ids[$i])
-                ->update(
-                    ['status' => 1]
-                );
+                    ->update(
+                        ['status' => 1]
+                    );
             }
             $lot_id_data = $save_lot['id'];
-        return redirect('/select_lot/' . $lot_id_data);
+            return redirect('/select_lot/' . $lot_id_data);
+        }
     }
 
     /**
