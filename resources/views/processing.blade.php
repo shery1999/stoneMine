@@ -47,11 +47,12 @@
                                     </select>
                                     <button type="button" onclick="addmember();" class="btn btn-block btn-success">Add
                                         New</button>
-                                        <input required type="hidden" id="bag_id" name="bag_ids" value="">
-                                    </div>
-                                    @if ($errors->has('bag_ids'))
-                                    <div style="color: red;font-size: 1rem;" class="error">{{'Please press Add New and Submit again' }}</div>
-                                    @endif
+                                    <input required type="hidden" id="bag_id" name="bag_ids" value="">
+                                </div>
+                                @if ($errors->has('bag_ids'))
+                                    <div style="color: red;font-size: 1rem;" class="error">
+                                        {{ 'Please press Add New and Submit again' }}</div>
+                                @endif
                             </div>
                             <div class="form-row align-items-center">
                                 <h3></h3>

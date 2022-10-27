@@ -12,9 +12,12 @@
                             </ul>
                         </li>
                     @endif
-
-
-                    <li class="nav-label">ADMIN CONTROLS</li>
+                    @if (Auth::user()->role == 'admin')
+                        <li class="nav-label">ADMIN CONTROLS</li>
+                    @endif
+                    @if (Auth::user()->role == 'user')
+                        <li class="nav-label">USER CONTROLS</li>
+                    @endif
                     @if (Auth::user()->role == 'admin')
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -53,11 +56,12 @@
                             <li><a href="/processing">Send to Workshop</a></li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-label">UPDATE STORE LOCATION</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Update Store Location</span>
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Update Store
+                                Location</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="/to_store">Update Unprocessed Store Location</a></li>
