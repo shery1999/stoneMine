@@ -43,8 +43,11 @@
                                             <td>{{ $item->unprocessed_grading_data['size'] }}</td>
                                             <td>{{ $item->unprocessed_grading_data->mines['location'] }}</td>
                                             <td>{{ $item->stores['store'] }}</td>
-                                            <td><img src="{{ url('/storage/' . $item->unprocessed_grading_data['picture']) }}"
-                                                    height="100px" width="150px" alt="" title="" /></td>
+                                            <td>@if ($item->unprocessed_grading_data['picture'])
+                                                <img src="{{ url('/storage/' . $item->unprocessed_grading_data['picture']) }}"
+                                                height="100px" width="150px" alt="" title="" />
+                                                @endif
+                                            </td>
                                             <td>
                                                 {{ $item->unprocessed_grading_data['qr_code'] }}
                                                 <div class="visible-print text-center">

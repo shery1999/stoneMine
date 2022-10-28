@@ -164,10 +164,12 @@
         </table>
         <div class="row">
             <div class="col-1 pt-3" ></div>
+            @if ($Data[0]['unprocessed_grading_data']['picture'])    
             <div class="col-6 pt-5 mt-6 text-center">
                 <img src="{{ url('/storage/' . $Data[0]['unprocessed_grading_data']['picture']) }}" height="500px"
                 width="500px" alt="" title="" />
             </div>
+            @endif
         </div>
     </div>
 </body>

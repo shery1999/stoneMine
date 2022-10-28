@@ -133,8 +133,12 @@
                                             <td>{{ $item->data['lab_certificate'] }}</td>
                                             <td>{{ $item->stores['location'] }}</td>
                                             {{-- <td>{{ $item->data['picture'] }}</td> --}}
-                                            <td><img src="{{ url('/storage/' . $item->data['picture']) }}" height="100px"
-                                                    width="150px" alt="" title="" /></td>
+                                            <td>
+                                                @if ($item->data['picture'])
+                                                    <img src="{{ url('/storage/' . $item->data['picture']) }}"
+                                                        height="100px" width="150px" alt="" title="" />
+                                                @endif
+                                            </td>
                                             <td>
                                                 {{ $item->data['qr_code'] }}
                                                 <div class="visible-print text-center">

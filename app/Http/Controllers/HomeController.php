@@ -39,32 +39,32 @@ class HomeController extends Controller
 
         $order = Order::count();
 
-        $first_storage_data =  first_storage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
-            ->groupBy('date')
-            ->get();
-        foreach ($first_storage_data as $key => $item) {
+        // $first_storage_data =  first_storage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
+        //     ->groupBy('date')
+        //     ->get();
+        // foreach ($first_storage_data as $key => $item) {
 
-            $first_storage_labels[] =  $item['date'];
-            $first_storage_data_v[] = $item['views'];
-        }
-        // dd($first_storage_data_v);
-        $second_storage_data =  Second_storage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
-            ->groupBy('date')
-            ->get();
-        foreach ($second_storage_data as $key => $item) {
+        //     $first_storage_labels[] =  $item['date'];
+        //     $first_storage_data_v[] = $item['views'];
+        // }
+        // // dd($first_storage_data_v);
+        // $second_storage_data =  Second_storage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
+        //     ->groupBy('date')
+        //     ->get();
+        // foreach ($second_storage_data as $key => $item) {
 
-            $second_storage_labels[] =  $item['date'];
-            $second_storage_data_v[] = $item['views'];
-        }
+        //     $second_storage_labels[] =  $item['date'];
+        //     $second_storage_data_v[] = $item['views'];
+        // }
 
-        $processing_data =  processing::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
-            ->groupBy('date')
-            ->get();
-        foreach ($processing_data as $key => $item) {
+        // $processing_data =  processing::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
+        //     ->groupBy('date')
+        //     ->get();
+        // foreach ($processing_data as $key => $item) {
 
-            $processing_labels[] =  $item['date'];
-            $processing_data_v[] = $item['views'];
-        }
+        //     $processing_labels[] =  $item['date'];
+        //     $processing_data_v[] = $item['views'];
+        // }
 
 
 
@@ -92,6 +92,6 @@ class HomeController extends Controller
         $labels3 = $users3->keys();
         $data3 = $users3->values();
 
-        return view('admin_panel', compact('labels1', 'data1', 'labels2', 'data2', 'labels3', 'data3','first_storage_total', 'first_storage', 'processing_total', 'processing', 'second_storage_total', 'second_storage', 'order', 'first_storage_labels', 'first_storage_data_v', 'second_storage_labels', 'second_storage_data_v', 'processing_labels', 'processing_data_v'));
+        return view('admin_panel', compact('labels1', 'data1', 'labels2', 'data2', 'labels3', 'data3', 'first_storage_total', 'first_storage', 'processing_total', 'processing', 'second_storage_total', 'second_storage', 'order'));
     }
 }

@@ -56,8 +56,10 @@
                                             <td>{{ $item->data['lab_certificate'] }}</td>
                                             <td>{{ $item->stores['store'] }}</td>
                                             <td>
+                                                @if ($item->data['picture'])
                                                 <img src="{{ url('/storage/' . $item->data['picture']) }}" height="100px"
-                                                    width="150px" alt="" title="" />
+                                                width="150px" alt="" title="" />
+                                                @endif
                                             </td>
                                             <td>
                                                 {{ $item->data['qr_code'] }}

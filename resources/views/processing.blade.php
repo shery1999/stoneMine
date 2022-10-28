@@ -51,7 +51,7 @@
                                 </div>
                                 @if ($errors->has('bag_ids'))
                                     <div style="color: red;font-size: 1rem;" class="error">
-                                        {{ 'Please press Add New and Submit again' }}</div>
+                                        {{ 'Please Select Bag ID press Add New and Submit again' }}</div>
                                 @endif
                             </div>
                             <div class="form-row align-items-center">
