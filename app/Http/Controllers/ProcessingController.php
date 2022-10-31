@@ -48,7 +48,9 @@ class ProcessingController extends Controller
 
         // dd($request->all());
         $validator = Validator::make($request->all(), [
+            'workshop' => 'max:255',
             'bag_ids' => 'required|max:255',
+            'description' => 'max:255',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);

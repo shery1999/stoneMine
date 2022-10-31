@@ -6,6 +6,8 @@ use App\Models\Second_storage;
 use App\Models\store;
 use App\Models\ProcessedGrading;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class SecondStorageController extends Controller
 {
@@ -16,7 +18,7 @@ class SecondStorageController extends Controller
      */
     public function index()
     {
-        $processedSpecimen = Second_storage::where('status','0')->with('data', 'stores')->get();
+        $processedSpecimen = Second_storage::where('status', '0')->with('data', 'stores')->get();
         return view('list_second_storage', compact('processedSpecimen'));
     }
 
@@ -87,15 +89,24 @@ class SecondStorageController extends Controller
      */
     public function update(Request $request)
     {
-        $save = Second_storage::where('processed_grading_id', $request->input('processeed_specimen'))
-        ->update([
-            'store_id' => $request->input('store'),
-            'processed_grading_id' => $request->input('processeed_specimen'),
-            'user_id' => $request->input('user_id'),
-            'description' => $request->input('description'),
+        $validator = Validator::make($request->all(), [
+            'store' =>               'required|max:255',
+            'processeed_specimen' => 'required|max:255',
+            'description' =>         'max:255',
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+            $save = Second_storage::where('processed_grading_id', $request->input('processeed_specimen'))
+                ->update([
+                    'store_id' => $request->input('store'),
+                    'processed_grading_id' => $request->input('processeed_specimen'),
+                    'user_id' => $request->input('user_id'),
+                    'description' => $request->input('description'),
+                ]);
 
-        return redirect('to_store_processed');
+            return redirect('to_store_processed');
+        }
     }
 
     /**

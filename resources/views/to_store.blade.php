@@ -2,6 +2,25 @@
 @section('titles', 'to Store')
 @section('content')
     <div class="container-fluid mt-3">
+       
+       @if(session()->has('msg'))
+            @if (session()->has('msg'))
+                <div class="alert alert-success" role="alert">
+                    Data added successfuly.
+                </div>
+            @else
+                <div class="alert alert-danger" role="alert">
+                    Oops! something went wrong.
+                </div>  
+            @endif
+       @endif
+       
+      
+
+
+       
+
+      
 
 
         <div>
@@ -10,6 +29,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <h2>Update Unprocessed Specimen/Bag Location</h2>
                             <h4 class="card-title"></h4>
                             <h4 class="card-title"></h4>
                             <h4 class="card-title">Select Store</h4>
@@ -17,13 +37,17 @@
                                 <div class="form-row align-items-center">
                                     <div class="col-auto my-1">
                                         <label class="mr-sm-2">Options</label>
-                                        <select name="store" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                            <option selected="selected">Choose...</option>
+                                        <select required name="store" class="custom-select mr-sm-2"
+                                            id="inlineFormCustomSelect">
+                                            <option value="" selected="selected">Choose...</option>
                                             @foreach ($store_data as $key => $item)
                                                 <option value='{{ $item['id'] }}'>{{ $item['store'] }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        @if ($errors->has('store'))
+                                            <div class="error">{{ $errors->first('store') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -34,15 +58,27 @@
                                 <div class="form-row align-items-center">
                                     <div class="col-auto my-1">
                                         <label class="mr-sm-2">Options</label>
-                                        <select name="bag_id" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                            <option selected="selected">Choose...</option>
+                                        <select required name="bag_id" class="custom-select mr-sm-2"
+                                            id="inlineFormCustomSelect">
+                                            <option value="" selected="selected">Choose...</option>
                                             @foreach ($stone_data as $key => $item)
-                                                <option value='{{ $item['unprocessed_grading_id'] }}'>{{ $item['unprocessed_grading_id'] }}
+                                                <option value='{{ $item['unprocessed_grading_id'] }}'>
+                                                    {{ $item['unprocessed_grading_id'] }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        @if ($errors->has('bag_id'))
+                                            <div class="error">{{ $errors->first('bag_id') }}</div>
+                                        @endif
                                     </div>
                                 </div>
+                                @if ($errors->any())
+                                    <div class="error">
+                                        <h2>
+                                            {{ $errors->first() }}
+                                        </h2>
+                                    </div>
+                                @endif
                             </div>
 
                         </div>
@@ -55,9 +91,13 @@
                             <p class="text-muted m-b-15 f-s-12"><code></code></p>
                             <div class="basic-form">
                                 <h4 class="card-title"></h4>
+
                                 <div class="form-group">
                                     <textarea name="description" class="form-control h-150px" rows="6" placeholder="Description" id="comment"></textarea>
                                 </div>
+                                @if ($errors->has('description'))
+                                    <div class="error">{{ $errors->first('description') }}</div>
+                                @endif
                                 <h4 class="card-title"></h4>
                             </div>
                         </div>

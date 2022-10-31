@@ -25,6 +25,10 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('workshop'))
+                                        <div style="color: red;font-size: 1rem;" class="error">
+                                            {{ 'Please Select Bag ID press Add New and Submit again' }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -88,6 +92,9 @@
                             <div class="form-group">
                                 <textarea name="description" class="form-control h-150px" rows="6" placeholder="Description" id="comment"></textarea>
                             </div>
+                            @if ($errors->has('description'))
+                                <div class="error">{{ $errors->first('description') }}</div>
+                            @endif
                             <h4 class="card-title"></h4>
                         </div>
                     </div>

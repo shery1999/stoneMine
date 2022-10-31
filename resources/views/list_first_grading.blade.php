@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="container-fluid">
-        <h1>Unprocessed Grading</h1>
+        <h1>Unprocessed Bag/Specimen</h1>
         <div class="row">
             <div class="col-12">
                 <div class="card">

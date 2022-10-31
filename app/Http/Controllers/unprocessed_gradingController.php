@@ -42,36 +42,44 @@ class unprocessed_gradingController extends Controller
      */
     public function store(Request $request)
     {
-
-        if ($request->file('image')) {
-
-            $photo =  $request->file('image')->store('unprocessed_stone_images', ['disk' => 'public']);
+        $validator = Validator::make($request->all(), [
+            // dd($request->all()),
+            'specimen/bag' => 'required|max:255',
+            'mine' => 'required|max:255',
+            'grade' => 'required|max:255',
+            'store' => 'required|max:255',
+            'size' => 'required|max:255',
+            'weight' => 'required|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
         } else {
-            $photo = null;
+            if ($request->file('image')) {
+                $photo =  $request->file('image')->store('unprocessed_stone_images', ['disk' => 'public']);
+            } else {
+                $photo = null;
+            }
+            $save = unprocessed_grading::create([
+                'specimen/bag' => $request->input('specimen/bag'),
+                'grade' => $request->input('grade'),
+                'weight' => $request->input('weight'),
+                'size' => $request->input('size'),
+                'qr_code' => $request->input('qr_code'),
+                'mine_id' => $request->input('mine'),
+                'user_id' => Auth()->user()->id,
+                'store_id' => $request->input('store'),
+                'picture' => $photo,
+            ]);
+            $save2 = first_storage::create([
+                'store_id' => $request->input('store'),
+                'user_id' => Auth()->user()->id,
+                'unprocessed_grading_id' => $save['id'],
+            ]);
+            $id = $save2['id'];
+            return redirect('/print_details/' . $id);
+            // return redirect('unprocessed_grading');
         }
-
-        $save = unprocessed_grading::create([
-
-            'specimen/bag' => $request->input('specimen/bag'),
-            'grade' => $request->input('grade'),
-            'weight' => $request->input('weight'),
-            'size' => $request->input('size'),
-            'qr_code' => $request->input('qr_code'),
-            'mine_id' => $request->input('mine'),
-            'user_id' => Auth()->user()->id,
-            'store_id' => $request->input('store'),
-            'picture' => $photo,
-
-        ]);
-        $save2 = first_storage::create([
-            'store_id' => $request->input('store'),
-            'user_id' => Auth()->user()->id,
-            'unprocessed_grading_id' => $save['id'],
-        ]);
-
-        $id = $save2['id'];
-        return redirect('/print_details/' . $id);
-        // return redirect('unprocessed_grading');
     }
 
     /**

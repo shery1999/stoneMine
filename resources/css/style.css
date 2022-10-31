@@ -7346,6 +7346,10 @@ li {
   height: auto;
   display: inline-block; }
 
+.error {
+  color: red;
+}
+
 .img-rounded {
   border-radius: .4rem; }
 

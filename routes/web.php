@@ -161,11 +161,6 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth','roleAuth']], function () {
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    // $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-    // $this->post('login', 'Auth\LoginController@login');
-    // $this->post('logout', 'Auth\LoginController@logout')->name('logout');
-
-
     Route::get('admin_panel', function () {
         return view('admin_panel');
     });
@@ -189,13 +184,11 @@ Route::group(['middleware' => ['auth','roleAuth']], function () {
 
     Route::post('/add_user', [UserController::class, 'store']);
 
-
     // add mine
     Route::get('add_mine', function () {
         return view('add_mine');
     });
     Route::post('/add_mine', [mineController::class, 'store']);
-
 
     // add store
     Route::get('add_store', function () {
@@ -203,12 +196,10 @@ Route::group(['middleware' => ['auth','roleAuth']], function () {
     });
     Route::post('/add_store', [StoreControllerController::class, 'store']);
 
-
     // add worshop
     Route::get('add_workshop', function () {
         return view('add_workshop');
     });
     Route::post('/add_workshop', [workshopController::class, 'store']);
-
 
 });

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\first_storage;
 use App\Models\store;
 use App\Models\unprocessed_grading;
+use Illuminate\Support\Facades\Validator;
+
 
 class first_storageController extends Controller
 {
@@ -18,7 +20,7 @@ class first_storageController extends Controller
     {
         //FOR GETTING DATA FROM DB
 
-        $firstGrading = first_storage::where('status','0')->with('stores', 'unprocessed_grading_data.mines')->get();
+        $firstGrading = first_storage::where('status', '0')->with('stores', 'unprocessed_grading_data.mines')->get();
         // dd($firstGrading);
         return view('list_first_grading', compact('firstGrading'));
     }
@@ -89,16 +91,25 @@ class first_storageController extends Controller
      */
     public function update(Request $request)
     {
-        $save = first_storage::where('unprocessed_grading_id', $request->input('bag_id'))
-            ->update([
-                'store_id' => $request->input('store'),
-                'unprocessed_grading_id' => $request->input('bag_id'),
-                'user_id' => Auth()->user()->id,
-                'description' => $request->input('description'),
-            ]);
-        return redirect('to_store');
+        $validator = Validator::make($request->all(), [
+            'store' =>         'required|max:255',
+            'bag_id' =>        'required|max:255',
+            'description' =>   'max:255',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+            $save = first_storage::where('unprocessed_grading_id', $request->input('bag_id'))
+                ->update([
+                    'store_id' => $request->input('store'),
+                    'unprocessed_grading_id' => $request->input('bag_id'),
+                    'user_id' => Auth()->user()->id,
+                    'description' => $request->input('description'),
+                ]);
+                return redirect()->back()->with(['msg' => 'data submitted']);
+            return redirect('to_store');
+        }
     }
-
     /**
      * Remove the specified resource from storage.
      *

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\storeController;
 use Illuminate\Http\Request;
 use App\Models\store;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class StoreControllerController extends Controller
@@ -38,14 +40,23 @@ class StoreControllerController extends Controller
     public function store(Request $request)
     {
         //
-        $save = store::create([
-
-            'store' => $request->input('store'),
-            'location' => $request->input('location'),
-            'description' => $request->input('description'),
-
+        $validator = Validator::make($request->all(), [
+            'store' => 'required|unique:stores|max:255',
+            'location' => 'required|max:255',
+            'description' => 'max:255',
         ]);
-        return redirect('add_store');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+            $save = store::create([
+
+                'store' => $request->input('store'),
+                'location' => $request->input('location'),
+                'description' => $request->input('description'),
+
+            ]);
+            return redirect('add_store');
+        }
     }
 
     /**

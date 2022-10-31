@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\showroom;
+use Illuminate\Support\Facades\Validator;
 
 
 class showroomController extends Controller
@@ -19,6 +20,12 @@ class showroomController extends Controller
         $showroom_data = showroom::get();
         // dd($showroom_data);
         return view('view_showroom_detail', compact('showroom_data'));
+    }
+    public function index2()
+    {
+        $ShowroomData = showroom::get();
+        dd($ShowroomData);
+        return view('add_showroom', compact('ShowroomData'));
     }
 
     /**
@@ -41,19 +48,31 @@ class showroomController extends Controller
     public function store(Request $request)
     {
         //
-        $save = showroom::create([
-            'ownername' => $request->input('ownername'),
-            'showroomname' => $request->input('showroomname'),
-            'phone1' => $request->input('phone1'),
-            'phone2' => $request->input('phone2'),
-            'phone3' => $request->input('phone3'),
-            'adress' => $request->input('adress'),
-            'city' => $request->input('city'),
-            'country' => $request->input('country'),
-
+        $validator = Validator::make($request->all(), [
+            // dd($request->all()),
+            'ownername' => 'required|max:255',
+            'showroomname' => 'required|unique:showrooms|max:255',
+            'adress' => 'required|max:255',
+            'city' => 'required|max:255',
+            'country' => 'required|max:255',
         ]);
-        // dd($save);
-        return redirect('add_showroom');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+
+            $save = showroom::create([
+                'ownername' => $request->input('ownername'),
+                'showroomname' => $request->input('showroomname'),
+                'phone1' => $request->input('phone1'),
+                'phone2' => $request->input('phone2'),
+                'phone3' => $request->input('phone3'),
+                'adress' => $request->input('adress'),
+                'city' => $request->input('city'),
+                'country' => $request->input('country'),
+            ]);
+            // dd($save);
+            return redirect('add_showroom');
+        }
     }
 
     /**

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\workshop;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class workshopController extends Controller
@@ -38,15 +40,24 @@ class workshopController extends Controller
     public function store(Request $request)
     {
         //
-        $save = workshop::create([
-            'workshop' => $request->input('workshop'),
-            'location' => $request->input('location'),
-            'description' => $request->input('description'),
-
+        $validator = Validator::make($request->all(), [
+            // dd($request->all()),
+            'workshop' => 'required|unique:workshops|max:255',
+            'location' => 'required|max:255',
+            'description' => 'max:255',
         ]);
-        return redirect('add_workshop');
-    }
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+            $save = workshop::create([
+                'workshop' => $request->input('workshop'),
+                'location' => $request->input('location'),
+                'description' => $request->input('description'),
 
+            ]);
+            return redirect('add_workshop');
+        }
+    }
     /**
      * Display the specified resource.
      *

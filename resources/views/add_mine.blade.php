@@ -17,7 +17,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="/add_mine" method="post" onsubmit="this.submit(); this.reset(); return false;">
+                            <form class="form-valide" action="/add_mine" method="post"
+                                onsubmit="this.submit(); this.reset(); return false;">
                                 @csrf
                                 {{-- username --}}
                                 <div class="form-group row">
@@ -28,7 +29,7 @@
                                         <input required type="text" class="form-control" id="val- minename"
                                             name="mine" placeholder="Mine name..">
                                         @if ($errors->has('mine'))
-                                            <div class="error">{{ $errors->first('username') }}</div>
+                                            <div class="error">{{ $errors->first('mine') }}</div>
                                         @endif
                                     </div>
                                 </div>
@@ -40,6 +41,9 @@
                                     <div class="col-lg-6">
                                         <input required type="text" class="form-control" id="val-email" name="location"
                                             placeholder="location..">
+                                        @if ($errors->has('location'))
+                                            <div class="error">{{ $errors->first('location') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- description --}}
@@ -49,6 +53,9 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <textarea class="form-control" id="val-description" name="description" rows="5" placeholder="Enter Description"></textarea>
+                                        @if ($errors->has('description'))
+                                        <div class="error">{{ $errors->first('description') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- submit --}}

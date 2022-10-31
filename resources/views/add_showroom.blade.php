@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="/add_showroom" method="post" onsubmit="this.submit(); this.reset(); return false;">
+                            <form class="form-valide" action="/add_showroom" method="post" {{-- onsubmit="this.submit(); this.reset(); return false;" --}}>
                                 @csrf
                                 <div class="form-group row">
                                     {{-- name --}}
@@ -26,8 +26,11 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" required class="form-control" id="val-username" name="ownername"
-                                            placeholder="Enter a name..">
+                                        <input type="text" required class="form-control" id="val-username"
+                                            name="ownername" placeholder="Enter a name..">
+                                        @if ($errors->has('ownername'))
+                                            <div class="error">{{ $errors->first('ownername') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -39,8 +42,11 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" required class="form-control" id="val-username" name="showroomname"
-                                            placeholder="Enter a showroom name">
+                                        <input type="text" required class="form-control" id="val-username"
+                                            name="showroomname" placeholder="Enter a showroom name">
+                                        @if ($errors->has('showroomname'))
+                                            <div class="error">{{ $errors->first('showroomname') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- email --}}
@@ -50,7 +56,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="email"  class="form-control" id="val-email" name="email"
+                                        <input type="email" class="form-control" id="val-email" name="email"
                                             placeholder="Enter email">
                                     </div>
                                 </div>
@@ -80,6 +86,9 @@
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-adress" name="adress"
                                             placeholder="Enter Adress">
+                                        @if ($errors->has('adress'))
+                                            <div class="error">{{ $errors->first('adress') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- city --}}
@@ -90,6 +99,9 @@
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-city" name="city"
                                             placeholder="Enter city">
+                                        @if ($errors->has('city'))
+                                            <div class="error">{{ $errors->first('city') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- country --}}
@@ -98,7 +110,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                    <select class="form-control" id="val-country" name="country">
+                                        <select class="form-control" id="val-country" name="country">
                                             <option>country</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Aland Islands">Aland Islands</option>
@@ -392,6 +404,9 @@
                                             <option value="Zimbabwe">Zimbabwe</option>
                                         </select>
                                     </div>
+                                    @if ($errors->has('country'))
+                                        <div class="error">{{ $errors->first('country') }}</div>
+                                    @endif
                                 </div>
                                 {{-- submit --}}
                                 <div class="form-group row">

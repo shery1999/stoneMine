@@ -16,6 +16,8 @@ class mineController extends Controller
      */
     public function index()
     {
+        
+
     }
 
     /**
@@ -38,8 +40,9 @@ class mineController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'mine' => 'required|max:255',
+            'mine' => 'required|unique:mines|max:255',
             'location' => 'required|max:255',
+            'description' => 'max:255',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);

@@ -3,7 +3,8 @@
 @section('content')
 
     <div class="container-fluid mt-3">
-        <form class="form-valide" action="/processed_specimen" method="post" enctype="multipart/form-data" onsubmit="this.submit(); this.reset(); return false;">
+        <form class="form-valide" action="/processed_specimen" method="post" enctype="multipart/form-data"
+            onsubmit="this.submit(); this.reset(); return false;">
             @csrf
             <div class="col-lg-12">
                 <div class="card">
@@ -24,6 +25,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('processing_id'))
+                                        <div class="error">{{ $errors->first('processing_id') }}</div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -49,6 +53,9 @@
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                     </select>
+                                    @if ($errors->has('grade'))
+                                        <div class="error">{{ $errors->first('grade') }}</div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -63,44 +70,71 @@
                             <div class="form-group">
                                 <input required name="dimensions" type="text" class="form-control input-default"
                                     placeholder="Dimensions(mm)">
+                                @if ($errors->has('dimensions'))
+                                    <div class="error">{{ $errors->first('dimensions') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input required name="weight" type="text" class="form-control input-default"
                                     placeholder="Weight(carats)">
+                                @if ($errors->has('weight'))
+                                    <div class="error">{{ $errors->first('weight') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input name="color" type="text" class="form-control input-default"
                                     placeholder="Colors">
+                                @if ($errors->has('color'))
+                                    <div class="error">{{ $errors->first('color') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input name="clarity" type="text" class="form-control input-default"
                                     placeholder="Clarity">
+                                @if ($errors->has('clarity'))
+                                    <div class="error">{{ $errors->first('clarity') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input name="type" type="text" class="form-control input-default" placeholder="Type">
+                                @if ($errors->has('type'))
+                                    <div class="error">{{ $errors->first('type') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input name="cut_shape" type="text" class="form-control input-default"
                                     placeholder="Cut Shape">
+                                @if ($errors->has('cut_shape'))
+                                    <div class="error">{{ $errors->first('cut_shape') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input name="treatment" type="text" class="form-control input-default"
                                     placeholder="Treatment">
+                                @if ($errors->has('treatment'))
+                                    <div class="error">{{ $errors->first('treatment') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input name="certificate" type="text" class="form-control input-default"
                                     placeholder="Lab Certificate">
+                                @if ($errors->has('certificate'))
+                                    <div class="error">{{ $errors->first('certificate') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <textarea name="description" class="form-control h-150px" rows="6" placeholder="Description" id="comment"></textarea>
+                                @if ($errors->has('description'))
+                                    <div class="error">{{ $errors->first('description') }}</div>
+                                @endif
                             </div>
                             <h4 class="card-title"></h4>
 
@@ -112,12 +146,16 @@
                             <div class="form-row align-items-center">
                                 <div class="col-auto my-1">
                                     <label class="mr-sm-2">Options</label>
-                                    <select required name="store" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                    <select required name="store" class="custom-select mr-sm-2"
+                                        id="inlineFormCustomSelect">
                                         <option value="" selected="selected">Choose...</option>
                                         @foreach ($store_data as $key => $item)
                                             <option value='{{ $item['id'] }}'> {{ $item['store'] }}</option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('store'))
+                                        <div class="error">{{ $errors->first('store') }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -137,6 +175,9 @@
                                     <label class="custom-file-label">Choose file</label>
                                 </div>
                             </div>
+                            @if ($errors->has('photo'))
+                                <div class="error">{{ $errors->first('photo') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>

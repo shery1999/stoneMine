@@ -14,7 +14,7 @@
     <!-- row -->
 
     <div class="container-fluid">
-        <h1>Processed Grading</h1>
+        <h1>Processed Specimen</h1>
         <div class="row">
             <div class="col-12">
                 <div class="card">

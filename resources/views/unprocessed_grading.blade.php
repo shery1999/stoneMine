@@ -26,6 +26,9 @@
                                     <label>
                                         <input required type="radio" value="specimen" name="specimen/bag">Specimen</label>
                                 </div>
+                                @if ($errors->has('specimen/bag'))
+                                    <div class="error">{{ $errors->first('specimen/bag') }}</div>
+                                @endif
 
                             </div>
                         </div>
@@ -51,6 +54,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('mine'))
+                                        <div class="error">{{ $errors->first('mine') }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -71,6 +77,9 @@
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                     </select>
+                                    @if ($errors->has('grade'))
+                                        <div class="error">{{ $errors->first('grade') }}</div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -91,6 +100,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('store'))
+                                        <div class="error">{{ $errors->first('store') }}</div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -108,19 +120,19 @@
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input required type="text" class="form-control input-default" name="weight"
-                                    placeholder="Weight">
-                            </div>
+                                    placeholder="Weight (Kg)">
+                                </div>
+                                @if ($errors->has('weight'))
+                                    <div class="error">{{ $errors->first('weight') }}</div>
+                                @endif
                             <h4 class="card-title"></h4>
                             <div class="form-group">
                                 <input required type="text" class="form-control input-default" name="size"
-                                    placeholder="Size">
+                                    placeholder="Size (m X m)">
                             </div>
-                            <h4 class="card-title"></h4>
-                            <div class="form-group">
-                                <textarea class="form-control h-150px" rows="6" placeholder="Description" name="description" id="comment"></textarea>
-                            </div>
-                            <h4 class="card-title"></h4>
-
+                            @if ($errors->has('size'))
+                                <div class="error">{{ $errors->first('size') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -137,6 +149,9 @@
                                         <label class="custom-file-label">Choose file</label>
                                     </div>
                                 </div>
+                                @if ($errors->has('image'))
+                                    <div class="error">{{ $errors->first('image') }}</div>
+                                @endif
                         </div>
                     </div>
                 </div>

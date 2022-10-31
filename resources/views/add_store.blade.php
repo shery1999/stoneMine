@@ -18,7 +18,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="/add_store" method="post" onsubmit="this.submit(); this.reset(); return false;">
+                            <form class="form-valide" action="/add_store" method="post"
+                                onsubmit="this.submit(); this.reset(); return false;">
                                 @csrf
                                 {{-- store name --}}
                                 <div class="form-group row">
@@ -26,8 +27,11 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input required type="text" class="form-control" id="val- storename" name="store"
-                                            placeholder="Store name..">
+                                        <input required type="text" class="form-control" id="val- storename"
+                                            name="store" placeholder="Store name..">
+                                        @if ($errors->has('store'))
+                                            <div class="error">{{ $errors->first('store') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- location --}}
@@ -38,6 +42,9 @@
                                     <div class="col-lg-6">
                                         <input required type="text" class="form-control" id="val-email" name="location"
                                             placeholder="location..">
+                                        @if ($errors->has('location'))
+                                            <div class="error">{{ $errors->first('location') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- description --}}
@@ -47,6 +54,9 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <textarea class="form-control" id="val-description" name="description" rows="5" placeholder="Enter Description"></textarea>
+                                        @if ($errors->has('description'))
+                                        <div class="error">{{ $errors->first('description') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 
