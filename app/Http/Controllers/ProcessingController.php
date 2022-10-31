@@ -76,7 +76,8 @@ class ProcessingController extends Controller
                     );
             }
             $id = $save_multiple['id'];
-            return redirect('/print_processing_details/' . $id);
+            return redirect()->back()->with(['msg' => '/print_processing_details/' . $id,]);
+            // return redirect('/print_processing_details/' . $id);
         }
     }
 

@@ -12,6 +12,17 @@
     <!-- row -->
 
     <div class="container-fluid">
+        @if (session()->has('msg'))
+            @if (session()->has('msg'))
+                <div class="alert alert-success" role="alert">
+                    Mine Added Successfully.
+                </div>
+            @else
+                <div class="alert alert-danger" role="alert">
+                    Oops! something went wrong.
+                </div>
+            @endif
+        @endif
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
@@ -54,7 +65,7 @@
                                     <div class="col-lg-6">
                                         <textarea class="form-control" id="val-description" name="description" rows="5" placeholder="Enter Description"></textarea>
                                         @if ($errors->has('description'))
-                                        <div class="error">{{ $errors->first('description') }}</div>
+                                            <div class="error">{{ $errors->first('description') }}</div>
                                         @endif
                                     </div>
                                 </div>

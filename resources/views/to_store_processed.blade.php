@@ -2,6 +2,19 @@
 @section('titles', 'to Store')
 @section('content')
     <div class="container-fluid mt-3">
+
+        @if (session()->has('msg'))
+            @if (session()->has('msg'))
+                <div class="alert alert-success" role="alert">
+                    Data Updated Successfully.
+                </div>
+            @else
+                <div class="alert alert-danger" role="alert">
+                    Oops! something went wrong.
+                </div>
+            @endif
+        @endif
+
         <div>
             <form class="form-valide" action="/to_store_processed" method="post"
                 onsubmit="this.submit(); this.reset(); return false;">

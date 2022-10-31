@@ -102,7 +102,9 @@ class ProcessedGradingController extends Controller
                     ]);
 
                 $id = $save['id'];
-                return redirect('/print_processed/' . $id);
+                return redirect()->back()->with(['msg' => '/print_processed/' . $id,]);
+
+                // return redirect('/print_processed/' . $id);
             }
             return redirect('processed_specimen');
         }

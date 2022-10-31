@@ -57,7 +57,9 @@ class UserController extends Controller
                 'mobileNo'=>$request->input('mobileNo'),
     
             ]);
-            return redirect('add_user');
+            return redirect()->back()->with(['msg' => 'data submitted']);
+
+            // return redirect('add_user');
             
         }
 

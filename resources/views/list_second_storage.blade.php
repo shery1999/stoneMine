@@ -12,7 +12,6 @@
         </div>
     </div>
     <!-- row -->
-
     <div class="container-fluid">
         <h1>Processed Specimen</h1>
         <div class="row">
@@ -45,8 +44,8 @@
                                     @foreach ($processedSpecimen as $index => $item)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $item->data->id }}</td>
                                             <td>{{ $item->data['id'] }}</td>
+                                            <td>{{ $item->data['grade'] }}</td>
                                             <td>{{ $item->data['cut_shape'] }}</td>
                                             <td>{{ $item->data['dimensions'] }}</td>
                                             <td>{{ $item->data['weight'] }}</td>

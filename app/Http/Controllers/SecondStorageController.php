@@ -104,8 +104,8 @@ class SecondStorageController extends Controller
                     'user_id' => $request->input('user_id'),
                     'description' => $request->input('description'),
                 ]);
-
-            return redirect('to_store_processed');
+            return redirect()->back()->with(['msg' => 'data submitted']);
+            // return redirect('to_store_processed');
         }
     }
 

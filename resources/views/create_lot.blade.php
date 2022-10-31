@@ -2,16 +2,35 @@
 @section('titles', 'Create Lot')
 @section('content')
 
-    <div class="row page-titles mx-0">
+
+    {{-- <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
             </ol>
         </div>
-    </div>
+    </div> --}}
 
     <div class="container-fluid">
+        @if (session()->has('msg'))
+            @if (session()->has('msg'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Lot Created Successfully :</strong> To Print details click :
+                    <a href="{{ url(Session::get('msg')) }}">
+                        <button type="button" class="btn btn-info">Print</button>
+                    </a>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @else
+                <div class="alert alert-danger" role="alert">
+                    Oops! something went wrong.
+                </div>
+            @endif
+        @endif
+
         <div class="row">
             <div class="col-12">
                 <div class="card">

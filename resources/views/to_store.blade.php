@@ -2,26 +2,18 @@
 @section('titles', 'to Store')
 @section('content')
     <div class="container-fluid mt-3">
-       
-       @if(session()->has('msg'))
+
+        @if (session()->has('msg'))
             @if (session()->has('msg'))
                 <div class="alert alert-success" role="alert">
-                    Data added successfuly.
+                    Data Updated Successfully.
                 </div>
             @else
                 <div class="alert alert-danger" role="alert">
                     Oops! something went wrong.
-                </div>  
+                </div>
             @endif
-       @endif
-       
-      
-
-
-       
-
-      
-
+        @endif
 
         <div>
             <form class="form-valide" action="/to_store" method="post" onsubmit="this.submit(); this.reset(); return false;">

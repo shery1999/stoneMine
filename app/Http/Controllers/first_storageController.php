@@ -106,8 +106,7 @@ class first_storageController extends Controller
                     'user_id' => Auth()->user()->id,
                     'description' => $request->input('description'),
                 ]);
-                return redirect()->back()->with(['msg' => 'data submitted']);
-            return redirect('to_store');
+            return redirect()->back()->with(['msg' => 'data submitted']);
         }
     }
     /**

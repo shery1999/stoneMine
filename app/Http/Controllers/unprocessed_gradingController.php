@@ -77,7 +77,8 @@ class unprocessed_gradingController extends Controller
                 'unprocessed_grading_id' => $save['id'],
             ]);
             $id = $save2['id'];
-            return redirect('/print_details/' . $id);
+            return redirect()->back()->with(['msg' => '/print_details/' . $id,]);
+            // return redirect('/print_details/' . $id);
             // return redirect('unprocessed_grading');
         }
     }

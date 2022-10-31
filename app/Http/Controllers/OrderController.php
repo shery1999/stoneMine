@@ -35,7 +35,7 @@ class OrderController extends Controller
     public function index1()
     {
         $showroom_data = showroom::get();
-    return view('select_lot', compact('showroom_data'));
+        return view('select_lot', compact('showroom_data'));
     }
 
     public function index2()
@@ -63,17 +63,12 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        // DB::beginTransaction();
         $save = Order::create([
-
             'lot_id' => $request->input('lot_id_data'),
             'showroom_id' => $request->input('showroom'),
         ]);
-        // dd($save['lot_id']);
         $lot_id = $save['lot_id'];
-        // dd($lot_id);
-        return redirect('print/'.$lot_id);
-        // return redirect('create_lot');
+        return redirect('create_lot')->with(['msg' => '/print/' . $lot_id]);
     }
 
     /**

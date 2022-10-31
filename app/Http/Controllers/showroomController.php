@@ -71,6 +71,8 @@ class showroomController extends Controller
                 'country' => $request->input('country'),
             ]);
             // dd($save);
+            return redirect()->back()->with(['msg' => 'data submitted']);
+
             return redirect('add_showroom');
         }
     }

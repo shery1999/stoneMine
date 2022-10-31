@@ -3,6 +3,25 @@
 @section('content')
 
     <div class="container-fluid mt-3">
+
+        @if (session()->has('msg'))
+            @if (session()->has('msg'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Data Added Successfully :</strong> To Print details click :
+                    <a href="{{ url(Session::get('msg')) }}">
+                        <button type="button" class="btn btn-info">Print</button>
+                    </a>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @else
+                <div class="alert alert-danger" role="alert">
+                    Oops! something went wrong.
+                </div>
+            @endif
+        @endif
+
         <form class="form-valide" action="/processed_specimen" method="post" enctype="multipart/form-data"
             onsubmit="this.submit(); this.reset(); return false;">
             @csrf

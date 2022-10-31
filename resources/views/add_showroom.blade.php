@@ -13,6 +13,17 @@
 
 
     <div class="container-fluid">
+        @if (session()->has('msg'))
+        @if (session()->has('msg'))
+            <div class="alert alert-success" role="alert">
+                Showroom Added Successfully.
+            </div>
+        @else
+            <div class="alert alert-danger" role="alert">
+                Oops! something went wrong.
+            </div>
+        @endif
+    @endif
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
