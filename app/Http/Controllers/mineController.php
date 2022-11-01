@@ -7,7 +7,7 @@ use App\Models\mine;
 use Illuminate\Support\Facades\Validator;
 
 
-class mineController extends Controller
+class MineController extends Controller
 {
     /**
      * Display a listing of the resource.

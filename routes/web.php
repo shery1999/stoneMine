@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\mineController;
-use App\Http\Controllers\showroomController;
-use App\Http\Controllers\workshopController;
+use App\Http\Controllers\MineController;
+use App\Http\Controllers\ShowroomController;
+use App\Http\Controllers\WorkshopController;
 use App\Http\Controllers\StoreControllerController;
-use App\Http\Controllers\unprocessed_gradingController;
-use App\Http\Controllers\first_storageController;
+use App\Http\Controllers\UnprocessedGradingController;
+use App\Http\Controllers\FirstStorageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProcessingController;
 use App\Http\Controllers\ProcessedGradingController;
@@ -36,8 +36,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('unprocessed_grading', function () {
         return view('unprocessed_grading');
     });
-    Route::post('/unprocessed_grading', [unprocessed_gradingController::class, 'store']);
-    Route::get('unprocessed_grading',  [unprocessed_gradingController::class, 'index']);
+    Route::post('/unprocessed_grading', [UnprocessedGradingController::class, 'store']);
+    Route::get('unprocessed_grading',  [UnprocessedGradingController::class, 'index']);
 
 
 
@@ -57,8 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('to_store', function () {
         return view('to_store');
     });
-    Route::post('/to_store', [first_storageController::class, 'update']);
-    Route::get('to_store',  [first_storageController::class, 'index1']);
+    Route::post('/to_store', [FirstStorageController::class, 'update']);
+    Route::get('to_store',  [FirstStorageController::class, 'index1']);
 
     Route::get('to_store_processed', function () {
         return view('to_store_processed');
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('bill', function () {
         return view('bill');
     });
-    Route::get('list_unprocessed', [first_storageController::class, 'index']);
+    Route::get('list_unprocessed', [FirstStorageController::class, 'index']);
 
     Route::get('list_processed', function () {
         return view('list_second_storage');
@@ -106,7 +106,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('view_showroom_detail', function () {
         return view('view_showroom_detail');
     });
-    Route::get('view_showroom_detail', [showroomController::class, 'index']);
+    Route::get('view_showroom_detail', [ShowroomController::class, 'index']);
 
 
     Route::get('create_bill', function () {
@@ -175,7 +175,7 @@ Route::group(['middleware' => ['auth','roleAuth']], function () {
     Route::get('add_showroom', function () {
         return view('add_showroom');
     });
-    Route::post('/add_showroom', [showroomController::class, 'store']);
+    Route::post('/add_showroom', [ShowroomController::class, 'store']);
 
     // add user
     Route::get('add_user', function () {
@@ -188,7 +188,7 @@ Route::group(['middleware' => ['auth','roleAuth']], function () {
     Route::get('add_mine', function () {
         return view('add_mine');
     });
-    Route::post('/add_mine', [mineController::class, 'store']);
+    Route::post('/add_mine', [MineController::class, 'store']);
 
     // add store
     Route::get('add_store', function () {
@@ -200,6 +200,6 @@ Route::group(['middleware' => ['auth','roleAuth']], function () {
     Route::get('add_workshop', function () {
         return view('add_workshop');
     });
-    Route::post('/add_workshop', [workshopController::class, 'store']);
+    Route::post('/add_workshop', [WorkshopController::class, 'store']);
 
 });

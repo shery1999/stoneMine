@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\MultipleProcessingIds;
 use App\Models\unprocessed_grading;
@@ -20,7 +19,7 @@ class PrintProcessingDetailController extends Controller
         foreach ($ids as $key => $value) {
             $unprocessed_ids = explode('|', $value);
             $Data[] = unprocessed_grading::whereIn('id', $unprocessed_ids)->get();
-            $workshopData = processing::where('id', $unprocessed_ids)->with('workshop')->get();
+            $workshopData = processing::where('unprocessed_grading_id', $unprocessed_ids)->with('workshop')->get();
         }
         return view('print_processing_details', compact('Data', 'MultipleData', 'workshopData'));
     }

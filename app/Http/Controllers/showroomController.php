@@ -7,7 +7,7 @@ use App\Models\showroom;
 use Illuminate\Support\Facades\Validator;
 
 
-class showroomController extends Controller
+class ShowroomController extends Controller
 {
     /**
      * Display a listing of the resource.

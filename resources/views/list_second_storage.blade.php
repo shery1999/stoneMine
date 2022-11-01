@@ -69,7 +69,7 @@
                                             </td>
                                             <td>{{ $item->data['created_at'] }}</td>
                                             <td>
-                                                <a href="/print_details/{{ $item['id'] }}">
+                                                <a href="/print_processed/{{ $item['id'] }}">
                                                     <button type="button" class="btn btn-block btn-success">Print</button>
                                                 </a>
                                             </td>

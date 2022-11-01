@@ -10,7 +10,7 @@ use App\Models\first_storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-class unprocessed_gradingController extends Controller
+class UnprocessedGradingController extends Controller
 {
     /**
      * Display a listing of the resource.

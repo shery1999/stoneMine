@@ -9,7 +9,7 @@ use App\Models\unprocessed_grading;
 use Illuminate\Support\Facades\Validator;
 
 
-class first_storageController extends Controller
+class FirstStorageController extends Controller
 {
     /**
      * Display a listing of the resource.
