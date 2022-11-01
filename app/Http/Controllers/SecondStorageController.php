@@ -47,15 +47,6 @@ class SecondStorageController extends Controller
      */
     public function store(Request $request)
     {
-        //    dd($request->all());
-        // $save = SecondStorage::create([
-        //     'store_id' => $request->input('store'),
-        //     'processed_grading_id' => $request->input('processeed_specimen'),
-        //     'user_id' => $request->input('user_id'),
-        //     'description' => $request->input('description'),
-        // ]);
-
-        // return redirect('to_store_processed');
     }
 
     /**

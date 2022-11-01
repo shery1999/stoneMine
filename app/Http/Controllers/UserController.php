@@ -58,9 +58,6 @@ class UserController extends Controller
     
             ]);
             return redirect()->back()->with(['msg' => 'data submitted']);
-
-            // return redirect('add_user');
-            
         }
 
     }

@@ -39,9 +39,7 @@ class WorkshopController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validator = Validator::make($request->all(), [
-            // dd($request->all()),
             'workshop' => 'required|unique:workshops|max:255',
             'location' => 'required|max:255',
             'description' => 'max:255',

@@ -22,16 +22,12 @@ class OrderController extends Controller
     public function index()
     {
         $Data = Order::with('data', 'showroom')->get();
-        // dd($Data);
-
         foreach ($Data as $key => $value) {
             $oneFieldId = Lot::where('id', $Data[$key]['lot_id'])->pluck('storage_id');
             $processed_ids = explode('"', $oneFieldId);
             $data_id = explode(',', $processed_ids[1]);
             $processed_stones_data[] = ProcessedGrading::whereIn('id', $data_id)->get();
         }
-        // dd($processed_stones_data);
-
         return view('orders', compact('Data', 'processed_stones_data'));
     }
     public function index1()
@@ -70,8 +66,7 @@ class OrderController extends Controller
             'showroom' => 'required|max:255',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with(['msg' => "1"]);
-            // return redirect()->back()->with(['msg' => "Showroom not Selected. Please select Showroom and Submit"]);
+            return redirect()->back()->with(['msg' => "Showroom not Selected. Please select Showroom and Submit"]);
         } else {
             $save = Order::create([
                 'lot_id' => $request->input('lot_id_data'),

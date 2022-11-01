@@ -21,7 +21,6 @@ class FirstStorageController extends Controller
         //FOR GETTING DATA FROM DB
 
         $firstGrading = FirstStorage::where('status', '0')->with('stores', 'unprocessed_grading_data.mines')->get();
-        // dd($firstGrading);
         return view('list_first_grading', compact('firstGrading'));
     }
 
@@ -50,14 +49,6 @@ class FirstStorageController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // $save = FirstStorage::create([
-        //     'store_id' => $request->input('store'),
-        //     'unprocessed_grading_id' => $request->input('bag_id'),
-        //     'user_id' => $request->input('user_id'),
-        //     'description' => $request->input('description'),
-        // ]);
-        // return redirect('to_store');
     }
 
     /**

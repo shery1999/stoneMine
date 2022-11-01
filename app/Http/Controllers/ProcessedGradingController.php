@@ -45,7 +45,6 @@ class ProcessedGradingController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // dd($request->all()),
             'processing_id' => 'required|max:255',
             'store' =>         'required|max:255',
             'grade' =>         'required|max:255',
@@ -63,9 +62,7 @@ class ProcessedGradingController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-            // dd("test pass");
             if ($request->file('photo')) {
-
                 $photo = $request->file('photo')->store('processed_stone_images', ['disk' => 'public']);
             } else {
                 $photo = null;
@@ -103,8 +100,6 @@ class ProcessedGradingController extends Controller
 
                 $id = $save['id'];
                 return redirect()->back()->with(['msg' => '/print_processed/' . $id,]);
-
-                // return redirect('/print_processed/' . $id);
             }
             return redirect('processed_specimen');
         }

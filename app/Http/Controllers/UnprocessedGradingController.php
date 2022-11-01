@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UnprocessedGrading;
-// use App\Models\;
 use App\Models\Mine;
 use App\Models\Store;
 use App\Models\FirstStorage;
@@ -44,7 +43,6 @@ class UnprocessedGradingController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // dd($request->all()),
             'specimen/bag' => 'required|max:255',
             'mine' => 'required|max:255',
             'grade' => 'required|max:255',
@@ -79,8 +77,6 @@ class UnprocessedGradingController extends Controller
             ]);
             $id = $save2['id'];
             return redirect()->back()->with(['msg' => '/print_details/' . $id,]);
-            // return redirect('/print_details/' . $id);
-            // return redirect('unprocessed_grading');
         }
     }
 

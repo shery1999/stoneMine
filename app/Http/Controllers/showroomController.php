@@ -47,7 +47,6 @@ class ShowroomController extends Controller
     {
         //
         $validator = Validator::make($request->all(), [
-            // dd($request->all()),
             'ownername' => 'required|max:255',
             'showroomname' => 'required|unique:showrooms|max:255',
             'adress' => 'required|max:255',

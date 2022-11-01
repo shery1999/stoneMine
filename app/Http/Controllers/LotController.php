@@ -22,7 +22,6 @@ class LotController extends Controller
     {
         //
         $processedSpecimen = SecondStorage::where('status', '0')->with('data', 'stores')->get();
-        // dd($processedSpecimen);
         return view('create_lot', compact('processedSpecimen'));
     }
 
@@ -45,7 +44,6 @@ class LotController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'storage_id' => 'required|max:255',
         ]);
@@ -68,7 +66,6 @@ class LotController extends Controller
                     );
             }
             $lot_id_data = $save_lot['id'];
-            // return redirect()->back()->with(['msg' => '/select_lot/' . $lot_id_data]);
             return redirect('/select_lot/' . $lot_id_data)->with(['msg' => "Lot Created Successfully.Please Select Showroom and Submit."]);
         }
     }
