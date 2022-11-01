@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\first_storage;
-use App\Models\Second_storage;
-use App\Models\processing;
+use App\Models\FirstStorage;
+use App\Models\SecondStorage;
+use App\Models\Processing;
 use Illuminate\Support\Facades\DB;
 
 class ChartJSController extends Controller
@@ -18,21 +18,21 @@ class ChartJSController extends Controller
     public function index()
     {
 
-        $users1 = first_storage::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+        $users1 = FirstStorage::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw("Month(created_at)"))
             ->pluck('count', 'month_name');
 
         $labels1 = $users1->keys();
         $data1 = $users1->values();
-        $users2 = Second_storage::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+        $users2 = SecondStorage::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw("Month(created_at)"))
             ->pluck('count', 'month_name');
 
         $labels2 = $users2->keys();
         $data2 = $users2->values();
-        $users3 = processing::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+        $users3 = Processing::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw("Month(created_at)"))
             ->pluck('count', 'month_name');
@@ -41,7 +41,7 @@ class ChartJSController extends Controller
         $data3 = $users3->values();
 
 
-        $first_storage_data =  first_storage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
+        $first_storage_data =  FirstStorage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
             ->groupBy('date')
             ->get();
         foreach ($first_storage_data as $key => $item) {
@@ -50,7 +50,7 @@ class ChartJSController extends Controller
             $first_storage_data_v[] = $item['views'];
         }
         // dd($first_storage_data_v);
-        $second_storage_data =  Second_storage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
+        $second_storage_data =  SecondStorage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
             ->groupBy('date')
             ->get();
         foreach ($second_storage_data as $key => $item) {
@@ -59,7 +59,7 @@ class ChartJSController extends Controller
             $second_storage_data_v[] = $item['views'];
         }
 
-        $processing_data =  processing::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
+        $processing_data =  Processing::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
             ->groupBy('date')
             ->get();
         foreach ($processing_data as $key => $item) {

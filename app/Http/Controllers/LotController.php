@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lot;
 use App\Models\Order;
 use Illuminate\Http\Request;
-use App\Models\Second_storage;
+use App\Models\SecondStorage;
 use App\Models\ProcessedGrading;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +21,7 @@ class LotController extends Controller
     public function index()
     {
         //
-        $processedSpecimen = second_storage::where('status', '0')->with('data', 'stores')->get();
+        $processedSpecimen = SecondStorage::where('status', '0')->with('data', 'stores')->get();
         // dd($processedSpecimen);
         return view('create_lot', compact('processedSpecimen'));
     }
@@ -62,7 +62,7 @@ class LotController extends Controller
             $processed_ids = explode(",", $lot);
 
             foreach ($processed_ids as $i => $key) {
-                $updateStatus = Second_storage::where('processed_grading_id', $processed_ids[$i])
+                $updateStatus = SecondStorage::where('processed_grading_id', $processed_ids[$i])
                     ->update(
                         ['status' => 1]
                     );

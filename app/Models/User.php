@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function get_user()
     {
-        return $this->belongsTo(first_storage::class);
+        return $this->belongsTo(FirstStorage::class);
     }
 
     /**

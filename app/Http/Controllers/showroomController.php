@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\showroom;
+use App\Models\Showroom;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -17,14 +17,12 @@ class ShowroomController extends Controller
     public function index()
     {
         //
-        $showroom_data = showroom::get();
-        // dd($showroom_data);
+        $showroom_data = Showroom::get();
         return view('view_showroom_detail', compact('showroom_data'));
     }
     public function index2()
     {
-        $ShowroomData = showroom::get();
-        dd($ShowroomData);
+        $ShowroomData = Showroom::get();
         return view('add_showroom', compact('ShowroomData'));
     }
 
@@ -60,7 +58,7 @@ class ShowroomController extends Controller
             return redirect()->back()->withErrors($validator);
         } else {
 
-            $save = showroom::create([
+            $save = Showroom::create([
                 'ownername' => $request->input('ownername'),
                 'showroomname' => $request->input('showroomname'),
                 'phone1' => $request->input('phone1'),
@@ -70,9 +68,7 @@ class ShowroomController extends Controller
                 'city' => $request->input('city'),
                 'country' => $request->input('country'),
             ]);
-            // dd($save);
             return redirect()->back()->with(['msg' => 'data submitted']);
-
             return redirect('add_showroom');
         }
     }

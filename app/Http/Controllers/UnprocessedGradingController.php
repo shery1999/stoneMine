@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\unprocessed_grading;
-use App\Models\mine;
-use App\Models\store;
-use App\Models\first_storage;
+use App\Models\UnprocessedGrading;
+// use App\Models\;
+use App\Models\Mine;
+use App\Models\Store;
+use App\Models\FirstStorage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,8 +20,8 @@ class UnprocessedGradingController extends Controller
      */
     public function index()
     {
-        $mine_data = mine::get();
-        $store_data = store::get();
+        $mine_data = Mine::get();
+        $store_data = Store::get();
         return view('unprocessed_grading', compact('mine_data', 'store_data'));
     }
 
@@ -60,7 +61,7 @@ class UnprocessedGradingController extends Controller
             } else {
                 $photo = null;
             }
-            $save = unprocessed_grading::create([
+            $save = UnprocessedGrading::create([
                 'specimen/bag' => $request->input('specimen/bag'),
                 'grade' => $request->input('grade'),
                 'weight' => $request->input('weight'),
@@ -71,7 +72,7 @@ class UnprocessedGradingController extends Controller
                 'store_id' => $request->input('store'),
                 'picture' => $photo,
             ]);
-            $save2 = first_storage::create([
+            $save2 = FirstStorage::create([
                 'store_id' => $request->input('store'),
                 'user_id' => Auth()->user()->id,
                 'unprocessed_grading_id' => $save['id'],

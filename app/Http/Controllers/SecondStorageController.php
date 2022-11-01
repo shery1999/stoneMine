@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Second_storage;
-use App\Models\store;
+use App\Models\SecondStorage;
+use App\Models\Store;
 use App\Models\ProcessedGrading;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,14 +18,14 @@ class SecondStorageController extends Controller
      */
     public function index()
     {
-        $processedSpecimen = Second_storage::where('status', '0')->with('data', 'stores')->get();
+        $processedSpecimen = SecondStorage::where('status', '0')->with('data', 'stores')->get();
         return view('list_second_storage', compact('processedSpecimen'));
     }
 
     public function index1()
     {
-        $store_data = store::get();
-        $stone_data = Second_storage::get();
+        $store_data = Store::get();
+        $stone_data = SecondStorage::get();
         return view('to_store_processed', compact('store_data', 'stone_data'));
     }
 
@@ -48,7 +48,7 @@ class SecondStorageController extends Controller
     public function store(Request $request)
     {
         //    dd($request->all());
-        // $save = Second_storage::create([
+        // $save = SecondStorage::create([
         //     'store_id' => $request->input('store'),
         //     'processed_grading_id' => $request->input('processeed_specimen'),
         //     'user_id' => $request->input('user_id'),
@@ -97,7 +97,7 @@ class SecondStorageController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-            $save = Second_storage::where('processed_grading_id', $request->input('processeed_specimen'))
+            $save = SecondStorage::where('processed_grading_id', $request->input('processeed_specimen'))
                 ->update([
                     'store_id' => $request->input('store'),
                     'processed_grading_id' => $request->input('processeed_specimen'),

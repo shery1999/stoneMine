@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\storeController;
+use App\Models\StoreController;
 use Illuminate\Http\Request;
-use App\Models\store;
+use App\Models\Store;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -48,7 +48,7 @@ class StoreControllerController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-            $save = store::create([
+            $save = Store::create([
 
                 'store' => $request->input('store'),
                 'location' => $request->input('location'),

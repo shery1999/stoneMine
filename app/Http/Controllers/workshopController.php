@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\workshop;
+use App\Models\Workshop;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -49,7 +49,7 @@ class WorkshopController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-            $save = workshop::create([
+            $save = Workshop::create([
                 'workshop' => $request->input('workshop'),
                 'location' => $request->input('location'),
                 'description' => $request->input('description'),

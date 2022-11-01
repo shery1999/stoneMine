@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\processing;
-use App\Models\workshop;
-use App\Models\first_storage;
+use App\Models\Processing;
+use App\Models\Workshop;
+use App\Models\FirstStorage;
 use App\Models\MultipleProcessingIds;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\unprocessed_grading;
+use App\Models\UnprocessedGrading;
 
 
 
@@ -22,8 +22,8 @@ class ProcessingController extends Controller
      */
     public function index()
     {
-        $workshop_data = workshop::get();
-        $first_storage_data = first_storage::where('status', 0)->get();
+        $workshop_data = Workshop::get();
+        $first_storage_data = FirstStorage::where('status', 0)->get();
         return view('processing', compact('workshop_data', 'first_storage_data'));
     }
 
@@ -62,7 +62,7 @@ class ProcessingController extends Controller
             $result1 = explode(',', $request->input('bag_ids'));
             foreach ($result1 as $key => $value) {
                 $result  = explode('|', $value);
-                $save = processing::create([
+                $save = Processing::create([
                     'workshop_id' => $request->input('workshop'),
                     'first_storage_id' => $result[1],
                     'unprocessed_grading_id' => $result[0],
@@ -70,7 +70,7 @@ class ProcessingController extends Controller
                     'description' => $request->input('description'),
                 ]);
                 $unprocessed_id =  $save['first_storage_id'];
-                $updateStaus = first_storage::where('id', $unprocessed_id)
+                $updateStaus = FirstStorage::where('id', $unprocessed_id)
                     ->update(
                         ['status' => 1]
                     );

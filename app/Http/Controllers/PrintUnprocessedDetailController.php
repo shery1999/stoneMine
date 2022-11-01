@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\first_storage;
+use App\Models\FirstStorage;
 use Illuminate\Http\Request;
-use App\Models\unprocessed_grading;
+use App\Models\UnprocessedGrading;
 
 class PrintUnprocessedDetailController extends Controller
 {
@@ -16,7 +16,7 @@ class PrintUnprocessedDetailController extends Controller
     public function index()
     {
         $id =  request()->route()->parameters['id'];
-        $Data = first_storage::where('id', $id)->with('unprocessed_grading_data', 'stores')->get();
+        $Data = FirstStorage::where('id', $id)->with('unprocessed_grading_data', 'stores')->get();
         return view('print_details', compact('Data'));
     }
 

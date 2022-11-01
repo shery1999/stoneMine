@@ -17,14 +17,14 @@ class store extends Model
 
     public function first_storages()
     {
-        return $this->belongsTo(first_storage::class);
+        return $this->belongsTo(FirstStorage::class);
     }
     public function second_storages()
     {
-        return $this->belongsTo(Second_storage::class);
+        return $this->belongsTo(SecondStorage::class);
     }
     public function processing()
     {
-        return $this->belongsTo(processing::class);
+        return $this->belongsTo(Processing::class);
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Second_storage;
+use App\Models\SecondStorage;
 
 class PrintProcessedDetailController extends Controller
 {
@@ -16,7 +16,7 @@ class PrintProcessedDetailController extends Controller
     {
         //
         $id =  request()->route()->parameters['id'];
-        $Data = Second_storage::where('id', $id)->with('data', 'stores')->get();
+        $Data = SecondStorage::where('id', $id)->with('data', 'stores')->get();
         return view('print_processed', compact('Data'));
     }
 

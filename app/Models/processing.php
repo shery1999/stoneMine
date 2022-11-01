@@ -21,6 +21,6 @@ class processing extends Model
 
     public function workshop()
     {
-        return $this->hasOne(workshop::class, 'id', 'workshop_id');
+        return $this->hasOne(Workshop::class, 'id', 'workshop_id');
     }
 }

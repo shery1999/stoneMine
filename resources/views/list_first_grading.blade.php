@@ -57,7 +57,7 @@
                                             </td>
                                             <td>{{ $item['created_at'] }}</td>
                                             <td>
-                                                <a href="/print_processed/{{ $item['unprocessed_grading_id'] }}">
+                                                <a href="/print_details/{{ $item['id'] }}">
                                                     <button type="button" class="btn btn-block btn-success">Print</button>
                                                 </a>
                                             </td>

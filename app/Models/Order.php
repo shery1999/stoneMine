@@ -22,7 +22,7 @@ class Order extends Model
 
     public function showroom()
     {
-        return $this->hasOne(showroom::class,'id', 'showroom_id');
+        return $this->hasOne(Showroom::class,'id', 'showroom_id');
     }
 
 

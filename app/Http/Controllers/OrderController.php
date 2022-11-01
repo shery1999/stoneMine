@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\ProcessedGrading;
 use App\Models\Lot;
-use App\Models\Second_storage;
-use App\Models\showroom;
+use App\Models\SecondStorage;
+use App\Models\Showroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,13 +36,13 @@ class OrderController extends Controller
     }
     public function index1()
     {
-        $showroom_data = showroom::get();
+        $showroom_data = Showroom::get();
         return view('select_lot', compact('showroom_data'));
     }
 
     public function index2()
     {
-        $processedSpecimen = Second_storage::with('data', 'stores')->get();
+        $processedSpecimen = SecondStorage::with('data', 'stores')->get();
         return view('select_lot', compact('processedSpecimen'));
     }
     /**

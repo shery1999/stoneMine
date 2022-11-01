@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class unprocessed_grading extends Model
+class UnprocessedGrading extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -22,7 +22,7 @@ class unprocessed_grading extends Model
     ];
 
     public function mines(){
-        return $this->belongsTo(mine::class, 'mine_id', 'id');
+        return $this->belongsTo(Mine::class, 'mine_id', 'id');
     }
 
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\first_storage;
-use App\Models\store;
-use App\Models\unprocessed_grading;
+use App\Models\FirstStorage;
+use App\Models\Store;
+use App\Models\UnprocessedGrading;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -20,15 +20,15 @@ class FirstStorageController extends Controller
     {
         //FOR GETTING DATA FROM DB
 
-        $firstGrading = first_storage::where('status', '0')->with('stores', 'unprocessed_grading_data.mines')->get();
+        $firstGrading = FirstStorage::where('status', '0')->with('stores', 'unprocessed_grading_data.mines')->get();
         // dd($firstGrading);
         return view('list_first_grading', compact('firstGrading'));
     }
 
     public function index1()
     {
-        $store_data = store::get();
-        $stone_data = first_storage::get();
+        $store_data = Store::get();
+        $stone_data = FirstStorage::get();
         return view('to_store', compact('store_data', 'stone_data'));
     }
 
@@ -51,7 +51,7 @@ class FirstStorageController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        // $save = first_storage::create([
+        // $save = FirstStorage::create([
         //     'store_id' => $request->input('store'),
         //     'unprocessed_grading_id' => $request->input('bag_id'),
         //     'user_id' => $request->input('user_id'),
@@ -99,7 +99,7 @@ class FirstStorageController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-            $save = first_storage::where('unprocessed_grading_id', $request->input('bag_id'))
+            $save = FirstStorage::where('unprocessed_grading_id', $request->input('bag_id'))
                 ->update([
                     'store_id' => $request->input('store'),
                     'unprocessed_grading_id' => $request->input('bag_id'),

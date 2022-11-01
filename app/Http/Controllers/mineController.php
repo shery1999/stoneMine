@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\mine;
+use App\Models\Mine;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -45,7 +45,7 @@ class MineController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-            $save = mine::create([
+            $save = Mine::create([
                 'mine' => $request->input('mine'),
                 'location' => $request->input('location'),
                 'description' => $request->input('description'),

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class first_storage extends Model
+class FirstStorage extends Model
 {
 
     use HasFactory;
@@ -22,11 +22,11 @@ class first_storage extends Model
     // used to fetch data from db
     public function unprocessed_grading_data()
     {
-        return $this->belongsTo(unprocessed_grading::class, 'unprocessed_grading_id', 'id');
+        return $this->belongsTo(UnprocessedGrading::class, 'unprocessed_grading_id', 'id');
     }
 
     public function stores()
     {
-        return $this->hasOne(store::class, 'id', 'store_id');
+        return $this->hasOne(Store::class, 'id', 'store_id');
     }
 }

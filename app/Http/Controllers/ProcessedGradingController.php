@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProcessedGrading;
-use App\Models\Second_storage;
-use App\Models\store;
-use App\Models\processing;
+use App\Models\SecondStorage;
+use App\Models\Store;
+use App\Models\Processing;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -20,8 +20,8 @@ class ProcessedGradingController extends Controller
      */
     public function index()
     {
-        $processing_data = processing::get();
-        $store_data = store::get();
+        $processing_data = Processing::get();
+        $store_data = Store::get();
 
         return view('processed_specimen', compact('processing_data', 'store_data'));
     }
@@ -88,13 +88,13 @@ class ProcessedGradingController extends Controller
                 'picture' => $photo,
             ]);
             $processing_id =  $save['processing_id'];
-            $updateStaus = processing::where('id', $processing_id)
+            $updateStaus = Processing::where('id', $processing_id)
                 ->update(
                     ['status' => 1]
                 );
             if (!$request->store = "") {
                 if ($request->input('store'))
-                    $save = Second_storage::create([
+                    $save = SecondStorage::create([
                         'store_id' => $request->input('store'),
                         'processed_grading_id' => $save['id'],
                         'user_id' => Auth()->user()->id,
