@@ -16,12 +16,11 @@
             <script>
                 window.location = "/create_lot";
             </script>
-
         @endif
         @if (session()->has('msg'))
             @if (session()->has('msg'))
                 <div class="alert alert-success" role="alert">
-                    Lot Created Successfully.Please Select Showroom and Submit.
+                    {{ Session::get('msg') }}
                 </div>
             @else
                 <div class="alert alert-danger" role="alert">

@@ -8,6 +8,8 @@ use App\Models\Lot;
 use App\Models\Second_storage;
 use App\Models\showroom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -63,12 +65,21 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $save = Order::create([
-            'lot_id' => $request->input('lot_id_data'),
-            'showroom_id' => $request->input('showroom'),
+        $validator = Validator::make($request->all(), [
+            'lot_id_data' => 'required|max:255',
+            'showroom' => 'required|max:255',
         ]);
-        $lot_id = $save['lot_id'];
-        return redirect('create_lot')->with(['msg' => '/print/' . $lot_id]);
+        if ($validator->fails()) {
+            return redirect()->back()->with(['msg' => "1"]);
+            // return redirect()->back()->with(['msg' => "Showroom not Selected. Please select Showroom and Submit"]);
+        } else {
+            $save = Order::create([
+                'lot_id' => $request->input('lot_id_data'),
+                'showroom_id' => $request->input('showroom'),
+            ]);
+            $lot_id = $save['lot_id'];
+            return redirect('create_lot')->with(['msg' => '/print/' . $lot_id]);
+        }
     }
 
     /**

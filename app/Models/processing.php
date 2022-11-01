@@ -18,5 +18,9 @@ class processing extends Model
         'status',
 
     ];
-    
+
+    public function workshop()
+    {
+        return $this->hasOne(workshop::class, 'id', 'workshop_id');
+    }
 }

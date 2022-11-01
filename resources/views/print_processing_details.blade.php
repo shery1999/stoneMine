@@ -143,9 +143,11 @@
                     <th class="text-center" scope="col">Grade</th>
                     <th class="text-center" scope="col">Weight</th>
                     <th class="text-center" scope="col">Size</th>
+                    <th class="text-center" scope="col">Workshop</th>
                 </tr>
             </thead>
             <tbody>
+                {{-- {{ dd($workshopData[0]['workshop']['workshop']) }} --}}
                 @foreach ($Data as $key => $data)
                     <tr>
                         <td class="text-center">{{ $data[0]['specimen/bag'] }}</td>
@@ -153,6 +155,8 @@
                         <td class="text-center">{{ $data[0]['grade'] }}</td>
                         <td class="text-center">{{ $data[0]['weight'] }}</td>
                         <td class="text-center">{{ $data[0]['size'] }}</td>
+                        <td class="text-center">{{ $workshopData[0]['workshop']['workshop'] }}</td>
+
                     </tr>
                     </tr>
                 @endforeach

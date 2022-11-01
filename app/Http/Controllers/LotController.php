@@ -69,7 +69,7 @@ class LotController extends Controller
             }
             $lot_id_data = $save_lot['id'];
             // return redirect()->back()->with(['msg' => '/select_lot/' . $lot_id_data]);
-            return redirect('/select_lot/' . $lot_id_data)->with(['msg' => "Data Added Successfully "]);
+            return redirect('/select_lot/' . $lot_id_data)->with(['msg' => "Lot Created Successfully.Please Select Showroom and Submit."]);
         }
     }
 

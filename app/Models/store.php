@@ -23,4 +23,8 @@ class store extends Model
     {
         return $this->belongsTo(Second_storage::class);
     }
+    public function processing()
+    {
+        return $this->belongsTo(processing::class);
+    }
 }

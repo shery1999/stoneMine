@@ -153,9 +153,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- {{dd($Data);}} --}}
                 @foreach ($Data as $key => $data)
-                    {{-- {{ dd($data['data']['grade']) }} --}}
                     <tr>
                         <td class="text-center">{{ $data['data']['id'] }}</td>
                         <td class="text-center">{{ $data['data']['grade'] }}</td>
