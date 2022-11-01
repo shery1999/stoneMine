@@ -4,7 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MineController;
 use App\Http\Controllers\ShowroomController;
 use App\Http\Controllers\WorkshopController;
-use App\Http\Controllers\StoreControllerController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UnprocessedGradingController;
 use App\Http\Controllers\FirstStorageController;
 use App\Http\Controllers\HomeController;
@@ -17,7 +17,6 @@ use App\Http\Controllers\PrintController;
 use App\Http\Controllers\PrintUnprocessedDetailController;
 use App\Http\Controllers\PrintProcessedDetailController;
 use App\Http\Controllers\PrintProcessingDetailController;
-use App\Http\Controllers\ChartJSController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::post('/unprocessed_grading', [UnprocessedGradingController::class, 'store']);
     Route::get('unprocessed_grading',  [UnprocessedGradingController::class, 'index']);
-
-
 
     Route::get('processing', function () {
         return view('processing');
@@ -74,14 +71,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('create_lot', [LotController::class, 'store']);
     Route::get('create_lot',  [LotController::class, 'index']);
 
-
-
-    Route::get('sale', function () {
-        return view('sale');
-    });
-    Route::get('bill', function () {
-        return view('bill');
-    });
     Route::get('list_unprocessed', [FirstStorageController::class, 'index']);
 
     Route::get('list_processed', function () {
@@ -109,10 +98,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('view_showroom_detail', [ShowroomController::class, 'index']);
 
 
-    Route::get('create_bill', function () {
-        return view('create_bill');
-    });
-
     Route::get('view_sold_lot', function () {
         return view('view_sold_lot');
     });
@@ -122,10 +107,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/orders', [OrderController::class, 'index']);
 
-
-    Route::get('/qrcode', function () {
-        return view('qrcode');
-    });
 
     Route::get('print/{lot_id}', function () {
         return view('print/{lot_id}');
@@ -154,11 +135,9 @@ Route::group(['middleware' => ['auth']], function () {
         return view('print_processing_details/{id}');
     });
     Route::get('print_processing_details/{id}', [PrintProcessingDetailController::class, 'index']);
-
-
 });
 
-Route::group(['middleware' => ['auth','roleAuth']], function () {
+Route::group(['middleware' => ['auth', 'roleAuth']], function () {
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('admin_panel', function () {
@@ -194,12 +173,11 @@ Route::group(['middleware' => ['auth','roleAuth']], function () {
     Route::get('add_store', function () {
         return view('add_store');
     });
-    Route::post('/add_store', [StoreControllerController::class, 'store']);
+    Route::post('/add_store', [StoreController::class, 'store']);
 
     // add worshop
     Route::get('add_workshop', function () {
         return view('add_workshop');
     });
     Route::post('/add_workshop', [WorkshopController::class, 'store']);
-
 });

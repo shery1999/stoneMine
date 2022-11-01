@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StoreController;
+// use App\Models\StoreController;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use Illuminate\Support\Facades\Validator;
 
 
 
-class StoreControllerController extends Controller
+class StoreController extends Controller
 {
     /**
      * Display a listing of the resource.

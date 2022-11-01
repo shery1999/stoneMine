@@ -38,7 +38,7 @@ class HomeController extends Controller
         $second_storage = SecondStorage::where('status', 0)->count();
 
         $order = Order::count();
-
+// per day result
         // $first_storage_data =  FirstStorage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
         //     ->groupBy('date')
         //     ->get();
@@ -65,7 +65,6 @@ class HomeController extends Controller
         //     $processing_labels[] =  $item['date'];
         //     $processing_data_v[] = $item['views'];
         // }
-
 
 
 
