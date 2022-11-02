@@ -14,16 +14,16 @@
 
     <div class="container-fluid">
         @if (session()->has('msg'))
-        @if (session()->has('msg'))
-            <div class="alert alert-success" role="alert">
-                Showroom Added Successfully.
-            </div>
-        @else
-            <div class="alert alert-danger" role="alert">
-                Oops! something went wrong.
-            </div>
+            @if (session()->has('msg'))
+                <div class="alert alert-success" role="alert">
+                    Showroom Added Successfully.
+                </div>
+            @else
+                <div class="alert alert-danger" role="alert">
+                    Oops! something went wrong.
+                </div>
+            @endif
         @endif
-    @endif
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
@@ -80,12 +80,21 @@
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-phoneus1" name="phone1"
                                             placeholder="Enter Phone Number 1">
+                                        @if ($errors->has('phone1'))
+                                            <div class="error">{{ $errors->first('phone1') }}</div>
+                                        @endif
                                         <h4 class="card-title"></h4>
                                         <input type="text" class="form-control" id="val-phoneus2" name="phone2"
                                             placeholder="Enter Phone Number 2">
+                                        @if ($errors->has('phone2'))
+                                            <div class="error">{{ $errors->first('phone2') }}</div>
+                                        @endif
                                         <h4 class="card-title"></h4>
                                         <input type="text" class="form-control" id="val-phoneus3" name="phone3"
                                             placeholder="Enter Phone Number 3">
+                                        @if ($errors->has('phone3'))
+                                            <div class="error">{{ $errors->first('phone3') }}</div>
+                                        @endif
                                     </div>
 
                                 </div>

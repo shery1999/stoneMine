@@ -38,28 +38,29 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username'=>'required|unique:users|max:255',
-            'email'=>'required|unique:users|max:255',
-            'password'=>'required|max:255',
-            'role'=>'required|max:255',
-            'phoneNo'=>'required|max:255',
-            'mobileNo'=>'required|max:255',
+            // dd($request->all()),
+            'username' => 'required|unique:users|max:255',
+            'email' => 'required|unique:users|max:255',
+            'password' => 'required|min:8|max:255',
+            'confirm_password' => 'required|same:password',
+            'role' => 'required|max:255',
+            'phoneNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'mobileNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-        }else{
-            $save=User::create([
-                'username'=>$request->input('username'),
-                'email'=>$request->input('email'),
-                'password'=>Hash::make($request['password']),
-                'role'=>$request->input('role'),
-                'phoneNo'=>$request->input('phoneNo'),
-                'mobileNo'=>$request->input('mobileNo'),
-    
+        } else {
+            $save = User::create([
+                'username' => $request->input('username'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request['password']),
+                'role' => $request->input('role'),
+                'phoneNo' => $request->input('phoneNo'),
+                'mobileNo' => $request->input('mobileNo'),
+
             ]);
             return redirect()->back()->with(['msg' => 'data submitted']);
         }
-
     }
 
     /**

@@ -2,14 +2,6 @@
 @section('titles', 'Add User')
 @section('content')
 
-    <style>
-        .error {
-            color: red;
-            font-style: italic;
-            font-weight: bolder;
-        }
-    </style>
-
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
@@ -74,6 +66,9 @@
                                     <div class="col-lg-6">
                                         <input required type="password" class="form-control" id="password" name="password"
                                             placeholder="Choose a safe one..">
+                                        @if ($errors->has('password'))
+                                            <div class="error">{{ $errors->first('password') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- confirm password --}}
@@ -83,7 +78,10 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input required type="password" class="form-control" id="confirm-password"
-                                            name="val-confirm-password" placeholder="..and confirm it!">
+                                            name="confirm_password" placeholder="..and confirm it!">
+                                        @if ($errors->has('confirm_password'))
+                                            <div class="error">{{ $errors->first('confirm_password') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -95,10 +93,17 @@
                                     <div class="col-lg-6">
                                         <input required type="text" class="form-control" id="val-phoneus1" name="phoneNo"
                                             placeholder="Phone Number">
+                                        @if ($errors->has('phoneNo'))
+                                            <div class="error">{{ $errors->first('phoneNo') }}</div>
+                                        @endif
+
                                         <h4 class="card-title"></h4>
                                         <h4 class="card-title"></h4>
                                         <input required type="text" class="form-control" id="val-phoneus2"
                                             name="mobileNo" placeholder="Mobile Number">
+                                        @if ($errors->has('mobileNo'))
+                                            <div class="error">{{ $errors->first('mobileNo') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -110,11 +115,14 @@
                                     <div class="col-lg-6">
                                         <select required type="text" class="form-control" id="val-username"
                                             name="role" placeholder="Enter a user Role..">
+                                            <option value="" selected aria-placeholder="Please Select Role">Enter a
+                                                user Role.. </option>
                                             <option value="user">User</option>
                                             <option value="admin">Admin</option>
                                         </select>
-                                        {{-- <input required type="text" class="form-control" id="val-username" name="role" --}}
-                                        {{-- placeholder="Enter a user Role.."> --}}
+                                        @if ($errors->has('role'))
+                                            <div class="error">{{ $errors->first('role') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 

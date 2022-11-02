@@ -52,6 +52,10 @@ class ShowroomController extends Controller
             'adress' => 'required|max:255',
             'city' => 'required|max:255',
             'country' => 'required|max:255',
+            'phone1' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'phone2' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'phone3' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
