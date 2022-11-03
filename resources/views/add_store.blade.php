@@ -12,27 +12,27 @@
     </div>
     <!-- row -->
 
-    <div class="container-fluid">
-        @if (session()->has('msg'))
+    <div class="row justify-content-center">
+        <div class="container-fluid">
             @if (session()->has('msg'))
-                <div class="col-lg-12">
+                @if (session()->has('msg'))
+                    <div class="col-lg-12">
 
-                    <div class="alert alert-success" role="alert">
-                        Store Added Successfully.
+                        <div class="alert alert-success" role="alert">
+                            Store Added Successfully.
+                        </div>
                     </div>
-                </div>
+                @endif
             @endif
-        @endif
-        @if (session()->has('msgf'))
             @if (session()->has('msgf'))
-                <div class="col-lg-12">
-                    <div class="alert alert-danger" role="alert">
-                        Store Not Added.
+                @if (session()->has('msgf'))
+                    <div class="col-lg-12">
+                        <div class="alert alert-danger" role="alert">
+                            Store Not Added.
+                        </div>
                     </div>
-                </div>
+                @endif
             @endif
-        @endif
-        <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
