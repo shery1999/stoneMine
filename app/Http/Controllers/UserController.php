@@ -38,7 +38,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // dd($request->all()),
             'username' => 'required|unique:users|max:255',
             'email' => 'required|unique:users|max:255',
             'password' => 'required|min:8|max:255',
@@ -48,7 +47,7 @@ class UserController extends Controller
             'mobileNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Submitted']);
         } else {
             $save = User::create([
                 'username' => $request->input('username'),

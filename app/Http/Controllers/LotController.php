@@ -48,7 +48,7 @@ class LotController extends Controller
             'storage_id' => 'required|max:255',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
         } else {
 
 
@@ -56,15 +56,6 @@ class LotController extends Controller
                 'storage_id' => $request->input('storage_id'),
                 'price' => $request->input('price'),
             ]);
-            $lot = $request->input('storage_id');
-            $processed_ids = explode(",", $lot);
-
-            foreach ($processed_ids as $i => $key) {
-                $updateStatus = SecondStorage::where('processed_grading_id', $processed_ids[$i])
-                    ->update(
-                        ['status' => 1]
-                    );
-            }
             $lot_id_data = $save_lot['id'];
             return redirect('/select_lot/' . $lot_id_data)->with(['msg' => "Lot Created Successfully.Please Select Showroom and Submit."]);
         }

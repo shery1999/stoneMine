@@ -5,16 +5,22 @@
 
         @if (session()->has('msg'))
             @if (session()->has('msg'))
-                <div class="alert alert-success" role="alert">
-                    Data Updated Successfully.
-                </div>
-            @else
-                <div class="alert alert-danger" role="alert">
-                    Oops! something went wrong.
+                <div class="col-lg-12">
+                    <div class="alert alert-success" role="alert">
+                        Data Updated Successfully.
+                    </div>
                 </div>
             @endif
         @endif
-
+        @if (session()->has('msgf'))
+            @if (session()->has('msgf'))
+                <div class="col-lg-12">
+                    <div class="col-lg-12 alert alert-danger" role="alert">
+                        Data Not Inserted.
+                    </div>
+                </div>
+            @endif
+        @endif
         <div>
             <form class="form-valide" action="/to_store_processed" method="post"
                 onsubmit="this.submit(); this.reset(); return false;">
@@ -90,16 +96,14 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Submit</h4>
-                                <div class="button-icon">
-                                    <button type="submit" class="btn mb-1 btn-success">Submit <span
-                                            class="btn-icon-right"><i class="fa fa-check"></i></span>
-                                    </button>
-                                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Submit</h4>
+                            <div class="button-icon">
+                                <button type="submit" class="btn mb-1 btn-success">Submit <span class="btn-icon-right"><i
+                                            class="fa fa-check"></i></span>
+                                </button>
                             </div>
                         </div>
                     </div>

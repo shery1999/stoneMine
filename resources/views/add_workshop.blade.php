@@ -14,16 +14,24 @@
 
     <div class="container-fluid">
         @if (session()->has('msg'))
-        @if (session()->has('msg'))
-            <div class="alert alert-success" role="alert">
-                Store Added Successfully.
-            </div>
-        @else
-            <div class="alert alert-danger" role="alert">
-                Oops! something went wrong.
-            </div>
+            @if (session()->has('msg'))
+                <div class="col-lg-12">
+                    <div class="alert alert-success" role="alert">
+                        Store Added Successfully.
+                    </div>
+                </div>
+            @endif
         @endif
-    @endif
+        @if (session()->has('msgf'))
+            @if (session()->has('msgf'))
+                <div class="col-lg-12">
+
+                    <div class="alert alert-danger" role="alert">
+                        Workshop Not Added.
+                    </div>
+                </div>
+            @endif
+        @endif
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">

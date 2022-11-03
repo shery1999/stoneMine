@@ -6,18 +6,25 @@
 
         @if (session()->has('msg'))
             @if (session()->has('msg'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Data Added Successfully :</strong> To Print details click :
-                    <a href="{{ url(Session::get('msg')) }}">
-                        <button type="button" class="btn btn-info">Print</button>
-                    </a>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="col-lg-12">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Data Added Successfully :</strong> To Print details click :
+                        <a href="{{ url(Session::get('msg')) }}">
+                            <button type="button" class="btn btn-info">Print</button>
+                        </a>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
-            @else
-                <div class="alert alert-danger" role="alert">
-                    Oops! something went wrong.
+            @endif
+        @endif
+        @if (session()->has('msgf'))
+            @if (session()->has('msgf'))
+                <div class="col-lg-12">
+                    <div class="col-lg-12 alert alert-danger" role="alert">
+                        Data Not Inserted.
+                    </div>
                 </div>
             @endif
         @endif
@@ -120,13 +127,15 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Submit</h4>
-                            <div class="button-icon">
-                                <button id="btnsubmit" type="submit" class="btn mb-1 btn-success">Submit <span
-                                        class="btn-icon-right"><i class="fa fa-check"></i></span>
-                                </button>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Submit</h4>
+                                <div class="button-icon">
+                                    <button id="btnsubmit" type="submit" class="btn mb-1 btn-success">Submit <span
+                                            class="btn-icon-right"><i class="fa fa-check"></i></span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

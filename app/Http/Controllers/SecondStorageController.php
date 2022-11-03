@@ -25,7 +25,7 @@ class SecondStorageController extends Controller
     public function index1()
     {
         $store_data = Store::get();
-        $stone_data = SecondStorage::get();
+        $stone_data = SecondStorage::where('status', 0)->get();
         return view('to_store_processed', compact('store_data', 'stone_data'));
     }
 
@@ -86,7 +86,7 @@ class SecondStorageController extends Controller
             'description' =>         'max:255',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
         } else {
             $save = SecondStorage::where('processed_grading_id', $request->input('processeed_specimen'))
                 ->update([

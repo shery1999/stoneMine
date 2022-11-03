@@ -26,6 +26,8 @@ Route::get('login', function () {
 });
 Auth::routes([
     'register' => false,
+    'verify' => false,
+    'reset' => false,
 ]);
 
 

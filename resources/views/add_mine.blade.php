@@ -14,12 +14,19 @@
     <div class="container-fluid">
         @if (session()->has('msg'))
             @if (session()->has('msg'))
-                <div class="alert alert-success" role="alert">
-                    Mine Added Successfully.
+                <div class="col-lg-12">
+                    <div class="alert alert-success" role="alert">
+                        Mine Added Successfully.
+                    </div>
                 </div>
-            @else
-                <div class="alert alert-danger" role="alert">
-                    Oops! something went wrong.
+            @endif
+        @endif
+        @if (session()->has('msgf'))
+            @if (session()->has('msgf'))
+                <div class="col-lg-12">
+                    <div class="alert alert-danger" role="alert">
+                        Mine Not Added.
+                    </div>
                 </div>
             @endif
         @endif

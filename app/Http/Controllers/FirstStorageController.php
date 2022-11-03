@@ -27,7 +27,7 @@ class FirstStorageController extends Controller
     public function index1()
     {
         $store_data = Store::get();
-        $stone_data = FirstStorage::get();
+        $stone_data = FirstStorage::where('status', 0)->get();
         return view('to_store', compact('store_data', 'stone_data'));
     }
 
@@ -88,7 +88,7 @@ class FirstStorageController extends Controller
             'description' =>   'max:255',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
         } else {
             $save = FirstStorage::where('unprocessed_grading_id', $request->input('bag_id'))
                 ->update([

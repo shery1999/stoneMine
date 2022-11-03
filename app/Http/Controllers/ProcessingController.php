@@ -51,7 +51,7 @@ class ProcessingController extends Controller
             'description' => 'max:255',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
         } else {
             $save_multiple = MultipleProcessingIds::create([
                 'processing_ids' => $request->input('bag_ids'),

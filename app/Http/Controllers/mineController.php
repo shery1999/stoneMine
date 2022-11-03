@@ -43,7 +43,7 @@ class MineController extends Controller
             'description' => 'max:255',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Submitted']);
         } else {
             $save = Mine::create([
                 'mine' => $request->input('mine'),

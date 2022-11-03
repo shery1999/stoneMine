@@ -58,7 +58,7 @@ class ShowroomController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Submitted']);
         } else {
 
             $save = Showroom::create([

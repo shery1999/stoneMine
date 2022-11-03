@@ -52,7 +52,7 @@ class UnprocessedGradingController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
         } else {
             if ($request->file('image')) {
                 $photo =  $request->file('image')->store('unprocessed_stone_images', ['disk' => 'public']);

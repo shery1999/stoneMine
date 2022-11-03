@@ -18,14 +18,16 @@
             </script>
         @endif
         @if (session()->has('msg'))
-            @if (session()->has('msg'))
-                <div class="alert alert-success" role="alert">
-                    {{ Session::get('msg') }}
-                </div>
+            @if (session()->has('msgf'))
+
+                    <div class="alert alert-danger" role="alert">
+                        {{ Session::get('msg') }}
+                    </div>
             @else
-                <div class="alert alert-danger" role="alert">
-                    Oops! something went wrong.
-                </div>
+
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('msg') }}
+                    </div>
             @endif
         @endif
         <div class="row">

@@ -150,7 +150,7 @@
                 {{-- {{ dd($workshopData[0]['workshop']['workshop']) }} --}}
                 @foreach ($Data as $key => $data)
                     <tr>
-                        <td class="text-center">{{ $data[0]['specimen/bag'] }}</td>
+                        <td class="text-center">{{ $data[0]['id'] }}</td>
                         <td class="text-center">{{ $data[0]['specimen/bag'] }}</td>
                         <td class="text-center">{{ $data[0]['grade'] }}</td>
                         <td class="text-center">{{ $data[0]['weight'] }}</td>

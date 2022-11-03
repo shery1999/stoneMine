@@ -24,13 +24,15 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            @else
-                <div class="alert alert-danger" role="alert">
-                    Oops! something went wrong.
+            @endif
+        @endif
+        @if (session()->has('msgf'))
+            @if (session()->has('msgf'))
+                <div class="col-lg-12 alert alert-danger" role="alert">
+                    Data Not Inserted.
                 </div>
             @endif
         @endif
-
         <div class="row">
             <div class="col-12">
                 <div class="card">

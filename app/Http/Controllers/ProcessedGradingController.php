@@ -60,7 +60,7 @@ class ProcessedGradingController extends Controller
             'photo' =>         'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
         } else {
             if ($request->file('photo')) {
                 $photo = $request->file('photo')->store('processed_stone_images', ['disk' => 'public']);

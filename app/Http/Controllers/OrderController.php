@@ -66,12 +66,30 @@ class OrderController extends Controller
             'showroom' => 'required|max:255',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with(['msg' => "Showroom not Selected. Please select Showroom and Submit"]);
+            return redirect()->back()->with(['msg' => "Showroom not Selected. Please select Showroom and Submit"])->with(['msgf' => "Data not inserted"]);
         } else {
             $save = Order::create([
                 'lot_id' => $request->input('lot_id_data'),
                 'showroom_id' => $request->input('showroom'),
             ]);
+            $lot_id = $request->input('lot_id_data');
+
+            $lot_details = Lot::where('id', $lot_id)->get();
+            $lot = $lot_details[0]['storage_id'];
+
+
+
+            // $lot = ;
+            $processed_ids = explode(",", $lot);
+
+            foreach ($processed_ids as $i => $key) {
+                $updateStatus = SecondStorage::where('processed_grading_id', $processed_ids[$i])
+                    ->update(
+                        ['status' => 1]
+                    );
+            }
+
+
             $lot_id = $save['lot_id'];
             return redirect('create_lot')->with(['msg' => '/print/' . $lot_id]);
         }
