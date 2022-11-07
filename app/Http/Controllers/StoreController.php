@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -19,6 +20,8 @@ class StoreController extends Controller
     public function index()
     {
         //
+        $store_data = Store::get();
+        return view('add_store', compact('store_data'));
     }
 
     /**
@@ -56,6 +59,18 @@ class StoreController extends Controller
 
             ]);
             return redirect()->back()->with(['msg' => 'data submitted']);
+        }
+    }
+
+    public function  StoreUpdateStatus(Request $request)
+    {
+        $updateUser = Store::where('id', $request->id)->update([
+            'status' => $request->status
+        ]);
+        if ($updateUser) {
+            return response()->json(['success' => 'Store Status Updated Successfully']);
+        } else {
+            return response()->json(['error' => 'Oops! something went wrong']);
         }
     }
 

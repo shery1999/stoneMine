@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user_data = User::get();
+        return view('add_user', compact('user_data'));
     }
 
     /**
@@ -59,6 +62,23 @@ class UserController extends Controller
 
             ]);
             return redirect()->back()->with(['msg' => 'data submitted']);
+        }
+    }
+
+    public function  updateStatus(Request $request)
+    {
+        if ($request->id == Auth::user()->id) {
+            return response()->json(['error' => 'Sorry you are logged in currently, cannot block this account']);
+        } else {
+
+            $updateUser = User::where('id', $request->id)->update([
+                'status' => $request->status
+            ]);
+            if ($updateUser) {
+                return response()->json(['success' => 'User Status Updated Successfully']);
+            } else {
+                return response()->json(['error' => 'Oops! something went wrong']);
+            }
         }
     }
 

@@ -32,7 +32,7 @@ class OrderController extends Controller
     }
     public function index1()
     {
-        $showroom_data = Showroom::get();
+        $showroom_data = Showroom::where('status', 1)->get();
         return view('select_lot', compact('showroom_data'));
     }
 

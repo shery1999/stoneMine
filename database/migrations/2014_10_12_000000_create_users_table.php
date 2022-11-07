@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('mobileNo')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->nullable();
+            $table->integer('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

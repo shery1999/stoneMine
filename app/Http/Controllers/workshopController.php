@@ -19,6 +19,9 @@ class WorkshopController extends Controller
     public function index()
     {
         //
+        $workshop_data = Workshop::get();
+
+        return view('add_workshop', compact('workshop_data'));
     }
 
     /**
@@ -58,6 +61,19 @@ class WorkshopController extends Controller
             return redirect('add_workshop');
         }
     }
+
+    public function  WorkshopUpdateStatus(Request $request)
+    {
+        $updateUser = Workshop::where('id', $request->id)->update([
+            'status' => $request->status
+        ]);
+        if ($updateUser) {
+            return response()->json(['success' => 'Workshop Status Updated Successfully']);
+        } else {
+            return response()->json(['error' => 'Oops! something went wrong']);
+        }
+    }
+
     /**
      * Display the specified resource.
      *

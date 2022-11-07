@@ -17,13 +17,13 @@ class ShowroomController extends Controller
     public function index()
     {
         //
-        $showroom_data = Showroom::get();
+        $showroom_data = Showroom::where('status', 1)->get();
         return view('view_showroom_detail', compact('showroom_data'));
     }
     public function index2()
     {
-        $ShowroomData = Showroom::get();
-        return view('add_showroom', compact('ShowroomData'));
+        $showroom_data = Showroom::get();
+        return view('add_showroom', compact('showroom_data'));
     }
 
     /**
@@ -73,6 +73,18 @@ class ShowroomController extends Controller
             ]);
             return redirect()->back()->with(['msg' => 'data submitted']);
             return redirect('add_showroom');
+        }
+    }
+
+    public function  ShowroomUpdateStatus(Request $request)
+    {
+        $updateUser = Showroom::where('id', $request->id)->update([
+            'status' => $request->status
+        ]);
+        if ($updateUser) {
+            return response()->json(['success' => 'Showroom Status Updated Successfully']);
+        } else {
+            return response()->json(['error' => 'Oops! something went wrong']);
         }
     }
 

@@ -157,29 +157,39 @@ Route::group(['middleware' => ['auth', 'roleAuth']], function () {
         return view('add_showroom');
     });
     Route::post('/add_showroom', [ShowroomController::class, 'store']);
+    Route::get('/add_showroom', [ShowroomController::class, 'index2']);
+    Route::post('/showroom_status_update', [ShowroomController::class, 'ShowroomUpdateStatus'])->name('showroomstatusUpdate.post');
 
     // add user
     Route::get('add_user', function () {
         return view('add_user');
     });
-
+    Route::get('/add_user', [UserController::class, 'index']);
     Route::post('/add_user', [UserController::class, 'store']);
+    Route::post('/status_update', [UserController::class, 'updateStatus'])->name('statusUpdate.post');
 
     // add mine
     Route::get('add_mine', function () {
         return view('add_mine');
     });
     Route::post('/add_mine', [MineController::class, 'store']);
+    Route::get('/add_mine', [MineController::class, 'index']);
+    Route::post('/mine_status_update', [MineController::class, 'MineUpdateStatus'])->name('minestatusUpdate.post');
+
 
     // add store
     Route::get('add_store', function () {
         return view('add_store');
     });
     Route::post('/add_store', [StoreController::class, 'store']);
+    Route::get('/add_store', [StoreController::class, 'index']);
+    Route::post('/store_status_update', [StoreController::class, 'StoreUpdateStatus'])->name('storestatusUpdate.post');
 
     // add worshop
     Route::get('add_workshop', function () {
         return view('add_workshop');
     });
     Route::post('/add_workshop', [WorkshopController::class, 'store']);
+    Route::get('/add_workshop', [WorkshopController::class, 'index']);
+    Route::post('/workshop_status_update', [WorkshopController::class, 'WorkshopUpdateStatus'])->name('workshopstatusUpdate.post');
 });

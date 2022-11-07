@@ -19,8 +19,8 @@ class UnprocessedGradingController extends Controller
      */
     public function index()
     {
-        $mine_data = Mine::get();
-        $store_data = Store::get();
+        $mine_data = Mine::where('status', 1) ->get();
+        $store_data = Store::where('status', 1)->get();
         return view('unprocessed_grading', compact('mine_data', 'store_data'));
     }
 

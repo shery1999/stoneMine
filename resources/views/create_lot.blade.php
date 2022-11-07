@@ -212,9 +212,6 @@
         document.getElementById("storage_id").innerHTML = lot;
         document.getElementById("storage_id").value = lot;
         console.log(lot)
-        // (json_encode(lot));
-        // console.log(lot);
-
         $(".use-button").click(function() {
             var row = $(this).closest("tr");
             var id = row.find("td")[1].textContent;

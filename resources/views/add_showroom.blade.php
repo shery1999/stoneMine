@@ -447,6 +447,126 @@
                     </div>
                 </div>
             </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <h1>Block/Unblock Showroom</h1>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Data Table</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ID</th>
+                                                <th>Owner Name</th>
+                                                <th>Showroom Name</th>
+                                                <th>Phone 1</th>
+                                                <th>Phone 2</th>
+                                                <th>Phone 3</th>
+                                                <th>Adress</th>
+                                                <th>City</th>
+                                                <th>Country</th>
+                                                <th>Date</th>
+                                                <th>Status (Blcked/Unblocked)</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($showroom_data as $key => $item)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $item['id'] }}</td>
+                                                    <td>{{ $item['ownername'] }}</td>
+                                                    <td>{{ $item['showroomname'] }}</td>
+                                                    <td>{{ $item['phone1'] }}</td>
+                                                    <td>{{ $item['phone2'] }}</td>
+                                                    <td>{{ $item['phone3'] }}</td>
+                                                    <td>{{ $item['adress'] }}</td>
+                                                    <td>{{ $item['city'] }}</td>
+                                                    <td>{{ $item['country'] }}</td>
+                                                    <td>{{ $item['created_at'] }}</td>
+                                                    <td>
+                                                        <button value="{{ $item['id'] }}" type="button"
+                                                            class="use-button btn btn-block userStatusUpdate {{ $item['status'] == 1 ? 'btn-success' : 'btn-danger' }}">{{ $item['status'] == 1 ? 'Active' : 'Block' }}</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ID</th>
+                                                <th>Owner Name</th>
+                                                <th>Showroom Name</th>
+                                                <th>Phone 1</th>
+                                                <th>Phone 2</th>
+                                                <th>Phone 3</th>
+                                                <th>Adress</th>
+                                                <th>City</th>
+                                                <th>Country</th>
+                                                <th>Date</th>
+                                                <th>Status (Blcked/Unblocked)</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <form action="" method="post">
+                                        <div class="form-group row">
+                                            <div class="col-lg-7 ml-auto">
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.userStatusUpdate').click(function() {
+                var user_id = $(this).attr("value");
+                var isActive = false;
+                var statusVal = 1;
+
+                if ($(this).attr("class").search("btn-success") > 0) {
+                    var isActive = true;
+                    var statusVal = 0;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('showroomstatusUpdate.post') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        id: user_id,
+                        status: statusVal
+                    },
+                    success: function(result) {
+                        if (result.error) {
+                            alert(result.error);
+
+                        } else {
+                            alert(result.success);
+                            location.reload();
+                        }
+                    },
+                    error: function(result) {
+                        location.reload();
+                        alert('Error');
+                    }
+                });
+            });
+
+        });
+    </script>

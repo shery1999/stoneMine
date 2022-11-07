@@ -22,7 +22,7 @@ class ProcessingController extends Controller
      */
     public function index()
     {
-        $workshop_data = Workshop::get();
+        $workshop_data = Workshop::where('status', 1)->get();
         $first_storage_data = FirstStorage::where('status', 0)->get();
         return view('processing', compact('workshop_data', 'first_storage_data'));
     }

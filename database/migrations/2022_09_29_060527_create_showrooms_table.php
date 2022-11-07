@@ -21,9 +21,11 @@ return new class extends Migration
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();
             $table->string('phone3')->nullable();
+            $table->integer('status')->default(1);
             $table->text('adress')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
+
 
             $table->timestamps();
         });

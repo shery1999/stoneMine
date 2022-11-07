@@ -17,5 +17,7 @@ class showroom extends Model
         'adress',
         'city',
         'country',
+        'status',
+
     ];
 }

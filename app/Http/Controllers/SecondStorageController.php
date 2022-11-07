@@ -24,7 +24,7 @@ class SecondStorageController extends Controller
 
     public function index1()
     {
-        $store_data = Store::get();
+        $store_data = Store::where('status', 1)->get();
         $stone_data = SecondStorage::where('status', 0)->get();
         return view('to_store_processed', compact('store_data', 'stone_data'));
     }

@@ -12,6 +12,8 @@ class mine extends Model
         'mine',
         'location',
         'description',
+        'status',
+
     ];
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mine;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class MineController extends Controller
@@ -16,6 +17,8 @@ class MineController extends Controller
      */
     public function index()
     {
+        $mine_data = Mine::get();
+        return view('add_mine', compact('mine_data'));
     }
 
     /**
@@ -57,6 +60,22 @@ class MineController extends Controller
         }
     }
 
+    public function  MineUpdateStatus(Request $request)
+    {
+        // if ($request->id == Auth::user()->id) {
+        //     return response()->json(['error' => 'Sorry you are logged in currently, cannot block this account']);
+        // } else {
+
+        $updateUser = Mine::where('id', $request->id)->update([
+            'status' => $request->status
+        ]);
+        if ($updateUser) {
+            return response()->json(['success' => 'Mine Status Updated Successfully']);
+        } else {
+            return response()->json(['error' => 'Oops! something went wrong']);
+        }
+        // }
+    }
     /**
      * Display the specified resource.
      *

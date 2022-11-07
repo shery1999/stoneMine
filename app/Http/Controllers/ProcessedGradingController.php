@@ -21,7 +21,7 @@ class ProcessedGradingController extends Controller
     public function index()
     {
         $processing_data = Processing::get();
-        $store_data = Store::get();
+        $store_data = Store::where('status', 1)->get();
 
         return view('processed_specimen', compact('processing_data', 'store_data'));
     }
