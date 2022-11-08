@@ -150,7 +150,7 @@ Route::group(['middleware' => ['auth', 'roleAuth']], function () {
     Route::get('test', function () {
         return view('test');
     });
-    Route::get('test', [ChartJSController::class, 'index']);
+    // Route::get('test', [ChartJSController::class, 'index']);
 
     // showroom
     Route::get('add_showroom', function () {

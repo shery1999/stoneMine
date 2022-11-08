@@ -77,7 +77,7 @@ class UserController extends Controller
             if ($updateUser) {
                 return response()->json(['success' => 'User Status Updated Successfully']);
             } else {
-                return response()->json(['error' => 'Oops! something went wrong']);
+                return response()->json(['error' => 'Oops! something went wrong'])->with(['status_error' => 'Oops! something went wrong']);
             }
         }
     }

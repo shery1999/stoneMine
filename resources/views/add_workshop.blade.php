@@ -156,6 +156,7 @@
         </div>
     @endsection
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -180,10 +181,18 @@
                     },
                     success: function(result) {
                         if (result.error) {
-                            alert(result.error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'User Status Not Updated',
+                                text: result.error,
+                            })
 
                         } else {
-                            alert(result.success);
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Workshop Status Updated',
+                                text: result.success,
+                            })
                             location.reload();
                         }
                     },

@@ -31,6 +31,12 @@
 
             zoom: 70%;
         }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+            width: 12rem;
+        }
     </style>
     @stack('my-styles')
 </head>
