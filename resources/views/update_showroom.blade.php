@@ -36,16 +36,21 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="/add_showroom" method="post" {{-- onsubmit="this.submit(); this.reset(); return false;" --}}>
+                            <form class="form-valide" action="/update_showroom" method="post" {{-- onsubmit="this.submit(); this.reset(); return false;" --}}>
                                 @csrf
                                 <div class="form-group row">
                                     {{-- name --}}
                                     <label class="col-lg-4 col-form-label" for="val-username">Owner Name <span
                                             class="text-danger">*</span>
                                     </label>
+                                    <input required style="display: none" type="text" class="form-control"
+                                        id="val- minename" name="id" placeholder="Mine name.."
+                                        value="{{ $Data[0]['id'] }}">
+                                    {{-- {{ dd($Data[0]) }} --}}
                                     <div class="col-lg-6">
-                                        <input type="text" required class="form-control" id="val-username"
-                                            name="ownername" placeholder="Enter a name..">
+                                        <input value="{{ $Data[0]['ownername'] }}" type="text" required
+                                            class="form-control" id="val-username" name="ownername"
+                                            placeholder="Enter a name..">
                                         @if ($errors->has('ownername'))
                                             <div class="error">{{ $errors->first('ownername') }}</div>
                                         @endif
@@ -54,14 +59,15 @@
 
 
                                 <h4 class="card-title"></h4>
-                                {{-- username --}}
+                                {{-- showroom name --}}
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="val-username">Showroom Name
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" required class="form-control" id="val-username"
-                                            name="showroomname" placeholder="Enter a showroom name">
+                                            value="{{ $Data[0]['showroomname'] }}" name="showroomname"
+                                            placeholder="Enter a showroom name">
                                         @if ($errors->has('showroomname'))
                                             <div class="error">{{ $errors->first('showroomname') }}</div>
                                         @endif
@@ -75,7 +81,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="email" class="form-control" id="val-email" name="email"
-                                            placeholder="Enter email">
+                                            value="{{ $Data[0]['email'] }}" placeholder="Enter email">
                                         @if ($errors->has('email'))
                                             <div class="error">{{ $errors->first('email') }}</div>
                                         @endif
@@ -89,19 +95,19 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-phoneus1" name="phone1"
-                                            placeholder="Enter Phone Number 1">
+                                            value="{{ $Data[0]['phone1'] }}" placeholder="Enter Phone Number 1">
                                         @if ($errors->has('phone1'))
                                             <div class="error">{{ $errors->first('phone1') }}</div>
                                         @endif
                                         <h4 class="card-title"></h4>
                                         <input type="text" class="form-control" id="val-phoneus2" name="phone2"
-                                            placeholder="Enter Phone Number 2">
+                                            value="{{ $Data[0]['phone2'] }}" placeholder="Enter Phone Number 2">
                                         @if ($errors->has('phone2'))
                                             <div class="error">{{ $errors->first('phone2') }}</div>
                                         @endif
                                         <h4 class="card-title"></h4>
                                         <input type="text" class="form-control" id="val-phoneus3" name="phone3"
-                                            placeholder="Enter Phone Number 3">
+                                            value="{{ $Data[0]['phone3'] }}" placeholder="Enter Phone Number 3">
                                         @if ($errors->has('phone3'))
                                             <div class="error">{{ $errors->first('phone3') }}</div>
                                         @endif
@@ -115,7 +121,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-adress" name="adress"
-                                            placeholder="Enter Adress">
+                                            value="{{ $Data[0]['adress'] }}" placeholder="Enter Adress">
                                         @if ($errors->has('adress'))
                                             <div class="error">{{ $errors->first('adress') }}</div>
                                         @endif
@@ -128,7 +134,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-city" name="city"
-                                            placeholder="Enter city">
+                                            value="{{ $Data[0]['city'] }}" placeholder="Enter city">
                                         @if ($errors->has('city'))
                                             <div class="error">{{ $errors->first('city') }}</div>
                                         @endif
@@ -141,7 +147,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <select class="form-control" id="val-country" name="country">
-                                            <option>country</option>
+                                            <option value="{{ $Data[0]['country'] }}">{{ $Data[0]['country'] }}</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Aland Islands">Aland Islands</option>
                                             <option value="Albania">Albania</option>
@@ -449,149 +455,5 @@
                     </div>
                 </div>
             </div>
-
-            <div class="container-fluid">
-                <div class="row">
-                    <h1>Block/Unblock Showroom</h1>
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Data Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered zero-configuration">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ID</th>
-                                                <th>Owner Name</th>
-                                                <th>Showroom Name</th>
-                                                <th>Email</th>
-                                                <th>Phone 1</th>
-                                                <th>Phone 2</th>
-                                                <th>Phone 3</th>
-                                                <th>Adress</th>
-                                                <th>City</th>
-                                                <th>Country</th>
-                                                <th>Date</th>
-                                                <th>Edit</th>
-                                                <th>Status (Blcked/Unblocked)</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($showroom_data as $key => $item)
-                                                <tr>
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $item['id'] }}</td>
-                                                    <td>{{ $item['ownername'] }}</td>
-                                                    <td>{{ $item['showroomname'] }}</td>
-                                                    <td>{{ $item['email'] }}</td>
-                                                    <td>{{ $item['phone1'] }}</td>
-                                                    <td>{{ $item['phone2'] }}</td>
-                                                    <td>{{ $item['phone3'] }}</td>
-                                                    <td>{{ $item['adress'] }}</td>
-                                                    <td>{{ $item['city'] }}</td>
-                                                    <td>{{ $item['country'] }}</td>
-                                                    <td>{{ $item['created_at'] }}</td>
-                                                    <td>
-                                                        <a href="update_showroom/{{ $item['id'] }}">
-                                                            <button type="button"
-                                                                class="use-button btn btn-block btn-warning">Edit</button>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <button value="{{ $item['id'] }}" type="button"
-                                                            class="use-button btn btn-block userStatusUpdate {{ $item['status'] == 1 ? 'btn-success' : 'btn-danger' }}">{{ $item['status'] == 1 ? 'Active' : 'Block' }}</button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ID</th>
-                                                <th>Owner Name</th>
-                                                <th>Showroom Name</th>
-                                                <th>Email</th>
-                                                <th>Phone 1</th>
-                                                <th>Phone 2</th>
-                                                <th>Phone 3</th>
-                                                <th>Adress</th>
-                                                <th>City</th>
-                                                <th>Country</th>
-                                                <th>Date</th>
-                                                <th>Edit</th>
-                                                <th>Status (Blcked/Unblocked)</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                    <form action="" method="post">
-                                        <div class="form-group row">
-                                            <div class="col-lg-7 ml-auto">
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
     @endsection
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('.userStatusUpdate').click(function() {
-                var user_id = $(this).attr("value");
-                var isActive = false;
-                var statusVal = 1;
-
-                if ($(this).attr("class").search("btn-success") > 0) {
-                    var isActive = true;
-                    var statusVal = 0;
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('showroomstatusUpdate.post') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {
-                        id: user_id,
-                        status: statusVal
-                    },
-                    success: function(result) {
-                        if (result.error) {
-                            // alert(result.error);
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Showroom Status Not Updated',
-                                text: result.error,
-                            })
-
-                        } else {
-                            // alert(result.success);
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Showroom Status Updated',
-                                text: result.success,
-                            })
-                            location.reload();
-                        }
-                    },
-                    error: function(result) {
-                        location.reload();
-                        alert('Error');
-                    }
-                });
-            });
-
-        });
-    </script>

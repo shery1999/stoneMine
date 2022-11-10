@@ -17,7 +17,7 @@
                 @if (session()->has('msg'))
                     <div class="col-lg-12">
                         <div class="alert alert-success" role="alert">
-                            Mine Added Successfully.
+                            {{ Session::get('msg') }}
                         </div>
                     </div>
                 @endif
@@ -26,7 +26,7 @@
                 @if (session()->has('msgf'))
                     <div class="col-lg-12">
                         <div class="alert alert-danger" role="alert">
-                            Mine Not Added.
+                            {{ Session::get('msgf') }}
                         </div>
                     </div>
                 @endif
@@ -111,6 +111,7 @@
                                                 <th>Mine Location</th>
                                                 <th>Description</th>
                                                 <th>Date</th>
+                                                <th>Edit</th>
                                                 <th>Status (Blcked/Unblocked)</th>
 
                                             </tr>
@@ -126,9 +127,16 @@
                                                     <td>{{ $item['description'] }}</td>
                                                     <td>{{ $item['created_at'] }}</td>
                                                     <td>
+                                                        <a href="update_mine/{{ $item['id'] }}">
+                                                            <button type="button"
+                                                                class="use-button btn btn-block btn-warning">Edit</button>
+                                                        </a>
+                                                    </td>
+                                                    <td>
                                                         <button value="{{ $item['id'] }}" type="button"
                                                             class="use-button btn btn-block userStatusUpdate {{ $item['status'] == 1 ? 'btn-success' : 'btn-danger' }}">{{ $item['status'] == 1 ? 'Active' : 'Block' }}</button>
                                                     </td>
+
                                                 </tr>
                                             @endforeach
 
@@ -141,6 +149,7 @@
                                                 <th>Mine Location</th>
                                                 <th>Description</th>
                                                 <th>Date</th>
+                                                <th>Edit</th>
                                                 <th>Status (Blcked/Unblocked)</th>
                                             </tr>
                                         </tfoot>
@@ -165,7 +174,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-   <script>
+    <script>
         $(document).ready(function() {
             $('.userStatusUpdate').click(function() {
                 var user_id = $(this).attr("value");

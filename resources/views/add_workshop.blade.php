@@ -18,7 +18,7 @@
                 @if (session()->has('msg'))
                     <div class="col-lg-12">
                         <div class="alert alert-success" role="alert">
-                            Store Added Successfully.
+                            {{ Session::get('msg') }}
                         </div>
                     </div>
                 @endif
@@ -28,7 +28,7 @@
                     <div class="col-lg-12">
 
                         <div class="alert alert-danger" role="alert">
-                            Workshop Not Added.
+                            {{ Session::get('msgf') }}
                         </div>
                     </div>
                 @endif
@@ -106,6 +106,7 @@
                                                 <th>Workshop Location</th>
                                                 <th>Description</th>
                                                 <th>Date</th>
+                                                <th>Edit</th>
                                                 <th>Status (Blcked/Unblocked)</th>
 
                                             </tr>
@@ -119,6 +120,12 @@
                                                     <td>{{ $item['location'] }}</td>
                                                     <td>{{ $item['description'] }}</td>
                                                     <td>{{ $item['created_at'] }}</td>
+                                                    <td>
+                                                        <a href="update_store/{{ $item['id'] }}">
+                                                            <button type="button"
+                                                                class="use-button btn btn-block btn-warning">Edit</button>
+                                                        </a>
+                                                    </td>
                                                     <td>
                                                         <button value="{{ $item['id'] }}" type="button"
                                                             class="use-button btn btn-block userStatusUpdate {{ $item['status'] == 1 ? 'btn-success' : 'btn-danger' }}">{{ $item['status'] == 1 ? 'Active' : 'Block' }}</button>
@@ -135,6 +142,7 @@
                                                 <th>Workshop Location</th>
                                                 <th>Description</th>
                                                 <th>Date</th>
+                                                <th>Edit</th>
                                                 <th>Status (Blcked/Unblocked)</th>
                                             </tr>
                                         </tfoot>

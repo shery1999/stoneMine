@@ -49,6 +49,7 @@ class ShowroomController extends Controller
         $validator = Validator::make($request->all(), [
             'ownername' => 'required|max:255',
             'showroomname' => 'required|unique:showrooms|max:255',
+            'email' => 'unique:showrooms|max:255',
             'adress' => 'required|max:255',
             'city' => 'required|max:255',
             'country' => 'required|max:255',
@@ -64,6 +65,7 @@ class ShowroomController extends Controller
             $save = Showroom::create([
                 'ownername' => $request->input('ownername'),
                 'showroomname' => $request->input('showroomname'),
+                'email' => $request->input('email'),
                 'phone1' => $request->input('phone1'),
                 'phone2' => $request->input('phone2'),
                 'phone3' => $request->input('phone3'),

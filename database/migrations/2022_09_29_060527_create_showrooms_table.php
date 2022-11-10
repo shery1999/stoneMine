@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->string('ownername');
             $table->string('showroomname');
+            $table->string('email')->nullable();
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();
             $table->string('phone3')->nullable();

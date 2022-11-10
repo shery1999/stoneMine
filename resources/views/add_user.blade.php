@@ -17,7 +17,7 @@
                 @if (session()->has('msg'))
                     <div class="col-lg-12">
                         <div class="alert alert-success" role="alert">
-                            User Added Successfully.
+                            {{ Session::get('msg') }}
                         </div>
                     </div>
                 @endif
@@ -26,7 +26,7 @@
                 @if (session()->has('msgf'))
                     <div class="col-lg-12">
                         <div class="alert alert-danger" role="alert">
-                            User Not Added.
+                            {{ Session::get('msgf') }}
                         </div>
                     </div>
                 @endif
@@ -170,8 +170,11 @@
                                                 <th>ID</th>
                                                 <th>User Name</th>
                                                 <th>Email</th>
+                                                <th>Mobile Number</th>
+                                                <th>Phone Number</th>
                                                 <th>Role</th>
                                                 <th>Date</th>
+                                                <th>Edit</th>
                                                 <th>Status (Blcked/Unblocked)</th>
 
                                             </tr>
@@ -184,8 +187,16 @@
                                                     <td>{{ $item['id'] }}</td>
                                                     <td>{{ $item['username'] }}</td>
                                                     <td>{{ $item['email'] }}</td>
+                                                    <td>{{ $item['phoneNo'] }}</td>
+                                                    <td>{{ $item['mobileNo'] }}</td>
                                                     <td>{{ $item['role'] }}</td>
                                                     <td>{{ $item['created_at'] }}</td>
+                                                    <td>
+                                                        <a href="update_user/{{ $item['id'] }}">
+                                                            <button type="button"
+                                                                class="use-button btn btn-block btn-warning">Edit</button>
+                                                        </a>
+                                                    </td>
                                                     <td>
                                                         <button value="{{ $item['id'] }}" type="button"
                                                             class="use-button btn btn-block userStatusUpdate {{ $item['status'] == 1 ? 'btn-success' : 'btn-danger' }}">{{ $item['status'] == 1 ? 'Active' : 'Block' }}</button>
@@ -200,8 +211,11 @@
                                                 <th>ID</th>
                                                 <th>User Name</th>
                                                 <th>Email</th>
+                                                <th>Mobile Number</th>
+                                                <th>Phone Number</th>
                                                 <th>Role</th>
                                                 <th>Date</th>
+                                                <th>Edit</th>
                                                 <th>Status (Blcked/Unblocked)</th>
                                             </tr>
                                         </tfoot>

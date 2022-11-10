@@ -17,7 +17,11 @@ use App\Http\Controllers\PrintController;
 use App\Http\Controllers\PrintUnprocessedDetailController;
 use App\Http\Controllers\PrintProcessedDetailController;
 use App\Http\Controllers\PrintProcessingDetailController;
-
+use App\Http\Controllers\UpdateMineController;
+use App\Http\Controllers\UpdateShowroomController;
+use App\Http\Controllers\UpdateStoreController;
+use App\Http\Controllers\UpdateUserController;
+use App\Http\Controllers\UpdateWorkshopController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -176,6 +180,23 @@ Route::group(['middleware' => ['auth', 'roleAuth']], function () {
     Route::get('/add_mine', [MineController::class, 'index']);
     Route::post('/mine_status_update', [MineController::class, 'MineUpdateStatus'])->name('minestatusUpdate.post');
 
+    // Route::get('update_showroom', function () {
+    // return view('update_showroom');
+    // });
+    Route::get('/update_mine/{id}', [UpdateMineController::class, 'index']);
+    Route::post('/update_mine', [UpdateMineController::class, 'update']);
+
+    Route::get('/update_showroom/{id}', [UpdateShowroomController::class, 'index']);
+    Route::post('/update_showroom', [UpdateShowroomController::class, 'update']);
+
+    Route::get('/update_store/{id}', [UpdateStoreController::class, 'index']);
+    Route::post('/update_store', [UpdateStoreController::class, 'update']);
+
+    Route::get('/update_workshop/{id}', [UpdateWorkshopController::class, 'index']);
+    Route::post('/update_workshop', [UpdateWorkshopController::class, 'update']);
+
+    Route::get('/update_user/{id}', [UpdateUserController::class, 'index']);
+    Route::post('/update_user', [UpdateUserController::class, 'update']);
 
     // add store
     Route::get('add_store', function () {
