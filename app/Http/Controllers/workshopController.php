@@ -56,7 +56,7 @@ class WorkshopController extends Controller
                 'description' => $request->input('description'),
 
             ]);
-            return redirect()->back()->with(['msg' => 'data submitted']);
+            return redirect()->back()->with(['msg' => 'Data submitted']);
 
             return redirect('add_workshop');
         }
