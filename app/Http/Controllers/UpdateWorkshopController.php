@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Workshop;
 use Illuminate\Http\Request;
-use App\Models\SecondStorage;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
-class PrintProcessedDetailController extends Controller
+class UpdateWorkshopController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +18,12 @@ class PrintProcessedDetailController extends Controller
     {
         //
         $id =  request()->route()->parameters['id'];
-        $Data = SecondStorage::where('id', $id)->with('data', 'stores')->get();
-        return view('print_processed', compact('Data'));
+        $Data = Workshop::where('id', $id)->first();
+        if (!$Data) {
+            return redirect()->back()->with(['msgf' => 'Data Not Found']);
+        } else {
+            return view('update_workshop', compact('Data'));
+        }
     }
 
     /**
@@ -72,7 +78,23 @@ class PrintProcessedDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'location'        => 'min:4|max:255',
+            'description'     => 'max:255',
+            'workshop'        => 'min:4|max:255',
+            'workshop'        => Rule::unique('workshops')->ignore($request->id)
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+        } else {
+            $update = Workshop::where('id', $id)
+                ->update([
+                    'workshop' => $request->store,
+                    'location' => $request->location,
+                    'description' => $request->description,
+                ]);
+            return redirect('/add_workshop')->with(['msg' => 'Record Updated']);
+        }
     }
 
     /**

@@ -12,11 +12,29 @@
     </div>
 
     <div class="container-fluid">
+        @if (!session()->has('msg'))
+            <script>
+                window.location = "/create_lot";
+            </script>
+        @endif
+        @if (session()->has('msg'))
+            @if (session()->has('msgf'))
+
+                    <div class="alert alert-danger" role="alert">
+                        {{ Session::get('msg') }}
+                    </div>
+            @else
+
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('msg') }}
+                    </div>
+            @endif
+        @endif
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <form action="/select_lot" method="post" onsubmit="this.submit(); this.reset(); return false;">
-                        
+
 
                         <div class="card-body">
                             <h4 class="card-title">Showrooms</h4>

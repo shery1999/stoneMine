@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\mineController;
-use App\Http\Controllers\showroomController;
-use App\Http\Controllers\workshopController;
-use App\Http\Controllers\StoreControllerController;
-use App\Http\Controllers\unprocessed_gradingController;
-use App\Http\Controllers\first_storageController;
+use App\Http\Controllers\MineController;
+use App\Http\Controllers\ShowroomController;
+use App\Http\Controllers\WorkshopController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\UnprocessedGradingController;
+use App\Http\Controllers\FirstStorageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProcessingController;
 use App\Http\Controllers\ProcessedGradingController;
@@ -17,8 +17,11 @@ use App\Http\Controllers\PrintController;
 use App\Http\Controllers\PrintUnprocessedDetailController;
 use App\Http\Controllers\PrintProcessedDetailController;
 use App\Http\Controllers\PrintProcessingDetailController;
-use App\Http\Controllers\ChartJSController;
-
+use App\Http\Controllers\UpdateMineController;
+use App\Http\Controllers\UpdateShowroomController;
+use App\Http\Controllers\UpdateStoreController;
+use App\Http\Controllers\UpdateUserController;
+use App\Http\Controllers\UpdateWorkshopController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +30,8 @@ Route::get('login', function () {
 });
 Auth::routes([
     'register' => false,
+    'verify' => false,
+    'reset' => false,
 ]);
 
 
@@ -36,10 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('unprocessed_grading', function () {
         return view('unprocessed_grading');
     });
-    Route::post('/unprocessed_grading', [unprocessed_gradingController::class, 'store']);
-    Route::get('unprocessed_grading',  [unprocessed_gradingController::class, 'index']);
-
-
+    Route::post('/unprocessed_grading', [UnprocessedGradingController::class, 'store']);
+    Route::get('unprocessed_grading',  [UnprocessedGradingController::class, 'index']);
 
     Route::get('processing', function () {
         return view('processing');
@@ -57,8 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('to_store', function () {
         return view('to_store');
     });
-    Route::post('/to_store', [first_storageController::class, 'update']);
-    Route::get('to_store',  [first_storageController::class, 'index1']);
+    Route::post('/to_store', [FirstStorageController::class, 'update']);
+    Route::get('to_store',  [FirstStorageController::class, 'index1']);
 
     Route::get('to_store_processed', function () {
         return view('to_store_processed');
@@ -74,15 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('create_lot', [LotController::class, 'store']);
     Route::get('create_lot',  [LotController::class, 'index']);
 
-
-
-    Route::get('sale', function () {
-        return view('sale');
-    });
-    Route::get('bill', function () {
-        return view('bill');
-    });
-    Route::get('list_unprocessed', [first_storageController::class, 'index']);
+    Route::get('list_unprocessed', [FirstStorageController::class, 'index']);
 
     Route::get('list_processed', function () {
         return view('list_second_storage');
@@ -106,12 +101,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('view_showroom_detail', function () {
         return view('view_showroom_detail');
     });
-    Route::get('view_showroom_detail', [showroomController::class, 'index']);
+    Route::get('view_showroom_detail', [ShowroomController::class, 'index']);
 
-
-    Route::get('create_bill', function () {
-        return view('create_bill');
-    });
 
     Route::get('view_sold_lot', function () {
         return view('view_sold_lot');
@@ -122,10 +113,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/orders', [OrderController::class, 'index']);
 
-
-    Route::get('/qrcode', function () {
-        return view('qrcode');
-    });
 
     Route::get('print/{lot_id}', function () {
         return view('print/{lot_id}');
@@ -154,18 +141,11 @@ Route::group(['middleware' => ['auth']], function () {
         return view('print_processing_details/{id}');
     });
     Route::get('print_processing_details/{id}', [PrintProcessingDetailController::class, 'index']);
-
-
 });
 
-Route::group(['middleware' => ['auth','roleAuth']], function () {
+Route::group(['middleware' => ['auth', 'roleAuth']], function () {
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    // $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-    // $this->post('login', 'Auth\LoginController@login');
-    // $this->post('logout', 'Auth\LoginController@logout')->name('logout');
-
-
     Route::get('admin_panel', function () {
         return view('admin_panel');
     });
@@ -174,41 +154,63 @@ Route::group(['middleware' => ['auth','roleAuth']], function () {
     Route::get('test', function () {
         return view('test');
     });
-    Route::get('test', [ChartJSController::class, 'index']);
+    // Route::get('test', [ChartJSController::class, 'index']);
 
     // showroom
     Route::get('add_showroom', function () {
         return view('add_showroom');
     });
-    Route::post('/add_showroom', [showroomController::class, 'store']);
+    Route::post('/add_showroom', [ShowroomController::class, 'store']);
+    Route::get('/add_showroom', [ShowroomController::class, 'index2']);
+    Route::post('/showroom_status_update', [ShowroomController::class, 'ShowroomUpdateStatus'])->name('showroomstatusUpdate.post');
 
     // add user
     Route::get('add_user', function () {
         return view('add_user');
     });
-
+    Route::get('/add_user', [UserController::class, 'index']);
     Route::post('/add_user', [UserController::class, 'store']);
-
+    Route::post('/status_update', [UserController::class, 'updateStatus'])->name('statusUpdate.post');
 
     // add mine
     Route::get('add_mine', function () {
         return view('add_mine');
     });
-    Route::post('/add_mine', [mineController::class, 'store']);
+    Route::post('/add_mine', [MineController::class, 'store']);
+    Route::get('/add_mine', [MineController::class, 'index']);
+    Route::post('/mine_status_update', [MineController::class, 'MineUpdateStatus'])->name('minestatusUpdate.post');
 
+    // Route::get('update_showroom', function () {
+    // return view('update_showroom');
+    // });
+    Route::get('/update_mine/{id}', [UpdateMineController::class, 'index']);
+    Route::put('/update_mine/{id}', [UpdateMineController::class, 'update']);
+
+    Route::get('/update_showroom/{id}', [UpdateShowroomController::class, 'index']);
+    Route::put('/update_showroom/{id}', [UpdateShowroomController::class, 'update']);
+
+    Route::get('/update_store/{id}', [UpdateStoreController::class, 'index']);
+    Route::put('/update_store/{id}', [UpdateStoreController::class, 'update']);
+
+    Route::get('/update_workshop/{id}', [UpdateWorkshopController::class, 'index']);
+    Route::put('/update_workshop/{id}', [UpdateWorkshopController::class, 'update']);
+
+    Route::get('/update_user/{id}', [UpdateUserController::class, 'index']);
+    Route::put('/update_user/{id}', [UpdateUserController::class, 'update']);
 
     // add store
     Route::get('add_store', function () {
         return view('add_store');
     });
-    Route::post('/add_store', [StoreControllerController::class, 'store']);
-
+    Route::post('/add_store', [StoreController::class, 'store']);
+    Route::get('/add_store', [StoreController::class, 'index']);
+    Route::post('/store_status_update', [StoreController::class, 'StoreUpdateStatus'])->name('storestatusUpdate.post');
 
     // add worshop
     Route::get('add_workshop', function () {
         return view('add_workshop');
     });
-    Route::post('/add_workshop', [workshopController::class, 'store']);
-
-
+    Route::post('/add_workshop', [WorkshopController::class, 'store']);
+    Route::get('/add_workshop', [WorkshopController::class, 'index']);
+    Route::post('/workshop_status_update', [WorkshopController::class, 'WorkshopUpdateStatus'])->name('workshopstatusUpdate.post');
 });

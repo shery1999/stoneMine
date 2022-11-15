@@ -24,12 +24,13 @@ class User extends Authenticatable
         'mobileNo',
         'role',
         'password',
+        'status',
     ];
 
 
     public function get_user()
     {
-        return $this->belongsTo(first_storage::class);
+        return $this->belongsTo(FirstStorage::class);
     }
 
     /**
@@ -50,6 +51,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-
 }

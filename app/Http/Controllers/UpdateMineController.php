@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\unprocessed_grading;
-use App\Models\mine;
-use App\Models\store;
-use App\Models\first_storage;
+use App\Models\Mine;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
-class unprocessed_gradingController extends Controller
+
+class UpdateMineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +17,14 @@ class unprocessed_gradingController extends Controller
      */
     public function index()
     {
-        $mine_data = mine::get();
-        $store_data = store::get();
-        return view('unprocessed_grading', compact('mine_data', 'store_data'));
+        //
+        $id =  request()->route()->parameters['id'];
+        $Data = Mine::where('id', $id)->first();
+        if (!$Data) {
+            return redirect()->back()->with(['msgf' => 'Data Not Found']);
+        } else {
+            return view('update_mine', compact('Data'));
+        }
     }
 
     /**
@@ -42,36 +45,7 @@ class unprocessed_gradingController extends Controller
      */
     public function store(Request $request)
     {
-
-        if ($request->file('image')) {
-
-            $photo =  $request->file('image')->store('unprocessed_stone_images', ['disk' => 'public']);
-        } else {
-            $photo = null;
-        }
-
-        $save = unprocessed_grading::create([
-
-            'specimen/bag' => $request->input('specimen/bag'),
-            'grade' => $request->input('grade'),
-            'weight' => $request->input('weight'),
-            'size' => $request->input('size'),
-            'qr_code' => $request->input('qr_code'),
-            'mine_id' => $request->input('mine'),
-            'user_id' => Auth()->user()->id,
-            'store_id' => $request->input('store'),
-            'picture' => $photo,
-
-        ]);
-        $save2 = first_storage::create([
-            'store_id' => $request->input('store'),
-            'user_id' => Auth()->user()->id,
-            'unprocessed_grading_id' => $save['id'],
-        ]);
-
-        $id = $save2['id'];
-        return redirect('/print_details/' . $id);
-        // return redirect('unprocessed_grading');
+        //
     }
 
     /**
@@ -105,7 +79,23 @@ class unprocessed_gradingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'location'    => 'min:4|max:255',
+            'description' => 'max:255',
+            'mine'        => 'max:255',
+            'mine'        =>  Rule::unique('mines')->ignore($request->id)
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+        } else {
+            $update = Mine::where('id', $id)
+                ->update([
+                    'mine' => $request->mine,
+                    'location' => $request->location,
+                    'description' => $request->description,
+                ]);
+            return redirect('/add_mine')->with(['msg' => 'Record Updated']);
+        }
     }
 
     /**

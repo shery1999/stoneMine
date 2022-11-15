@@ -2,16 +2,37 @@
 @section('titles', 'Create Lot')
 @section('content')
 
-    <div class="row page-titles mx-0">
+
+    {{-- <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
             </ol>
         </div>
-    </div>
+    </div> --}}
 
     <div class="container-fluid">
+        @if (session()->has('msg'))
+            @if (session()->has('msg'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Lot Created Successfully :</strong> To Print details click :
+                    <a href="{{ url(Session::get('msg')) }}">
+                        <button type="button" class="btn btn-info">Print</button>
+                    </a>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+        @endif
+        @if (session()->has('msgf'))
+            @if (session()->has('msgf'))
+                <div class="col-lg-12 alert alert-danger" role="alert">
+                    Data Not Inserted.
+                </div>
+            @endif
+        @endif
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -133,8 +154,12 @@
                                             <td>{{ $item->data['lab_certificate'] }}</td>
                                             <td>{{ $item->stores['location'] }}</td>
                                             {{-- <td>{{ $item->data['picture'] }}</td> --}}
-                                            <td><img src="{{ url('/storage/' . $item->data['picture']) }}" height="100px"
-                                                    width="150px" alt="" title="" /></td>
+                                            <td>
+                                                @if ($item->data['picture'])
+                                                    <img src="{{ url('/storage/' . $item->data['picture']) }}"
+                                                        height="100px" width="150px" alt="" title="" />
+                                                @endif
+                                            </td>
                                             <td>
                                                 {{ $item->data['qr_code'] }}
                                                 <div class="visible-print text-center">
@@ -187,9 +212,6 @@
         document.getElementById("storage_id").innerHTML = lot;
         document.getElementById("storage_id").value = lot;
         console.log(lot)
-        // (json_encode(lot));
-        // console.log(lot);
-
         $(".use-button").click(function() {
             var row = $(this).closest("tr");
             var id = row.find("td")[1].textContent;

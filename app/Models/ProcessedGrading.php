@@ -29,7 +29,7 @@ class ProcessedGrading extends Model
     ];
     public function second_storages()
     {
-        return $this->belongsTo(Second_storage::class);
+        return $this->belongsTo(SecondStorage::class);
     }
    
 }

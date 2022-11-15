@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\mine;
+use App\Models\Mine;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
-class mineController extends Controller
+class MineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +17,8 @@ class mineController extends Controller
      */
     public function index()
     {
+        $mine_data = Mine::get();
+        return view('add_mine', compact('mine_data'));
     }
 
     /**
@@ -38,22 +41,41 @@ class mineController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'mine' => 'required|max:255',
+            'mine' => 'required|unique:mines|max:255',
             'location' => 'required|max:255',
+            'description' => 'max:255',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Submitted']);
         } else {
-            $save = mine::create([
+            $save = Mine::create([
                 'mine' => $request->input('mine'),
                 'location' => $request->input('location'),
                 'description' => $request->input('description'),
 
             ]);
+            return redirect()->back()->with(['msg' => 'Data Submitted']);
+
             return redirect('add_mine');
         }
     }
 
+    public function  MineUpdateStatus(Request $request)
+    {
+        // if ($request->id == Auth::user()->id) {
+        //     return response()->json(['error' => 'Sorry you are logged in currently, cannot block this account']);
+        // } else {
+
+        $updateUser = Mine::where('id', $request->id)->update([
+            'status' => $request->status
+        ]);
+        if ($updateUser) {
+            return response()->json(['success' => 'Mine Status Updated Successfully']);
+        } else {
+            return response()->json(['error' => 'Oops! something went wrong']);
+        }
+        // }
+    }
     /**
      * Display the specified resource.
      *

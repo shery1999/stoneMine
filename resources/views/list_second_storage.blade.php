@@ -12,9 +12,8 @@
         </div>
     </div>
     <!-- row -->
-
     <div class="container-fluid">
-        <h1>Processed Grading</h1>
+        <h1>Processed Specimen</h1>
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -45,8 +44,8 @@
                                     @foreach ($processedSpecimen as $index => $item)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $item->data->id }}</td>
                                             <td>{{ $item->data['id'] }}</td>
+                                            <td>{{ $item->data['grade'] }}</td>
                                             <td>{{ $item->data['cut_shape'] }}</td>
                                             <td>{{ $item->data['dimensions'] }}</td>
                                             <td>{{ $item->data['weight'] }}</td>
@@ -56,19 +55,21 @@
                                             <td>{{ $item->data['lab_certificate'] }}</td>
                                             <td>{{ $item->stores['store'] }}</td>
                                             <td>
+                                                @if ($item->data['picture'])
                                                 <img src="{{ url('/storage/' . $item->data['picture']) }}" height="100px"
-                                                    width="150px" alt="" title="" />
+                                                width="150px" alt="" title="" />
+                                                @endif
                                             </td>
                                             <td>
                                                 {{ $item->data['qr_code'] }}
                                                 <div class="visible-print text-center">
                                                     {{ $id = $item->data['id'] }}
-                                                    {!! QrCode::generate(url('/print_details/' . $id)) !!}
+                                                    {!! QrCode::generate(url('/print_processed/' . $id)) !!}
                                                 </div>
                                             </td>
                                             <td>{{ $item->data['created_at'] }}</td>
                                             <td>
-                                                <a href="/print_details/{{ $item['id'] }}">
+                                                <a href="/print_processed/{{ $item['id'] }}">
                                                     <button type="button" class="btn btn-block btn-success">Print</button>
                                                 </a>
                                             </td>

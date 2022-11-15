@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\workshop;
+use App\Models\Workshop;
+use Illuminate\Support\Facades\Validator;
 
 
-class workshopController extends Controller
+
+class WorkshopController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +19,9 @@ class workshopController extends Controller
     public function index()
     {
         //
+        $workshop_data = Workshop::get();
+
+        return view('add_workshop', compact('workshop_data'));
     }
 
     /**
@@ -37,14 +42,36 @@ class workshopController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $save = workshop::create([
-            'workshop' => $request->input('workshop'),
-            'location' => $request->input('location'),
-            'description' => $request->input('description'),
-
+        $validator = Validator::make($request->all(), [
+            'workshop' => 'required|unique:workshops|max:255',
+            'location' => 'required|max:255',
+            'description' => 'max:255',
         ]);
-        return redirect('add_workshop');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Submitted']);
+        } else {
+            $save = Workshop::create([
+                'workshop' => $request->input('workshop'),
+                'location' => $request->input('location'),
+                'description' => $request->input('description'),
+
+            ]);
+            return redirect()->back()->with(['msg' => 'Data submitted']);
+
+            return redirect('add_workshop');
+        }
+    }
+
+    public function  WorkshopUpdateStatus(Request $request)
+    {
+        $updateUser = Workshop::where('id', $request->id)->update([
+            'status' => $request->status
+        ]);
+        if ($updateUser) {
+            return response()->json(['success' => 'Workshop Status Updated Successfully']);
+        } else {
+            return response()->json(['error' => 'Oops! something went wrong']);
+        }
     }
 
     /**

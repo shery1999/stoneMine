@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\first_storage;
-use App\Models\store;
-use App\Models\unprocessed_grading;
+use App\Models\FirstStorage;
+use App\Models\Store;
+use App\Models\UnprocessedGrading;
+use Illuminate\Support\Facades\Validator;
 
-class first_storageController extends Controller
+
+class FirstStorageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +20,14 @@ class first_storageController extends Controller
     {
         //FOR GETTING DATA FROM DB
 
-        $firstGrading = first_storage::where('status','0')->with('stores', 'unprocessed_grading_data.mines')->get();
-        // dd($firstGrading);
+        $firstGrading = FirstStorage::where('status', '0')->with('stores', 'unprocessed_grading_data.mines')->get();
         return view('list_first_grading', compact('firstGrading'));
     }
 
     public function index1()
     {
-        $store_data = store::get();
-        $stone_data = first_storage::get();
+        $store_data = Store::where('status', 1)->get();
+        $stone_data = FirstStorage::where('status', 0)->get();
         return view('to_store', compact('store_data', 'stone_data'));
     }
 
@@ -48,14 +49,6 @@ class first_storageController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // $save = first_storage::create([
-        //     'store_id' => $request->input('store'),
-        //     'unprocessed_grading_id' => $request->input('bag_id'),
-        //     'user_id' => $request->input('user_id'),
-        //     'description' => $request->input('description'),
-        // ]);
-        // return redirect('to_store');
     }
 
     /**
@@ -89,16 +82,24 @@ class first_storageController extends Controller
      */
     public function update(Request $request)
     {
-        $save = first_storage::where('unprocessed_grading_id', $request->input('bag_id'))
-            ->update([
-                'store_id' => $request->input('store'),
-                'unprocessed_grading_id' => $request->input('bag_id'),
-                'user_id' => Auth()->user()->id,
-                'description' => $request->input('description'),
-            ]);
-        return redirect('to_store');
+        $validator = Validator::make($request->all(), [
+            'store' =>         'required|max:255',
+            'bag_id' =>        'required|max:255',
+            'description' =>   'max:255',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
+        } else {
+            $save = FirstStorage::where('unprocessed_grading_id', $request->input('bag_id'))
+                ->update([
+                    'store_id' => $request->input('store'),
+                    'unprocessed_grading_id' => $request->input('bag_id'),
+                    'user_id' => Auth()->user()->id,
+                    'description' => $request->input('description'),
+                ]);
+            return redirect()->back()->with(['msg' => 'data submitted']);
+        }
     }
-
     /**
      * Remove the specified resource from storage.
      *

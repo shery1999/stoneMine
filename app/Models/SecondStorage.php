@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Second_storage extends Model
+class SecondStorage extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -22,7 +22,7 @@ class Second_storage extends Model
         return $this->hasMany(ProcessedGrading::class, 'id');
     }
 
-    
+
     public function data()
     {
         return $this->belongsTo(ProcessedGrading::class, 'processed_grading_id', 'id');
@@ -31,6 +31,6 @@ class Second_storage extends Model
 
     public function stores()
     {
-        return $this->hasOne(store::class,'id', 'store_id');
+        return $this->hasOne(Store::class, 'id', 'store_id');
     }
 }

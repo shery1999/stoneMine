@@ -219,6 +219,7 @@
                     <th class="text-center" scope="col">Stone Id </th>
                     <th class="text-center" scope="col">Stone Dimentions</th>
                     <th class="text-center" scope="col">Stone Weight</th>
+                    <th class="text-center" scope="col">Stone Grade</th>
                     <th class="text-center" scope="col">Stone Color</th>
                     <th class="text-center" scope="col">Stone Clarity</th>
                     <th class="text-center" scope="col">Stone Treatment</th>
@@ -237,6 +238,7 @@
                             <td class="text-center">{{ $item['id'] }}</td>
                             <td class="text-center">{{ $item['dimensions'] }}</td>
                             <td class="text-center">{{ $item['weight'] }}</td>
+                            <td class="text-center">{{ $item['grade'] }}</td>
                             <td class="text-center">{{ $item['color'] }}</td>
                             <td class="text-center">{{ $item['clarity'] }}</td>
                             <td class="text-center">{{ $item['treatment'] }}</td>

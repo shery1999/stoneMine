@@ -11,11 +11,14 @@ class showroom extends Model
     protected $fillable = [
         'ownername',
         'showroomname',
+        'email',
         'phone1',
         'phone2',
         'phone3',
         'adress',
         'city',
         'country',
+        'status',
+
     ];
 }

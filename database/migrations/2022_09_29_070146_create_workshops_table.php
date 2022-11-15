@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('workshop');
             $table->string('location')->nullable();
             $table->text('description')->nullable();
+            $table->integer('status')->default(1);
+
 
             $table->timestamps();
         });

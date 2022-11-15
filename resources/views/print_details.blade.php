@@ -112,7 +112,7 @@
             <div class="col-4 pt-3 pl-4">
                 <div class="row textsize">
                     <div class="col-5 text-left blue textbold">
-                        Description :
+                        {{-- Description : --}}
                     </div>
                     <div class="col-7 text-left">
                       {{  $Data[0]['description'] }}
@@ -164,10 +164,12 @@
         </table>
         <div class="row">
             <div class="col-1 pt-3" ></div>
+            @if ($Data[0]['unprocessed_grading_data']['picture'])    
             <div class="col-6 pt-5 mt-6 text-center">
                 <img src="{{ url('/storage/' . $Data[0]['unprocessed_grading_data']['picture']) }}" height="500px"
                 width="500px" alt="" title="" />
             </div>
+            @endif
         </div>
     </div>
 </body>

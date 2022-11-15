@@ -112,7 +112,7 @@
             <div class="col-4 pt-3 pl-4">
                 <div class="row textsize">
                     <div class="col-5 text-left blue textbold">
-                        Description :
+                        Description:
                     </div>
                     <div class="col-7 text-left">
                         {{ $Data[0]['description'] }}
@@ -149,13 +149,11 @@
                     <th class="text-center" scope="col">Cut Shape</th>
                     <th class="text-center" scope="col">Lab Certificate</th>
                     <th class="text-center" scope="col">Store Name</th>
-                    <th class="text-center" scope="col">Store Location</th>
+                    {{-- <th class="text-center" scope="col">Store Location</th>s --}}
                 </tr>
             </thead>
             <tbody>
-                {{-- {{dd($Data);}} --}}
                 @foreach ($Data as $key => $data)
-                    {{-- {{ dd($data['data']['grade']) }} --}}
                     <tr>
                         <td class="text-center">{{ $data['data']['id'] }}</td>
                         <td class="text-center">{{ $data['data']['grade'] }}</td>
@@ -168,18 +166,20 @@
                         <td class="text-center">{{ $data['data']['cut_shape'] }}</td>
                         <td class="text-center">{{ $data['data']['lab_certificate'] }}</td>
                         <td class="text-center">{{ $data['stores']['store'] }}</td>
-                        <td class="text-center">{{ $data['stores']['location'] }}</td>
+                        {{-- <td class="text-center">{{ $data['stores']['location'] }}</td> --}}
                     </tr>
                     </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="row">
-            <div class="col-1 pt-3"></div>
-            <div class="col-6 pt-5 mt-6 text-center">
-                <img src="{{ url('/storage/' . $Data[0]['data']['picture']) }}" height="500px"
-                    width="500px" alt="" title="" />
-            </div>
+            @if ($Data[0]['data']['picture'])
+                <div class="col-1 pt-3"></div>
+                <div class="col-6 pt-5 mt-6 text-center">
+                    <img src="{{ url('/storage/' . $Data[0]['data']['picture']) }}" height="500px" width="500px"
+                        alt="" title="" />
+                </div>
+            @endif
         </div>
     </div>
 </body>

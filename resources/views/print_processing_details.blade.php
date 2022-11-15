@@ -112,7 +112,7 @@
             <div class="col-4 pt-3 pl-4">
                 <div class="row textsize">
                     <div class="col-5 text-left blue textbold">
-                        Description :
+                        Description:
                     </div>
                     <div class="col-7 text-left">
                         {{ $MultipleData[0]['description'] }}
@@ -143,16 +143,20 @@
                     <th class="text-center" scope="col">Grade</th>
                     <th class="text-center" scope="col">Weight</th>
                     <th class="text-center" scope="col">Size</th>
+                    <th class="text-center" scope="col">Workshop</th>
                 </tr>
             </thead>
             <tbody>
+                {{-- {{ dd($workshopData[0]['workshop']['workshop']) }} --}}
                 @foreach ($Data as $key => $data)
                     <tr>
-                        <td class="text-center">{{ $data[0]['specimen/bag'] }}</td>
+                        <td class="text-center">{{ $data[0]['id'] }}</td>
                         <td class="text-center">{{ $data[0]['specimen/bag'] }}</td>
                         <td class="text-center">{{ $data[0]['grade'] }}</td>
                         <td class="text-center">{{ $data[0]['weight'] }}</td>
                         <td class="text-center">{{ $data[0]['size'] }}</td>
+                        <td class="text-center">{{ $workshopData[0]['workshop']['workshop'] }}</td>
+
                     </tr>
                     </tr>
                 @endforeach

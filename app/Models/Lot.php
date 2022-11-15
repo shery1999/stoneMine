@@ -30,7 +30,7 @@ class Lot extends Model
 
     public function stores()
     {
-        return $this->hasOne(store::class,'id', 'store_id');
+        return $this->hasOne(Store::class,'id', 'store_id');
     }
 
 }

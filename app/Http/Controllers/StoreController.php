@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\storeController;
+// use App\Models\StoreController;
 use Illuminate\Http\Request;
-use App\Models\store;
+use App\Models\Store;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
-class StoreControllerController extends Controller
+
+class StoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +20,8 @@ class StoreControllerController extends Controller
     public function index()
     {
         //
+        $store_data = Store::get();
+        return view('add_store', compact('store_data'));
     }
 
     /**
@@ -38,14 +43,35 @@ class StoreControllerController extends Controller
     public function store(Request $request)
     {
         //
-        $save = store::create([
-
-            'store' => $request->input('store'),
-            'location' => $request->input('location'),
-            'description' => $request->input('description'),
-
+        $validator = Validator::make($request->all(), [
+            'store' => 'required|unique:stores|max:255',
+            'location' => 'required|max:255',
+            'description' => 'max:255',
         ]);
-        return redirect('add_store');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Submitted']);
+        } else {
+            $save = Store::create([
+
+                'store' => $request->input('store'),
+                'location' => $request->input('location'),
+                'description' => $request->input('description'),
+
+            ]);
+            return redirect()->back()->with(['msg' => 'Data submitted']);
+        }
+    }
+
+    public function  StoreUpdateStatus(Request $request)
+    {
+        $updateUser = Store::where('id', $request->id)->update([
+            'status' => $request->status
+        ]);
+        if ($updateUser) {
+            return response()->json(['success' => 'Store Status Updated Successfully']);
+        } else {
+            return response()->json(['error' => 'Oops! something went wrong']);
+        }
     }
 
     /**
