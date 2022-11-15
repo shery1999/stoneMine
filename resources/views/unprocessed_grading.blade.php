@@ -38,10 +38,8 @@
                         <h4 class="card-title"></h4>
                         <h4 class="card-title">Specimen type </h4>
                         <h4 class="card-title"></h4>
-                        <h4 class="card-title"></h4>
                         <div class="basic-form">
                             <div class="form-group">
-                                <h4 class="card-title"></h4>
                                 <h4 class="card-title"></h4>
                                 <div class="radio mb-3">
                                     <label>

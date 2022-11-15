@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('titles', 'Add Mine')
+@section('titles', 'Update Mine')
 @section('content')
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
@@ -38,18 +38,17 @@
                         <h2>Edit Mine Detail
                         </h2>
                         <div class="form-validation">
-                            <form class="form-valide" action="/update_mine" method="post" {{-- onsubmit="this.submit(); this.reset(); return false;" --}}>
+                            <form class="form-valide" action="/update_mine/{{ $Data['id'] }}" method="post" {{-- onsubmit="this.submit(); this.reset(); return false;" --}}>
                                 @csrf
+                                @method('PUT')
+
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="val-minename">Mine name <span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input required style="display: none" type="text" class="form-control"
-                                        id="val- minename" name="id" placeholder="Mine name.."
-                                        value="{{ $Data[0]['id'] }}">
                                     <div class="col-lg-6">
                                         <input required type="text" class="form-control" id="val- minename"
-                                            name="mine" placeholder="Mine name.." value="{{ $Data[0]['mine'] }}">
+                                            name="mine" placeholder="Mine name.." value="{{ $Data['mine'] }}">
                                         @if ($errors->has('mine'))
                                             <div class="error">{{ $errors->first('mine') }}</div>
                                         @endif
@@ -62,7 +61,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input required type="text" class="form-control" id="val-email" name="location"
-                                            placeholder="location.." value="{{ $Data[0]['location'] }}">
+                                            placeholder="location.." value="{{ $Data['location'] }}">
                                         @if ($errors->has('location'))
                                             <div class="error">{{ $errors->first('location') }}</div>
                                         @endif
@@ -74,7 +73,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-description" name="description" rows="5" placeholder="Enter Description"> {{ $Data[0]['description'] }}</textarea>
+                                        <textarea class="form-control" id="val-description" name="description" rows="5" placeholder="Enter Description"> {{ $Data['description'] }}</textarea>
                                         @if ($errors->has('description'))
                                             <div class="error">{{ $errors->first('description') }}</div>
                                         @endif

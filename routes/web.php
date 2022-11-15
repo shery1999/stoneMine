@@ -184,19 +184,19 @@ Route::group(['middleware' => ['auth', 'roleAuth']], function () {
     // return view('update_showroom');
     // });
     Route::get('/update_mine/{id}', [UpdateMineController::class, 'index']);
-    Route::post('/update_mine', [UpdateMineController::class, 'update']);
+    Route::put('/update_mine/{id}', [UpdateMineController::class, 'update']);
 
     Route::get('/update_showroom/{id}', [UpdateShowroomController::class, 'index']);
-    Route::post('/update_showroom', [UpdateShowroomController::class, 'update']);
+    Route::put('/update_showroom/{id}', [UpdateShowroomController::class, 'update']);
 
     Route::get('/update_store/{id}', [UpdateStoreController::class, 'index']);
-    Route::post('/update_store', [UpdateStoreController::class, 'update']);
+    Route::put('/update_store/{id}', [UpdateStoreController::class, 'update']);
 
     Route::get('/update_workshop/{id}', [UpdateWorkshopController::class, 'index']);
-    Route::post('/update_workshop', [UpdateWorkshopController::class, 'update']);
+    Route::put('/update_workshop/{id}', [UpdateWorkshopController::class, 'update']);
 
     Route::get('/update_user/{id}', [UpdateUserController::class, 'index']);
-    Route::post('/update_user', [UpdateUserController::class, 'update']);
+    Route::put('/update_user/{id}', [UpdateUserController::class, 'update']);
 
     // add store
     Route::get('add_store', function () {

@@ -18,8 +18,12 @@ class UpdateStoreController extends Controller
     {
         //
         $id =  request()->route()->parameters['id'];
-        $Data = Store::where('id', $id)->get();
-        return view('update_store', compact('Data'));
+        $Data = Store::where('id', $id)->first();
+        if (!$Data) {
+            return redirect()->back()->with(['msgf' => 'Data Not Found']);
+        } else {
+            return view('update_store', compact('Data'));
+        }
     }
 
     /**
@@ -72,7 +76,7 @@ class UpdateStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         //
         // dd($request->all());
@@ -86,7 +90,7 @@ class UpdateStoreController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
         } else {
-            $update = Store::where('id', $request->id)
+            $update = Store::where('id', $id)
                 ->update([
                     'store' => $request->store,
                     'location' => $request->location,

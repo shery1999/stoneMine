@@ -18,8 +18,12 @@ class UpdateWorkshopController extends Controller
     {
         //
         $id =  request()->route()->parameters['id'];
-        $Data = Workshop::where('id', $id)->get();
-        return view('update_workshop', compact('Data'));
+        $Data = Workshop::where('id', $id)->first();
+        if (!$Data) {
+            return redirect()->back()->with(['msgf' => 'Data Not Found']);
+        } else {
+            return view('update_workshop', compact('Data'));
+        }
     }
 
     /**
@@ -72,7 +76,7 @@ class UpdateWorkshopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'location'        => 'min:4|max:255',
@@ -83,7 +87,7 @@ class UpdateWorkshopController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
         } else {
-            $update = Workshop::where('id', $request->id)
+            $update = Workshop::where('id', $id)
                 ->update([
                     'workshop' => $request->store,
                     'location' => $request->location,

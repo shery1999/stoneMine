@@ -19,8 +19,13 @@ class UpdateShowroomController extends Controller
     {
         //
         $id =  request()->route()->parameters['id'];
-        $Data = Showroom::where('id', $id)->get();
-        return view('update_showroom', compact('Data'));
+        $Data = Showroom::where('id', $id)->first();
+        if (!$Data) {
+            return redirect()->back()->with(['msgf' => 'Data Not Found']);
+        } else {
+            
+            return view('update_showroom', compact('Data'));
+        }
     }
 
     /**
@@ -73,7 +78,7 @@ class UpdateShowroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $Data = Showroom::where('id', $request->id)->get();
         // dd($Data[0]['email']);
@@ -87,14 +92,26 @@ class UpdateShowroomController extends Controller
             'adress' => 'required|max:255',
             'city' => 'required|max:255',
             'country' => 'required|max:255',
-            'phone1' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'phone2' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'phone3' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
         ]);
+        if (!$request->phone1 == '') {
+            $validator = Validator::make($request->all(), [
+                'phone1' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
+        if (!$request->phone2 == '') {
+            $validator = Validator::make($request->all(), [
+                'phone2' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
+        if (!$request->phone3 == '') {
+            $validator = Validator::make($request->all(), [
+                'phone3' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
         } else {
-            $update = Showroom::where('id', $request->id)
+            $update = Showroom::where('id', $id)
                 ->update([
                     'ownername' => $request->input('ownername'),
                     'showroomname' => $request->input('showroomname'),

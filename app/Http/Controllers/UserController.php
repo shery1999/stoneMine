@@ -46,9 +46,17 @@ class UserController extends Controller
             'password' => 'required|min:8|max:255',
             'confirm_password' => 'required|same:password',
             'role' => 'required|max:255',
-            'phoneNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'mobileNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
         ]);
+        if (!$request->phoneNo == '') {
+            $validator = Validator::make($request->all(), [
+                'phoneNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
+        if (!$request->mobileNo == '') {
+            $validator = Validator::make($request->all(), [
+                'mobileNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Submitted']);
         } else {

@@ -28,7 +28,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h2>Update Processed Specimen Location
+                            <h2>Transport Processed Specimen
                             </h2>
                             <h4 class="card-title"></h4>
                             <h4 class="card-title"></h4>

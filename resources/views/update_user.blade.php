@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('titles', 'Add User')
+@section('titles', 'Update User')
 @section('content')
 
     <div class="row page-titles mx-0">
@@ -13,6 +13,11 @@
     <!-- row -->
     <div class="row justify-content-center">
         <div class="container-fluid">
+            @if (!$Data['email'])
+                <script>
+                    window.location = "/add_user";
+                </script>
+            @endif
             @if (session()->has('msg'))
                 @if (session()->has('msg'))
                     <div class="col-lg-12">
@@ -36,19 +41,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="/update_user" method="post"
+                            <form class="form-valide" action="/update_user/{{ $Data['id'] }}" method="post"
                                 onsubmit="this.submit(); this.reset(); return false;">
                                 @csrf
+                                @method('PUT')
                                 {{-- username --}}
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="val-username">Username <span
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input style="display: none" type="text" class="form-control" id="val- minename"
-                                            name="id" placeholder="Mine name.." value="{{ $Data[0]['id'] }}">
                                         <input required type="text" class="form-control" id="val-username"
-                                            value="{{ $Data[0]['username'] }}" name="username"
+                                            value="{{ $Data['username'] }}" name="username"
                                             placeholder="Enter a username..">
                                         @if ($errors->has('username'))
                                             <div class="error">{{ $errors->first('username') }}</div>
@@ -62,7 +66,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input required type="email" class="form-control" id="val-email" name="email"
-                                            value="{{ $Data[0]['email'] }}" placeholder="Your valid email..">
+                                            value="{{ $Data['email'] }}" placeholder="Your valid email..">
                                         @if ($errors->has('email'))
                                             <div class="error">{{ $errors->first('email') }}</div>
                                         @endif
@@ -75,7 +79,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="password" class="form-control" id="password" name="password"
-                                           value=""  placeholder="Choose a safe one..">
+                                            value="" placeholder="Choose a safe one..">
                                         @if ($errors->has('password'))
                                             <div class="error">{{ $errors->first('password') }}</div>
                                         @endif
@@ -98,19 +102,19 @@
                                 {{-- phone number --}}
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="phoneus">Phone <span
-                                            value="{{ $Data[0]['id'] }}" class="text-danger">*</span>
+                                            value="{{ $Data['id'] }}" class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input  type="text" class="form-control" id="val-phoneus1" name="phoneNo"
-                                            value="{{ $Data[0]['phoneNo'] }}" placeholder="Phone Number">
+                                        <input type="text" class="form-control" id="val-phoneus1" name="phoneNo"
+                                            value="{{ $Data['phoneNo'] }}" placeholder="Phone Number">
                                         @if ($errors->has('phoneNo'))
                                             <div class="error">{{ $errors->first('phoneNo') }}</div>
                                         @endif
 
                                         <h4 class="card-title"></h4>
                                         <h4 class="card-title"></h4>
-                                        <input  type="text" class="form-control" id="val-phoneus2"
-                                            value="{{ $Data[0]['mobileNo'] }}" name="mobileNo" placeholder="Mobile Number">
+                                        <input type="text" class="form-control" id="val-phoneus2"
+                                            value="{{ $Data['mobileNo'] }}" name="mobileNo" placeholder="Mobile Number">
                                         @if ($errors->has('mobileNo'))
                                             <div class="error">{{ $errors->first('mobileNo') }}</div>
                                         @endif
@@ -123,11 +127,11 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <select  type="text" class="form-control" id="val-username"
-                                            name="role" placeholder="Enter a user Role..">
-                                            <option value="{{ $Data[0]['role'] }}" value="" selected
+                                        <select type="text" class="form-control" id="val-username" name="role"
+                                            placeholder="Enter a user Role..">
+                                            <option value="{{ $Data['role'] }}" value="" selected
                                                 aria-placeholder="Please Select Role">
-                                                {{ $Data[0]['role'] }} </option>
+                                                {{ $Data['role'] }} </option>
                                             <option value="user">User</option>
                                             <option value="admin">Admin</option>
                                         </select>

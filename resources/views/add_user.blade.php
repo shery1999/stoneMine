@@ -37,7 +37,8 @@
                     <div class="card-body">
                         <div class="form-validation">
                             <form class="form-valide" action="/add_user" method="post"
-                                onsubmit="this.submit(); this.reset(); return false;">
+                                {{-- onsubmit="this.submit(); this.reset(); return false;" --}}
+                                >
                                 @csrf
                                 {{-- username --}}
                                 <div class="form-group row">
@@ -98,7 +99,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input required type="text" class="form-control" id="val-phoneus1" name="phoneNo"
+                                        <input  type="text" class="form-control" id="val-phoneus1" name="phoneNo"
                                             placeholder="Phone Number">
                                         @if ($errors->has('phoneNo'))
                                             <div class="error">{{ $errors->first('phoneNo') }}</div>
@@ -106,7 +107,7 @@
 
                                         <h4 class="card-title"></h4>
                                         <h4 class="card-title"></h4>
-                                        <input required type="text" class="form-control" id="val-phoneus2"
+                                        <input  type="text" class="form-control" id="val-phoneus2"
                                             name="mobileNo" placeholder="Mobile Number">
                                         @if ($errors->has('mobileNo'))
                                             <div class="error">{{ $errors->first('mobileNo') }}</div>

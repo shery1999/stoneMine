@@ -19,8 +19,12 @@ class UpdateMineController extends Controller
     {
         //
         $id =  request()->route()->parameters['id'];
-        $Data = Mine::where('id', $id)->get();
-        return view('update_mine', compact('Data'));
+        $Data = Mine::where('id', $id)->first();
+        if (!$Data) {
+            return redirect()->back()->with(['msgf' => 'Data Not Found']);
+        } else {
+            return view('update_mine', compact('Data'));
+        }
     }
 
     /**
@@ -73,7 +77,7 @@ class UpdateMineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'location'    => 'min:4|max:255',
@@ -84,7 +88,7 @@ class UpdateMineController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
         } else {
-            $update = Mine::where('id', $request->id)
+            $update = Mine::where('id', $id)
                 ->update([
                     'mine' => $request->mine,
                     'location' => $request->location,

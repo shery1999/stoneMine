@@ -19,8 +19,13 @@ class UpdateUserController extends Controller
     {
         //
         $id =  request()->route()->parameters['id'];
-        $Data = User::where('id', $id)->get();
-        return view('update_User', compact('Data'));
+        // $Data = User::where('id', $id)->get();
+        $Data = User::where('id', $id)->first();
+        if (!$Data) {
+            return redirect()->back()->with(['msgf' => 'Data Not Found']);
+        } else {
+            return view('update_User', compact('Data'));
+        }
     }
 
     /**
@@ -73,22 +78,31 @@ class UpdateUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+
         $validator = Validator::make($request->all(), [
             'username'         => 'required|max:255',
             'password'         => 'max:255',
             'confirm_password' => 'same:password',
             'role'             => 'required|max:255',
-            'phoneNo'          => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'mobileNo'         => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
             'email'            => 'max:255',
-            'email'            =>  Rule::unique('users')->ignore($request->id),
+            'email'            =>  Rule::unique('users')->ignore($id),
         ]);
+        if (!$request->phoneNo == '') {
+            $validator = Validator::make($request->all(), [
+                'phoneNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
+        if (!$request->mobileNo == '') {
+            $validator = Validator::make($request->all(), [
+                'mobileNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
         } else {
-            $update = User::where('id', $request->id)
+            $update = User::where('id', $id)
                 ->update([
                     'username' => $request->input('username'),
                     'email' => $request->input('email'),

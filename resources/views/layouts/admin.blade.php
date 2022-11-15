@@ -37,6 +37,22 @@
             border-style: none;
             width: 12rem;
         }
+
+        .card-title {
+            margin-bottom: 1.1rem;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            display: flex;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            box-sizing: border-box;
+            padding: 1rem;
+            width: 1rem;
+        }
     </style>
     @stack('my-styles')
 </head>

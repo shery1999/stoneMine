@@ -112,7 +112,7 @@
             <div class="col-4 pt-3 pl-4">
                 <div class="row textsize">
                     <div class="col-5 text-left blue textbold">
-                        Description :
+                        Description:
                     </div>
                     <div class="col-7 text-left">
                         {{ $Data[0]['description'] }}
@@ -149,7 +149,7 @@
                     <th class="text-center" scope="col">Cut Shape</th>
                     <th class="text-center" scope="col">Lab Certificate</th>
                     <th class="text-center" scope="col">Store Name</th>
-                    <th class="text-center" scope="col">Store Location</th>
+                    {{-- <th class="text-center" scope="col">Store Location</th>s --}}
                 </tr>
             </thead>
             <tbody>
@@ -166,7 +166,7 @@
                         <td class="text-center">{{ $data['data']['cut_shape'] }}</td>
                         <td class="text-center">{{ $data['data']['lab_certificate'] }}</td>
                         <td class="text-center">{{ $data['stores']['store'] }}</td>
-                        <td class="text-center">{{ $data['stores']['location'] }}</td>
+                        {{-- <td class="text-center">{{ $data['stores']['location'] }}</td> --}}
                     </tr>
                     </tr>
                 @endforeach

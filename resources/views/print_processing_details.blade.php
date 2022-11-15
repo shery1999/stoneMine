@@ -112,7 +112,7 @@
             <div class="col-4 pt-3 pl-4">
                 <div class="row textsize">
                     <div class="col-5 text-left blue textbold">
-                        Description :
+                        Description:
                     </div>
                     <div class="col-7 text-left">
                         {{ $MultipleData[0]['description'] }}

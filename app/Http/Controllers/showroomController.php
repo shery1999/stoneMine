@@ -53,11 +53,23 @@ class ShowroomController extends Controller
             'adress' => 'required|max:255',
             'city' => 'required|max:255',
             'country' => 'required|max:255',
-            'phone1' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'phone2' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'phone3' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
 
         ]);
+        if (!$request->phone1 == '') {
+            $validator = Validator::make($request->all(), [
+                'phone1' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
+        if (!$request->phone2 == '') {
+            $validator = Validator::make($request->all(), [
+                'phone2' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
+        if (!$request->phone3 == '') {
+            $validator = Validator::make($request->all(), [
+                'phone3' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
+            ]);
+        }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Submitted']);
         } else {
@@ -66,15 +78,14 @@ class ShowroomController extends Controller
                 'ownername' => $request->input('ownername'),
                 'showroomname' => $request->input('showroomname'),
                 'email' => $request->input('email'),
-                'phone1' => $request->input('phone1'),
-                'phone2' => $request->input('phone2'),
-                'phone3' => $request->input('phone3'),
                 'adress' => $request->input('adress'),
                 'city' => $request->input('city'),
                 'country' => $request->input('country'),
+                'phone1' => $request->input('phone1'),
+                'phone2' => $request->input('phone2'),
+                'phone3' => $request->input('phone3'),
             ]);
             return redirect()->back()->with(['msg' => 'Data submitted']);
-            return redirect('add_showroom');
         }
     }
 

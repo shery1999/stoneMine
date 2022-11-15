@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('titles', 'Add Showroom')
+@section('titles', 'Update Showroom')
 @section('content')
 
     <div class="row page-titles mx-0">
@@ -36,19 +36,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="/update_showroom" method="post" {{-- onsubmit="this.submit(); this.reset(); return false;" --}}>
+                            <form class="form-valide" action="/update_showroom/{{ $Data['id'] }}" method="post" {{-- onsubmit="this.submit(); this.reset(); return false;" --}}>
                                 @csrf
+                                @method('PUT')
+
                                 <div class="form-group row">
                                     {{-- name --}}
                                     <label class="col-lg-4 col-form-label" for="val-username">Owner Name <span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input required style="display: none" type="text" class="form-control"
-                                        id="val- minename" name="id" placeholder="Mine name.."
-                                        value="{{ $Data[0]['id'] }}">
-                                    {{-- {{ dd($Data[0]) }} --}}
+                                    {{-- {{ dd($Data) }} --}}
                                     <div class="col-lg-6">
-                                        <input value="{{ $Data[0]['ownername'] }}" type="text" required
+                                        <input value="{{ $Data['ownername'] }}" type="text" required
                                             class="form-control" id="val-username" name="ownername"
                                             placeholder="Enter a name..">
                                         @if ($errors->has('ownername'))
@@ -66,7 +65,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" required class="form-control" id="val-username"
-                                            value="{{ $Data[0]['showroomname'] }}" name="showroomname"
+                                            value="{{ $Data['showroomname'] }}" name="showroomname"
                                             placeholder="Enter a showroom name">
                                         @if ($errors->has('showroomname'))
                                             <div class="error">{{ $errors->first('showroomname') }}</div>
@@ -81,7 +80,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="email" class="form-control" id="val-email" name="email"
-                                            value="{{ $Data[0]['email'] }}" placeholder="Enter email">
+                                            value="{{ $Data['email'] }}" placeholder="Enter email">
                                         @if ($errors->has('email'))
                                             <div class="error">{{ $errors->first('email') }}</div>
                                         @endif
@@ -95,19 +94,19 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-phoneus1" name="phone1"
-                                            value="{{ $Data[0]['phone1'] }}" placeholder="Enter Phone Number 1">
+                                            value="{{ $Data['phone1'] }}" placeholder="Enter Phone Number 1">
                                         @if ($errors->has('phone1'))
                                             <div class="error">{{ $errors->first('phone1') }}</div>
                                         @endif
                                         <h4 class="card-title"></h4>
                                         <input type="text" class="form-control" id="val-phoneus2" name="phone2"
-                                            value="{{ $Data[0]['phone2'] }}" placeholder="Enter Phone Number 2">
+                                            value="{{ $Data['phone2'] }}" placeholder="Enter Phone Number 2">
                                         @if ($errors->has('phone2'))
                                             <div class="error">{{ $errors->first('phone2') }}</div>
                                         @endif
                                         <h4 class="card-title"></h4>
                                         <input type="text" class="form-control" id="val-phoneus3" name="phone3"
-                                            value="{{ $Data[0]['phone3'] }}" placeholder="Enter Phone Number 3">
+                                            value="{{ $Data['phone3'] }}" placeholder="Enter Phone Number 3">
                                         @if ($errors->has('phone3'))
                                             <div class="error">{{ $errors->first('phone3') }}</div>
                                         @endif
@@ -121,7 +120,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-adress" name="adress"
-                                            value="{{ $Data[0]['adress'] }}" placeholder="Enter Adress">
+                                            value="{{ $Data['adress'] }}" placeholder="Enter Adress">
                                         @if ($errors->has('adress'))
                                             <div class="error">{{ $errors->first('adress') }}</div>
                                         @endif
@@ -134,7 +133,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-city" name="city"
-                                            value="{{ $Data[0]['city'] }}" placeholder="Enter city">
+                                            value="{{ $Data['city'] }}" placeholder="Enter city">
                                         @if ($errors->has('city'))
                                             <div class="error">{{ $errors->first('city') }}</div>
                                         @endif
@@ -147,7 +146,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <select class="form-control" id="val-country" name="country">
-                                            <option value="{{ $Data[0]['country'] }}">{{ $Data[0]['country'] }}</option>
+                                            <option value="{{ $Data['country'] }}">{{ $Data['country'] }}</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Aland Islands">Aland Islands</option>
                                             <option value="Albania">Albania</option>
