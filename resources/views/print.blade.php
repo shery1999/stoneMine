@@ -94,6 +94,24 @@
             .table-stripe {
                 background-color: #dedede !important;
             }
+
+            /* @page {
+                size: auto;
+                margin-top: 0mm;
+                margin-bottom: 0mm;
+            } */
+
+            @media print {
+                @page {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                }
+
+                body {
+                    padding-top: 5rem;
+                    padding-bottom: 5rem;
+                }
+            }
         }
     </style>
 </head>
@@ -103,15 +121,15 @@
         <!-- header -->
         <div class="row">
             <!-- first col start -->
-            <div class="col-md-5 col-3">
+            <div class="col-md-6 col-4">
                 <div class="row mt-4 ">
                     <div class="col-1"></div>
-                    <div class="col-2 ">
-                        <i class="fa fa-shopping-bag" width="6vw" style="font-size:58px;color:rgb(1, 116, 177)"></i>
+                    <div class="col-3 ">
+                        <i class="fa fa-diamond" width="6vw" style="font-size:58px;color:rgb(1, 116, 177)"></i>
                     </div>
-                    <div class="col-8">
-                        <h1 class="weigthbold"><span style="color:rgb(1, 116, 177);">INVENT </span> CORP</h1>
-                        <h3 class="blue logoFont">Invent Corp Slogan Here</h3>
+                    <div class="col-7">
+                        <h1 class="weigthbold"><span style="color:rgb(1, 116, 177);">NORTH RANGE</span> MINES</h1>
+                        <h3 class="blue logoFont">(SMC-PVT)LTD</h3>
                     </div>
                 </div>
             </div>
@@ -121,9 +139,9 @@
                         <i class="fa fa-map-marker" style="font-size:34px"></i>
                     </div>
                     <div class="col-9">
-                        <p>1st Floor, KPIT Park</p>
-                        <p> Office, Abbottabad</p>
-                        <p>21300, Pakistan</p>
+                        <p>RANI, POST OFFICE RABAT</p>
+                        <p> TIMERGARA, DIR LOWER, PK</p>
+                        <p>Pakistan</p>
                     </div>
                 </div>
             </div>
@@ -133,12 +151,12 @@
                         <i class="fa fa-phone" style="font-size:24px"></i>
                     </div>
                     <div class="col-9">
-                        <p>(+92)335044029</p>
+                        <p style="inline-size:max-content">(+92)333-7776333</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-3">
-                <div class="row mt-4">
+            {{-- <div class="col-md-2 col-3"> --}}
+            {{-- <div class="row mt-4">
                     <div class="col-3">
                         <i class="fa fa-envelope" style="font-size:24px"></i>
                     </div>
@@ -146,8 +164,8 @@
                         <p>accounts@.app</p>
                         <p>www.owner.app</p>
                     </div>
-                </div>
-            </div>
+                </div> --}}
+            {{-- </div> --}}
         </div>
         <!-- invoice -->
         <div class="row bgcol">
@@ -307,8 +325,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>
     // addEventListener('popstate',()=>{location.reload()})
-    addEventListener('popstate',console.log("hello"))
-
+    addEventListener('popstate', console.log("hello"))
 </script>
 <script>
     n = new Date();

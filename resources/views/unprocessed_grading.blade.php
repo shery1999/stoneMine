@@ -10,6 +10,7 @@
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Data Added Successfully :</strong> To Print details click :
                         <a href="{{ url(Session::get('msg')) }}">
+                            {{-- {{dd($Print_id)}} --}}
                             <button type="button" class="btn btn-info">Print</button>
                         </a>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -142,8 +143,8 @@
 
                             <h4 class="card-title"></h4>
                             <div class="form-group">
-                                <input required type="text" class="form-control input-default" name="weight"
-                                    placeholder="Weight (Kg)">
+                                <input required type="text" class="form-control input-default"
+                                    name="weight" placeholder="Weight (Kg)">
                             </div>
                             @if ($errors->has('weight'))
                                 <div class="error">{{ $errors->first('weight') }}</div>
@@ -179,16 +180,15 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Submit</h4>
-                            <div class="button-icon">
-                                <button type="submit" class="btn mb-1 btn-success">Submit <span
-                                        class="btn-icon-right"><i class="fa fa-check"></i></span>
-                                </button>
-                            </div>
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Submit</h4>
+                        <div class="button-icon">
+                            <button type="submit" class="btn mb-1 btn-success">Submit <span
+                                    class="btn-icon-right"><i class="fa fa-check"></i></span>
+                            </button>
                         </div>
                     </div>
                 </div>

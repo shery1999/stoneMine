@@ -5,11 +5,11 @@
                         {{-- <li class="nav-label">Dashboard</li> --}}
                         <li>
                             <a class="has-arrow" href="/admin_panel" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                                <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                             </a>
                             <ul aria-expanded="false">
-                        <li><a href="/admin_panel">Dashboard</a></li>
-                        </ul>
+                                <li><a href="/admin_panel">Dashboard</a></li>
+                            </ul>
                         </li>
                     @endif
                     @if (Auth::user()->role == 'admin')
@@ -21,11 +21,13 @@
                     @if (Auth::user()->role == 'admin')
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="
+                                <i
+                                    class="
                                 {{-- icon-screen-tablet  --}}
                                 fa fa-user
                                 {{-- fa fa-user-circle --}}
-                                menu-icon"></i><span class="nav-text">Admin Controls</span>
+                                menu-icon"></i><span
+                                    class="nav-text">Admin Controls</span>
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="/add_user">Add Users</a></li>
@@ -71,33 +73,37 @@
                     </li>
 
                     {{-- <li class="nav-label">UPDATE STORE LOCATION</li> --}}
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="
+                    @if (Auth::user()->role == 'admin')
+                        <li>
+                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i
+                                    class="
                             {{-- icon-screen-tablet --}}
                             fa fa-plane	
-                             menu-icon"></i><span class="nav-text">
-                                Transport Inventory
-                                {{-- Update Store Location --}}
-                            </span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="/to_store">Transport Unprocessed</a></li>
-                            <li><a href="/to_store_processed">Transport Processed</a></li>
-                        </ul>
-                    </li>
+                             menu-icon"></i><span
+                                    class="nav-text">
+                                    Transport Inventory
+                                    {{-- Update Store Location --}}
+                                </span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="/to_store">Transport Unprocessed</a></li>
+                                <li><a href="/to_store_processed">Transport Processed</a></li>
+                            </ul>
+                        </li>
 
 
 
 
-                    @if (Auth::user()->role == 'admin')
                         {{-- <li class="nav-label">INVENTORY</li> --}}
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="
+                                <i
+                                    class="
                                 {{-- icon-screen-tablet  --}}
                                 fa fa-diamond
-                                menu-icon"></i><span class="nav-text">Store </span>
+                                menu-icon"></i><span
+                                    class="nav-text">Store </span>
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="/list_unprocessed">Unprocessed </a></li>
@@ -108,10 +114,12 @@
                         {{-- <li class="nav-label">LOT MANAGEMENT</li> --}}
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="
+                                <i
+                                    class="
                                 {{-- icon-screen-tablet  --}}
                                 fa fa-cart-plus	
-                                menu-icon"></i><span class="nav-text">Lot </span>
+                                menu-icon"></i><span
+                                    class="nav-text">Lot </span>
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="/create_lot">Create Lot</a></li>
@@ -131,10 +139,12 @@
                         {{-- <li class="nav-label">SOLD DATA</li> --}}
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="
+                                <i
+                                    class="
                                 {{-- icon-screen-tablet --}}
                                 fa fa-credit-card	
-                                 menu-icon"></i><span class="nav-text">VIEW SOLD</span>
+                                 menu-icon"></i><span
+                                    class="nav-text">VIEW SOLD</span>
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="/orders">Sold Lot Data</a></li>

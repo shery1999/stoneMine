@@ -44,6 +44,7 @@ class ProcessedGradingController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'processing_id' => 'required|max:255',
             'store' =>         'required|max:255',
@@ -67,8 +68,7 @@ class ProcessedGradingController extends Controller
             } else {
                 $photo = null;
             }
-
-            $save = ProcessedGrading::create([
+            $saveProcessedGrading = ProcessedGrading::create([
 
                 'processing_id' => $request->input('processing_id'),
                 'grade' => $request->input('grade'),
@@ -84,23 +84,22 @@ class ProcessedGradingController extends Controller
                 'user_id' => Auth()->user()->id,
                 'picture' => $photo,
             ]);
-            $processing_id =  $save['processing_id'];
-            $updateStaus = Processing::where('id', $processing_id)
-                ->update(
-                    ['status' => 1]
-                );
             if (!$request->store = "") {
                 if ($request->input('store'))
                     $save = SecondStorage::create([
                         'store_id' => $request->input('store'),
-                        'processed_grading_id' => $save['id'],
+                        'processed_grading_id' => $saveProcessedGrading['id'],
                         'user_id' => Auth()->user()->id,
                         'description' => $request->input('description'),
                     ]);
-
-                $id = $save['id'];
-                return redirect()->back()->with(['msg' => '/print_processed/' . $id,]);
             }
+            $processing_id =  $saveProcessedGrading['processing_id'];
+            $updateStaus = Processing::where('id', $processing_id)
+                ->update(
+                    ['status' => 1]
+                );
+            $id = $save['id'];
+            return redirect()->back()->with(['msg' => '/print_processed/' . $id,]);
             return redirect('processed_specimen');
         }
     }

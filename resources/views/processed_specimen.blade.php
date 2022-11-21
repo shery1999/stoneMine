@@ -210,23 +210,20 @@
                     </div>
                 </div>
             </div>
-
-
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Submit</h4>
-                            <div class="button-icon">
-                                <button type="submit" class="btn mb-1 btn-success">Submit <span
-                                        class="btn-icon-right"><i class="fa fa-check"></i></span>
-                                </button>
-                            </div>
+            {{-- <div class="row"> --}}
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Submit</h4>
+                        <div class="button-icon">
+                            <button type="submit" class="btn mb-1 btn-success">Submit <span class="btn-icon-right"><i
+                                        class="fa fa-check"></i></span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+            {{-- </div> --}}
         </form>
     </div>
 

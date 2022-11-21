@@ -10,6 +10,11 @@
         <div class="header-right">
 
             <ul class="clearfix">
+                <li class="icons dropdown d-none d-md-flex">
+                    {{-- <a href="javascript:void(0)" class="log-user"                      > --}}
+                        <span> logged in as {{Auth()->user()->username}}({{Auth()->user()->email}})</span>  
+                    {{-- </a> --}}
+                </li>
 
                 <li class="icons dropdown">
                     <div class="user-img c-pointer position-relative" data-toggle="dropdown">
