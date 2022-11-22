@@ -1,28 +1,56 @@
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-
-class Processing extends Model
-{
-    use HasFactory;
-
     protected $fillable = [
-        'unprocessed_grading_id',
-        'first_storage_id',
-        'user_id',
-        'store_id',
-        'description',
-        'workshop_id',
+        'ownername',
+        'showroomname',
+        'email',
+        'phone1',
+        'phone2',
+        'phone3',
+        'adress',
+        'city',
+        'country',
         'status',
 
     ];
 
-    public function workshop()
+
+
+
+
+
+?????????store
+        protected $fillable = [
+        'store',
+        'location',
+        'description',
+        'status',
+
+    ];
+
+
+    public function first_storages()
     {
-        return $this->hasOne(Workshop::class, 'id', 'workshop_id');
+        return $this->belongsTo(FirstStorage::class);
     }
-} 
+    public function second_storages()
+    {
+        return $this->belongsTo(SecondStorage::class);
+    }
+    public function processing()
+    {
+        return $this->belongsTo(Processing::class);
+    }
+
+
+
+
+
+
+
+
+
+    ??????????/workshop
+     protected $fillable = [
+        'workshop',
+        'location',
+        'description',
+    ];
