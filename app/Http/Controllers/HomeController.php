@@ -31,13 +31,14 @@ class HomeController extends Controller
         $first_storage_total = FirstStorage::count();
         $first_storage = FirstStorage::where('status', 0)->count();
 
-        $processing_total = Processing::count();
-        $processing = Processing::where('status', 0)->count();
+        $processing_total = 1;// Processing::count();
+        $processing = 1;// Processing::where('status', 0)->count();
 
         $second_storage_total = SecondStorage::count();
         $second_storage = SecondStorage::where('status', 0)->count();
 
         $order = Order::count();
+
         // per day result
         // $first_storage_data =  FirstStorage::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as views'))
         //     ->groupBy('date')
