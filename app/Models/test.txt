@@ -1,0 +1,8 @@
+    use HasFactory;
+    protected $fillable = [
+        'mine',
+        'location',
+        'description',
+        'status',
+
+    ];

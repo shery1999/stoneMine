@@ -15,5 +15,4 @@ class Mine extends Model
         'status',
 
     ];
-
 }
