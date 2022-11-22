@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Processing extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'unprocessed_grading_id',
         'first_storage_id',
@@ -23,4 +25,4 @@ class Processing extends Model
     {
         return $this->hasOne(Workshop::class, 'id', 'workshop_id');
     }
-}
+} 
