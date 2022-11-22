@@ -35,7 +35,7 @@
         img {
             vertical-align: middle;
             border-style: none;
-            width: 12rem;
+            width: 14.4rem;
         }
 
         .card-title {
@@ -52,6 +52,38 @@
             box-sizing: border-box;
             padding: 1rem;
             width: 1rem;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .nav-header .brand-logo a {
+                padding: 1.1rem 0.15rem;
+                display: block;
+            }
+        }
+
+        .nav-header .brand-logo a b img {
+            max-width: 3.5625rem;
+        }
+
+        @media only screen and (min-width: 768px) {
+            .nav-header .brand-logo a {
+                padding: 1.5rem 0.15rem !important;
+                display: block;
+            }
+
+            [data-sidebar-style="mini"] .nav-header .brand-logo a b img {
+                margin-top: 0.1rem !important;
+            }
+
+            [data-sidebar-style="mini"] .nav-header .brand-logo a {
+                padding: 1.2rem 0.25rem;
+            }
+
+        }
+
+        .nav-header .brand-logo a {
+            padding: 1.1rem 0.15rem !important;
+            display: block;
         }
     </style>
     @stack('my-styles')

@@ -8453,8 +8453,9 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       z-index: 999; }
       [data-sidebar-style="mini"] .nav-header .brand-logo a {
         padding: 1.607rem 1.0625rem; }
-        [data-sidebar-style="mini"] .nav-header .brand-logo a b img {
-          margin-top: 0.4375rem; }
+        /* [data-sidebar-style="mini"] .nav-header .brand-logo a b img { */
+          /* margin-top: 0.4375rem;  */
+        /* } */
     [data-sidebar-style="mini"] .nav-header .nav-control {
       z-index: -1; }
       [data-sidebar-style="mini"] .nav-header .nav-control .hamburger {
