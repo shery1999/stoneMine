@@ -22,6 +22,7 @@ class OrderController extends Controller
     public function index()
     {
         $Data = Order::with('data', 'showroom')->get();
+        $processed_stones_data = [];
         foreach ($Data as $key => $value) {
             $oneFieldId = Lot::where('id', $Data[$key]['lot_id'])->pluck('storage_id');
             $processed_ids = explode('"', $oneFieldId);
