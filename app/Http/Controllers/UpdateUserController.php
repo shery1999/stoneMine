@@ -24,7 +24,7 @@ class UpdateUserController extends Controller
         if (!$Data) {
             return redirect()->back()->with(['msgf' => 'Data Not Found']);
         } else {
-            return view('update_User', compact('Data'));
+            return view('update_user', compact('Data'));
         }
     }
 
@@ -80,38 +80,54 @@ class UpdateUserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request) {
+            $validator = Validator::make($request->all(), [
+                'username'         => 'required|max:255',
+                'password'         => 'max:255',
+                'confirm_password' => 'same:password',
+                'role'             => 'required|max:255',
+                'email'            => 'max:225|email',
+                'email'            =>  Rule::unique('users')->ignore($id),
 
-        $validator = Validator::make($request->all(), [
-            'username'         => 'required|max:255',
-            'password'         => 'max:255',
-            'confirm_password' => 'same:password',
-            'role'             => 'required|max:255',
-            'email'            => 'max:255',
-            'email'            =>  Rule::unique('users')->ignore($id),
-        ]);
+            ]);
+            if ($validator->fails()) {
+
+                return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+            }
+        }
         if (!$request->phoneNo == '') {
             $validator = Validator::make($request->all(), [
                 'phoneNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
             ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+            }
         }
         if (!$request->mobileNo == '') {
             $validator = Validator::make($request->all(), [
                 'mobileNo' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
             ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+            }
         }
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
-        } else {
+        // else
+        if (!$validator->fails()) {
             $update = User::where('id', $id)
                 ->update([
                     'username' => $request->input('username'),
                     'email' => $request->input('email'),
-                    'password' => Hash::make($request['password']),
                     'role' => $request->input('role'),
                     'phoneNo' => $request->input('phoneNo'),
                     'mobileNo' => $request->input('mobileNo'),
 
                 ]);
+            if (!$request['password'] == "") {
+                $update = User::where('id', $id)
+                    ->update([
+                        'password' => Hash::make($request['password']),
+                    ]);
+            }
             return redirect('/add_user')->with(['msg' => 'Record Updated']);
         }
     }

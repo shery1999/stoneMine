@@ -85,6 +85,13 @@
             padding: 1.1rem 0.15rem !important;
             display: block;
         }
+
+        @media only screen and (max-width: 625px) {
+            #myChart {
+                height: 16rem !important;
+                width: -webkit-fill-available !important;
+            }
+        }
     </style>
     @stack('my-styles')
 </head>

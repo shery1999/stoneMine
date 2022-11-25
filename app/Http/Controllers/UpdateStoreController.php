@@ -84,7 +84,7 @@ class UpdateStoreController extends Controller
         $validator = Validator::make($request->all(), [
             'location'     => 'min:4|max:255',
             'description'  => 'max:255',
-            'store'        => 'min:4|max:255',
+            'store'        => 'min:2|max:255',
             'store'        => Rule::unique('stores')->ignore($request->id)
         ]);
         if ($validator->fails()) {

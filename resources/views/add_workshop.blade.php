@@ -121,7 +121,7 @@
                                                     <td>{{ $item['description'] }}</td>
                                                     <td>{{ $item['created_at'] }}</td>
                                                     <td>
-                                                        <a href="update_store/{{ $item['id'] }}">
+                                                        <a href="update_workshop/{{ $item['id'] }}">
                                                             <button type="button"
                                                                 class="use-button btn btn-block btn-warning">Edit</button>
                                                         </a>

@@ -9,6 +9,9 @@ use App\Models\Store;
 use App\Models\FirstStorage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+
 
 class UnprocessedGradingController extends Controller
 {
@@ -42,20 +45,32 @@ class UnprocessedGradingController extends Controller
      */
     public function store(Request $request)
     {
+        $picture = "";
         $validator = Validator::make($request->all(), [
             'specimen/bag' => 'required|max:255',
-            'mine' => 'required|max:255',
-            'grade' => 'required|max:255',
-            'store' => 'required|max:255',
-            'size' => 'required|max:255',
-            'weight' => 'required|max:255',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'mine' => 'required|max:55',
+            'grade' => 'required|max:55',
+            'store' => 'required|max:55',
+            'size' => 'required|max:55',
+            'weight' => 'required|max:55',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:5500',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
         } else {
+            $imageName = '';
             if ($request->file('image')) {
-                $photo =  $request->file('image')->store('unprocessed_stone_images', ['disk' => 'public']);
+                File::ensureDirectoryExists('storage/unprocessed_stone_images');
+
+                $destinationPath = 'storage/unprocessed_stone_images';
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $imgFile = Image::make($image->getRealPath());
+                $img = $imgFile->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath . '/' . $imageName, 80);
+                $picture = "unprocessed_stone_images/" . $imageName;
+                // $photo = $imgFile->store('unprocessed_stone_images', ['disk' => 'public']);
             } else {
                 $photo = null;
             }
@@ -68,7 +83,7 @@ class UnprocessedGradingController extends Controller
                 'mine_id' => $request->input('mine'),
                 'user_id' => Auth()->user()->id,
                 'store_id' => $request->input('store'),
-                'picture' => $photo,
+                'picture' => $picture,
             ]);
             $save2 = FirstStorage::create([
                 'store_id' => $request->input('store'),

@@ -43,12 +43,20 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::post('/unprocessed_grading', [UnprocessedGradingController::class, 'store']);
     Route::get('unprocessed_grading',  [UnprocessedGradingController::class, 'index']);
+    Route::get('print_details/{id}', function () {
+        return view('print_details/{id}');
+    });
+    Route::get('print_details/{id}', [PrintUnprocessedDetailController::class, 'index']);
 
     Route::get('processing', function () {
         return view('processing');
     });
     Route::post('/processing', [ProcessingController::class, 'store']);
     Route::get('/processing',  [ProcessingController::class, 'index']);
+    Route::get('print_processing_details/{id}', function () {
+        return view('print_processing_details/{id}');
+    });
+    Route::get('print_processing_details/{id}', [PrintProcessingDetailController::class, 'index']);
 
     // processed_specimen
     Route::get('processed_specimen', function () {
@@ -56,92 +64,19 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::post('/processed_specimen', [ProcessedGradingController::class, 'store']);
     Route::get('/processed_specimen',  [ProcessedGradingController::class, 'index']);
-
-    Route::get('to_store', function () {
-        return view('to_store');
-    });
-    Route::post('/to_store', [FirstStorageController::class, 'update']);
-    Route::get('to_store',  [FirstStorageController::class, 'index1']);
-
-    Route::get('to_store_processed', function () {
-        return view('to_store_processed');
-    });
-    Route::post('/to_store_processed', [SecondStorageController::class, 'update']);
-    Route::get('to_store_processed',  [SecondStorageController::class, 'index1']);
-
-
-    // create lot page
-    Route::get('create_lot', function () {
-        return view('create_lot');
-    });
-    Route::post('create_lot', [LotController::class, 'store']);
-    Route::get('create_lot',  [LotController::class, 'index']);
-
-    Route::get('list_unprocessed', [FirstStorageController::class, 'index']);
-
-    Route::get('list_processed', function () {
-        return view('list_second_storage');
-    });
-    Route::get('list_processed', [SecondStorageController::class, 'index']);
-
-    Route::get('/select_lot/{slug_id}', function () {
-        return view('select_lot/{slug_id}');
-    });
-    Route::get('select_lot/{slug_id}', [OrderController::class, 'index1']);
-    Route::post('select_lot', [OrderController::class, 'store']);
-
-    // Route::get('select_lot', [OrderController::class, 'store']);
-
-
-    Route::get('view_lot_detail', function () {
-        return view('view_lot_detail');
-    });
-
-
-    Route::get('view_showroom_detail', function () {
-        return view('view_showroom_detail');
-    });
-    Route::get('view_showroom_detail', [ShowroomController::class, 'index']);
-
-
-    Route::get('view_sold_lot', function () {
-        return view('view_sold_lot');
-    });
-
-    Route::get('orders', function () {
-        return view('orders');
-    });
-    Route::get('/orders', [OrderController::class, 'index']);
-
-
-    Route::get('print/{lot_id}', function () {
-        return view('print/{lot_id}');
-    });
-
-    Route::get('/print/{lot_id}', [PrintController::class, 'index']);
-
-    Route::get('print_details/{id}', function () {
-        return view('print_details/{id}');
-    });
-    Route::get('print_details/{id}', [PrintUnprocessedDetailController::class, 'index']);
-
-
-    Route::get('print_processed', function () {
-        return view('print_processed');
-    });
     Route::get('print_processed/{id}', function () {
         return view('print_processed/{id}');
     });
     Route::get('print_processed/{id}', [PrintProcessedDetailController::class, 'index']);
-
-    Route::get('print_processing_details', function () {
-        return view('print_processing_details');
-    });
-    Route::get('print_processing_details/{id}', function () {
-        return view('print_processing_details/{id}');
-    });
-    Route::get('print_processing_details/{id}', [PrintProcessingDetailController::class, 'index']);
 });
+
+
+
+
+
+
+
+
 
 Route::group(['middleware' => ['auth', 'roleAuth']], function () {
 
@@ -213,4 +148,76 @@ Route::group(['middleware' => ['auth', 'roleAuth']], function () {
     Route::post('/add_workshop', [WorkshopController::class, 'store']);
     Route::get('/add_workshop', [WorkshopController::class, 'index']);
     Route::post('/workshop_status_update', [WorkshopController::class, 'WorkshopUpdateStatus'])->name('workshopstatusUpdate.post');
+
+
+    Route::get('to_store', function () {
+        return view('to_store');
+    });
+    Route::post('/to_store', [FirstStorageController::class, 'update']);
+    Route::get('to_store',  [FirstStorageController::class, 'index1']);
+
+    Route::get('to_store_processed', function () {
+        return view('to_store_processed');
+    });
+    Route::post('/to_store_processed', [SecondStorageController::class, 'update']);
+    Route::get('to_store_processed',  [SecondStorageController::class, 'index1']);
+
+
+    // create lot page
+    Route::get('create_lot', function () {
+        return view('create_lot');
+    });
+    Route::post('create_lot', [LotController::class, 'store']);
+    Route::get('create_lot',  [LotController::class, 'index']);
+
+    Route::get('list_unprocessed', [FirstStorageController::class, 'index']);
+
+    Route::get('list_processed', function () {
+        return view('list_second_storage');
+    });
+    Route::get('list_processed', [SecondStorageController::class, 'index']);
+
+    Route::get('/select_lot/{slug_id}', function () {
+        return view('select_lot/{slug_id}');
+    });
+    Route::get('select_lot/{slug_id}', [OrderController::class, 'index1']);
+    Route::post('select_lot', [OrderController::class, 'store']);
+
+    // Route::get('select_lot', [OrderController::class, 'store']);
+
+
+    Route::get('view_lot_detail', function () {
+        return view('view_lot_detail');
+    });
+
+
+    Route::get('view_showroom_detail', function () {
+        return view('view_showroom_detail');
+    });
+    Route::get('view_showroom_detail', [ShowroomController::class, 'index']);
+
+
+    Route::get('view_sold_lot', function () {
+        return view('view_sold_lot');
+    });
+
+    Route::get('orders', function () {
+        return view('orders');
+    });
+    Route::get('/orders', [OrderController::class, 'index']);
+
+
+    Route::get('print/{lot_id}', function () {
+        return view('print/{lot_id}');
+    });
+
+    Route::get('/print/{lot_id}', [PrintController::class, 'index']);
+
+    Route::get('print_processing_details', function () {
+        return view('print_processing_details');
+    });
+    // Route::get('print_processing_details/{id}', function () {
+    //     return view('print_processing_details/{id}');
+    // });
+    // Route::get('print_processing_details/{id}', [PrintProcessingDetailController::class, 'index']);
 });

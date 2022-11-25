@@ -23,7 +23,7 @@ class UpdateShowroomController extends Controller
         if (!$Data) {
             return redirect()->back()->with(['msgf' => 'Data Not Found']);
         } else {
-            
+
             return view('update_showroom', compact('Data'));
         }
     }
@@ -80,37 +80,46 @@ class UpdateShowroomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Data = Showroom::where('id', $request->id)->get();
-        // dd($Data[0]['email']);
-
-        $validator = Validator::make($request->all(), [
-            'ownername' => 'required|max:255',
-            'showroomname' => 'required|max:255',
-            'showroomname' => Rule::unique('showrooms')->ignore($request->id),
-            'email' => 'max:255',
-            'email' => Rule::unique('showrooms')->ignore($request->id),
-            'adress' => 'required|max:255',
-            'city' => 'required|max:255',
-            'country' => 'required|max:255',
-        ]);
+        if ($request) {
+            $validator = Validator::make($request->all(), [
+                'ownername' => 'required|max:50',
+                'showroomname' => 'required|max:75',
+                'showroomname' => Rule::unique('showrooms')->ignore($request->id),
+                'email' => 'max:75',
+                'email' => Rule::unique('showrooms')->ignore($request->id),
+                'adress' => 'required|max:255',
+                'city' => 'required|max:255',
+                'country' => 'required|max:255',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+            }
+        }
         if (!$request->phone1 == '') {
             $validator = Validator::make($request->all(), [
                 'phone1' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
             ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+            }
         }
         if (!$request->phone2 == '') {
             $validator = Validator::make($request->all(), [
                 'phone2' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
             ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+            }
         }
         if (!$request->phone3 == '') {
             $validator = Validator::make($request->all(), [
                 'phone3' => 'max:20|regex:/^([0-9\s\-\+\(\)]*)$/',
             ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
+            }
         }
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->with(['msgf' => 'Data Not Updated']);
-        } else {
+        if (!$validator->fails()) {
             $update = Showroom::where('id', $id)
                 ->update([
                     'ownername' => $request->input('ownername'),

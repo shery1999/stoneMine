@@ -57,7 +57,7 @@
                                             <td>
                                                 @if ($item->data['picture'])
                                                 <img src="{{ url('/storage/' . $item->data['picture']) }}" height="100px"
-                                                width="150px" alt="" title="" />
+                                                width="100px" alt="" title="" />
                                                 @endif
                                             </td>
                                             <td>

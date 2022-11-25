@@ -73,7 +73,7 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-description" name="description" rows="5" placeholder="Enter Description">value="{{ $Data['description'] }}"</textarea>
+                                        <textarea class="form-control" id="val-description" name="description" rows="5" placeholder="Enter Description">{{ $Data['description'] }}</textarea>
                                         @if ($errors->has('description'))
                                             <div class="error">{{ $errors->first('description') }}</div>
                                         @endif

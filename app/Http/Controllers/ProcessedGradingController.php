@@ -7,6 +7,9 @@ use App\Models\SecondStorage;
 use App\Models\Store;
 use App\Models\Processing;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+
 
 
 use Illuminate\Http\Request;
@@ -44,27 +47,37 @@ class ProcessedGradingController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $picture = "";
         $validator = Validator::make($request->all(), [
-            'processing_id' => 'required|max:255',
-            'store' =>         'required|max:255',
-            'grade' =>         'required|max:255',
-            'dimensions' =>    'required|max:255',
-            'weight' =>        'required|max:255',
-            'color' =>         'required|max:255',
-            'clarity' =>       'required|max:255',
-            'treatment' =>     'required|max:255',
-            'type' =>          'required|max:255',
-            'cut_shape' =>     'required|max:255',
-            'certificate' =>   'required|max:255',
+            'processing_id' => 'required|max:15',
+            'store' =>         'required|max:15',
+            'grade' =>         'required|max:15',
+            'dimensions' =>    'required|max:25',
+            'weight' =>        'required|max:25',
+            'color' =>         'required|max:25',
+            'clarity' =>       'required|max:75',
+            'treatment' =>     'required|max:155',
+            'type' =>          'required|max:55',
+            'cut_shape' =>     'required|max:55',
+            'certificate' =>   'required|max:155',
             'description' =>   'max:255',
-            'photo' =>         'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'photo' =>         'image|mimes:jpeg,png,jpg,gif|max:5500'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->with(['msgf' => "Data not inserted"]);
         } else {
             if ($request->file('photo')) {
-                $photo = $request->file('photo')->store('processed_stone_images', ['disk' => 'public']);
+                // $photo = $request->file('photo')->store('processed_stone_images', ['disk' => 'public']);
+                File::ensureDirectoryExists('storage/processed_stone_images');
+
+                $destinationPath = 'storage/processed_stone_images';
+                $image = $request->file('photo');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $imgFile = Image::make($image->getRealPath());
+                $img = $imgFile->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath . '/' . $imageName, 80);
+                $picture = "processed_stone_images/" . $imageName;
             } else {
                 $photo = null;
             }
@@ -82,7 +95,7 @@ class ProcessedGradingController extends Controller
                 'lab_certificate' => $request->input('certificate'),
                 'store' => $request->input('store'),
                 'user_id' => Auth()->user()->id,
-                'picture' => $photo,
+                'picture' => $picture,
             ]);
             if (!$request->store = "") {
                 if ($request->input('store'))

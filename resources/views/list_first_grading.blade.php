@@ -45,7 +45,7 @@
                                             <td>{{ $item->stores['store'] }}</td>
                                             <td>@if ($item->unprocessed_grading_data['picture'])
                                                 <img src="{{ url('/storage/' . $item->unprocessed_grading_data['picture']) }}"
-                                                height="100px" width="150px" alt="" title="" />
+                                                height="100px" width="100px" alt="" title="" />
                                                 @endif
                                             </td>
                                             <td>

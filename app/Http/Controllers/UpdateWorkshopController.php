@@ -79,9 +79,9 @@ class UpdateWorkshopController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'location'        => 'min:4|max:255',
+            'location'        => 'min:4|max:255|required',
             'description'     => 'max:255',
-            'workshop'        => 'min:4|max:255',
+            'workshop'        => 'min:2|max:255|required',
             'workshop'        => Rule::unique('workshops')->ignore($request->id)
         ]);
         if ($validator->fails()) {
@@ -89,7 +89,7 @@ class UpdateWorkshopController extends Controller
         } else {
             $update = Workshop::where('id', $id)
                 ->update([
-                    'workshop' => $request->store,
+                    'workshop' => $request->workshop,
                     'location' => $request->location,
                     'description' => $request->description,
                 ]);
