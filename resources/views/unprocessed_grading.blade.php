@@ -143,8 +143,8 @@
 
                             <h4 class="card-title"></h4>
                             <div class="form-group">
-                                <input required type="text" class="form-control input-default"
-                                    name="weight" placeholder="Weight (Kg)">
+                                <input required type="text" class="form-control input-default" name="weight"
+                                    placeholder="Weight (Kg)">
                             </div>
                             @if ($errors->has('weight'))
                                 <div class="error">{{ $errors->first('weight') }}</div>
@@ -164,13 +164,14 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Image Upload</h4>
+                        <h4 class="card-title">Image sdfsdf Upload</h4>
                         <div class="basic-form">
                             <form action="#">
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input name="image" type="file" class="custom-file-input">
-                                        <label class="custom-file-label">Choose file</label>
+                                        <div class="form-group">
+                                            <input name="image" type="file" class="form-control-file">
+                                        </div>
                                     </div>
                                 </div>
                                 @if ($errors->has('image'))
@@ -186,8 +187,8 @@
                     <div class="card-body">
                         <h4 class="card-title">Submit</h4>
                         <div class="button-icon">
-                            <button type="submit" class="btn mb-1 btn-success">Submit <span
-                                    class="btn-icon-right"><i class="fa fa-check"></i></span>
+                            <button type="submit" class="btn mb-1 btn-success">Submit <span class="btn-icon-right"><i
+                                        class="fa fa-check"></i></span>
                             </button>
                         </div>
                     </div>

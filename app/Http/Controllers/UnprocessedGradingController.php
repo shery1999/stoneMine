@@ -60,9 +60,10 @@ class UnprocessedGradingController extends Controller
         } else {
             $imageName = '';
             if ($request->file('image')) {
-                File::ensureDirectoryExists('storage/unprocessed_stone_images');
-
-                $destinationPath = 'storage/unprocessed_stone_images';
+                File::ensureDirectoryExists('/home/bitnami/htdocs/public/storage/unprocessed_stone_images/');
+                $destinationPath = public_path('/home/bitnami/htdocs/public/storage/unprocessed_stone_images/');
+                
+                // dd($destinationPath);
                 $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $imgFile = Image::make($image->getRealPath());

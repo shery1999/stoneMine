@@ -68,9 +68,9 @@ class ProcessedGradingController extends Controller
         } else {
             if ($request->file('photo')) {
                 // $photo = $request->file('photo')->store('processed_stone_images', ['disk' => 'public']);
-                File::ensureDirectoryExists('storage/processed_stone_images');
-
-                $destinationPath = 'storage/processed_stone_images';
+                File::ensureDirectoryExists('/home/bitnami/htdocs/public/storage/processed_stone_images');
+                $destinationPath = '/home/bitnami/htdocs/public/storage/processed_stone_images';
+                
                 $image = $request->file('photo');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $imgFile = Image::make($image->getRealPath());

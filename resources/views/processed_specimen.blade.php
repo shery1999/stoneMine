@@ -199,8 +199,9 @@
                         <div class="basic-form">
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input name='photo' type="file" class="custom-file-input">
-                                    <label class="custom-file-label">Choose file</label>
+                                    <div class="form-group">
+                                        <input name='photo' type="file" class="form-control-file">
+                                    </div>
                                 </div>
                             </div>
                             @if ($errors->has('photo'))
